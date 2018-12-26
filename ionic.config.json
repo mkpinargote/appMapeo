@@ -1,5 +1,7 @@
 {
   "name": "karo-prueba",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
