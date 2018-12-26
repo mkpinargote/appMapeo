@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController, NavController } from '@ionic/angular';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { AlertOptions } from '@ionic/core';
-import { AlertController, NavController } from '@ionic/angular';
+//import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -14,7 +14,8 @@ import { AlertController, NavController } from '@ionic/angular';
 export class PrincipalPage implements OnInit {
   formularioUser:FormGroup;
   constructor(public actionSheetController: ActionSheetController,  public navCtrl: NavController,
-    private alertCtrl: AlertController,
+    public alertCtrl: AlertController,
+    private alertController: AlertController,
     private fb: FormBuilder
   ) {
     this.buildForm();
@@ -48,6 +49,34 @@ export class PrincipalPage implements OnInit {
       password1:['',[Validators.required,Validators.minLength(6),Validators.maxLength(12)]],
       });
   }
+
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Message <strong>text</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+
 
   ngOnInit() {
   }

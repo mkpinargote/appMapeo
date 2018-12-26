@@ -28,12 +28,10 @@
               <ion-label color="danger">El nombre es requerido</ion-label>
             </p>
             <p *ngIf="formularioUser.get('nombre').hasError('maxlength')" class="error">
-              El máximo de caracteres permitidos es 30.
+              <ion-label color="danger">El máximo de caracteres permitidos es 30</ion-label>
             </p>
           </ion-item>
           <ion-item>
-            <ion-icon name="person" item-left></ion-icon>
-            <ion-label stacked>Apellidos:</ion-label>
             <ion-input
               formControlName="apellido"
               type="text"
@@ -43,10 +41,10 @@
           </ion-item>
           <ion-item *ngIf="formularioUser.get('apellido').errors && formularioUser.get('apellido').dirty">
             <p *ngIf="formularioUser.get('apellido').hasError('required')" class="error">
-              El apellido es requerido.
+              <ion-label color="danger">El apellido es requerido</ion-label>
             </p>
             <p *ngIf="formularioUser.get('apellido').hasError('maxlength')" class="error">
-                El máximo de caracteres permitidos es 30.
+              <ion-label color="danger">El máximo de caracteres permitidos es 30</ion-label>
               </p>
           </ion-item>
           <ion-item>
@@ -55,80 +53,72 @@
               </ion-datetime>
           </ion-item>
           <ion-item>
-              <ion-icon name="person" item-left></ion-icon>
-              <ion-label stacked>Usuario:</ion-label>
               <ion-input
                 formControlName="usuario"
                 type="text"
-                placeholder="usuario"
+                placeholder="Usuario"
                 name="usuario">
               </ion-input>
           </ion-item>
           <ion-item *ngIf="formularioUser.get('usuario').errors && formularioUser.get('usuario').dirty">
               <p *ngIf="formularioUser.get('usuario').hasError('required')" class="error">
-                El nombre de usuario es requerido.
+                <ion-label color="danger">El nombre de usuario es requerido</ion-label>
               </p>
               <p *ngIf="formularioUser.get('apellido').hasError('maxlength')" class="error">
-                  El máximo de caracteres permitidos es 10.
+                <ion-label color="danger">El máximo de caracteres permitidos es 10</ion-label>
                 </p>
           </ion-item>
           <ion-item>
-            <ion-icon name="at" item-left></ion-icon>
-            <ion-label stacked>Correo Electrónico:</ion-label>
             <ion-input
               formControlName="correo"
               type="email"
-              placeholder="correo"
+              placeholder="Correo"
               name="correo">
             </ion-input>
           </ion-item>
           <ion-item *ngIf="formularioUser.get('correo').errors && formularioUser.get('correo').dirty">
             <p *ngIf="formularioUser.get('correo').hasError('required')" class="error">
-              El correo es requerido.
+              <ion-label color="danger">El correo es requerido</ion-label>
             </p>
             <p *ngIf="formularioUser.get('correo').hasError('email')" class="error">
-              El correo electrónico indicado no es válido.
+              <ion-label color="danger">El correo electrónico indicado no es válido</ion-label>
             </p>
           </ion-item>
           <ion-item>
-              <ion-icon name="person" item-left></ion-icon>
-              <ion-label stacked>Contraseña:</ion-label>
-              <ion-input
+            <ion-input
                 formControlName="password"
                 type="text"
-                placeholder="password"
+                placeholder="Password"
                 name="password">
-              </ion-input>
+            </ion-input>
           </ion-item>
           <ion-item *ngIf="formularioUser.get('password').errors && formularioUser.get('password').dirty">
               <p *ngIf="formularioUser.get('password').hasError('required')" class="error">
-                La contraseña es requerida.
+                <ion-label color="danger">La contraseña es requerida</ion-label>
               </p>
               <p *ngIf="formularioUser.get('password').hasError('minlength')" class="error">
-                  El mínimo de caracteres permitidos es 6.
+                  <ion-label color="danger">El mínimo de caracteres permitidos es 6</ion-label>
                 </p>
           </ion-item>
           <ion-item>
-              <ion-icon name="person" item-left></ion-icon>
-              <ion-label stacked>Confirmar contraseña:</ion-label>
-              <ion-input
-                  formControlName="password1"
-                  type="text"
-                  placeholder="password1"
-                  name="password1">
-              </ion-input>
+            <ion-input
+                formControlName="password1"
+                type="text"
+                placeholder="Confirmar password"
+                name="password1">
+            </ion-input>
           </ion-item>
           <ion-item *ngIf="formularioUser.get('password1').errors && formularioUser.get('password1').dirty">
               <p *ngIf="formularioUser.get('password1').hasError('required')" class="error">
-              La contraseña es requerida.
+                <ion-label color="danger">La contraseña es requerida</ion-label>
               </p>
               <p *ngIf="formularioUser.get('password1').hasError('minlength')" class="error">
-              El mínimo de caracteres permitidos es 6.
+                <ion-label color="danger">El mínimo de caracteres permitidos es 6</ion-label>
               </p>
           </ion-item>        
         </ion-list>
         <div class="padding">
-          <ion-button color="success" ion-button block type="submit" [disabled]="!formularioUser.valid"  (click)="saveData()" >Guardar</ion-button>
+          <ion-button color="success" ion-button block type="submit" [disabled]="!formularioUser.valid"  (click)="presentAlertConfirm" >Guardar</ion-button>
         </div>
       </form>
     </div>

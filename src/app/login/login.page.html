@@ -10,11 +10,48 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item>
-    <ion-input required type="text" placeholder="Usuario"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input required type="text" placeholder="Password"></ion-input>
-  </ion-item>
-  <ion-button shape="round" color="primary" fill="outline" href="/principal">Iniciar sesión</ion-button>
- </ion-content>
+  <div><h1>Inicio de sesión</h1></div>
+    <div >
+      <form  [formGroup]='formularioLogin' novalidate>
+        <ion-list>
+          <ion-item>
+            <ion-input
+              formControlName="usuario"
+              type="text"
+              placeholder="Usuario"
+              name="usuario">
+            </ion-input>
+          </ion-item>
+          <ion-item *ngIf="formularioLogin.get('usuario').errors && formularioLogin.get('usuario').dirty">
+            <p *ngIf="formularioLogin.get('usuario').hasError('required')" class="error" >
+              <ion-label color="danger">El usuario es requerido</ion-label>
+            </p>
+            <p *ngIf="formularioLogin.get('nombre').hasError('maxlength')" class="error">
+              <ion-label color="danger">El máximo de caracteres permitidos es 10</ion-label>
+            </p>
+          </ion-item>
+          
+          <ion-item>
+            <ion-input
+                formControlName="password"
+                type="text"
+                placeholder="Password"
+                name="password">
+            </ion-input>
+          </ion-item>
+          <ion-item *ngIf="formularioLogin.get('password').errors && formularioLogin.get('password').dirty">
+              <p *ngIf="formularioLogin.get('password').hasError('required')" class="error">
+                <ion-label color="danger">La contraseña es requerida</ion-label>
+              </p>
+              <p *ngIf="formularioLogin.get('password').hasError('minlength')" class="error">
+                  <ion-label color="danger">El mínimo de caracteres permitidos es 6</ion-label>
+                </p>
+          </ion-item>
+                 
+        </ion-list>
+        <div class="padding">
+          <ion-button color="success" ion-button block type="submit" [disabled]="!formularioLogin.valid"  (click)="presentAlertConfirm" >Guardar</ion-button>
+        </div>
+      </form>
+    </div>
+</ion-content>

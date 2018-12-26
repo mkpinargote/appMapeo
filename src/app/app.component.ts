@@ -23,7 +23,7 @@ export class AppComponent {
     {
       title: 'Principal',
       url: '/principal',
-      icon: 'person'
+      icon: 'add'
     },
     {
       title: 'Buscar redes',
@@ -32,7 +32,7 @@ export class AppComponent {
     },
     {
       title: 'Sesión',
-      url: '/login',
+      url: '/Login',
       icon: 'person'
     }
   ];
