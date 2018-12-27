@@ -11,117 +11,128 @@
 
 <ion-content padding>
 
-    <div><h1>Registro de datos</h1></div>
-    <div >
-      <form  [formGroup]='formularioUser' novalidate>
-        <ion-list>
-          <ion-item>
-            <ion-input
-              formControlName="nombre"
-              type="text"
-              placeholder="Nombre"
-              name="nombre">
-            </ion-input>
-          </ion-item>
-          <ion-item *ngIf="formularioUser.get('nombre').errors && formularioUser.get('nombre').dirty">
-            <p *ngIf="formularioUser.get('nombre').hasError('required')" class="error" >
-              <ion-label color="danger">El nombre es requerido</ion-label>
-            </p>
-            <p *ngIf="formularioUser.get('nombre').hasError('maxlength')" class="error">
-              <ion-label color="danger">El máximo de caracteres permitidos es 30</ion-label>
-            </p>
-          </ion-item>
-          <ion-item>
-            <ion-input
-              formControlName="apellido"
-              type="text"
-              placeholder="Apellido"
-              name="apellido">
-            </ion-input>
-          </ion-item>
-          <ion-item *ngIf="formularioUser.get('apellido').errors && formularioUser.get('apellido').dirty">
-            <p *ngIf="formularioUser.get('apellido').hasError('required')" class="error">
-              <ion-label color="danger">El apellido es requerido</ion-label>
-            </p>
-            <p *ngIf="formularioUser.get('apellido').hasError('maxlength')" class="error">
-              <ion-label color="danger">El máximo de caracteres permitidos es 30</ion-label>
-              </p>
-          </ion-item>
-          <ion-item>
-              <ion-input required type="text" placeholder="Fecha de nacimiento"></ion-input>
-              <ion-datetime display-format="DD/MM/YYYY" >
-              </ion-datetime>
-          </ion-item>
-          <ion-item>
-              <ion-input
-                formControlName="usuario"
-                type="text"
-                placeholder="Usuario"
-                name="usuario">
-              </ion-input>
-          </ion-item>
-          <ion-item *ngIf="formularioUser.get('usuario').errors && formularioUser.get('usuario').dirty">
-              <p *ngIf="formularioUser.get('usuario').hasError('required')" class="error">
-                <ion-label color="danger">El nombre de usuario es requerido</ion-label>
-              </p>
-              <p *ngIf="formularioUser.get('apellido').hasError('maxlength')" class="error">
-                <ion-label color="danger">El máximo de caracteres permitidos es 10</ion-label>
-                </p>
-          </ion-item>
-          <ion-item>
-            <ion-input
-              formControlName="correo"
-              type="email"
-              placeholder="Correo"
-              name="correo">
-            </ion-input>
-          </ion-item>
-          <ion-item *ngIf="formularioUser.get('correo').errors && formularioUser.get('correo').dirty">
-            <p *ngIf="formularioUser.get('correo').hasError('required')" class="error">
-              <ion-label color="danger">El correo es requerido</ion-label>
-            </p>
-            <p *ngIf="formularioUser.get('correo').hasError('email')" class="error">
-              <ion-label color="danger">El correo electrónico indicado no es válido</ion-label>
-            </p>
-          </ion-item>
-          <ion-item>
-            <ion-input
-                formControlName="password"
-                type="password"
-                placeholder="Password"
-                name="password">
-            </ion-input>
-          </ion-item>
-          <ion-item *ngIf="formularioUser.get('password').errors && formularioUser.get('password').dirty">
-              <p *ngIf="formularioUser.get('password').hasError('required')" class="error">
-                <ion-label color="danger">La contraseña es requerida</ion-label>
-              </p>
-              <p *ngIf="formularioUser.get('password').hasError('minlength')" class="error">
-                  <ion-label color="danger">El mínimo de caracteres permitidos es 6</ion-label>
-                </p>
-          </ion-item>
-          <ion-item>
-            <ion-input
-                formControlName="password1"
-                type="password"
-                placeholder="Confirmar password"
-                name="password1">
-            </ion-input>
-          </ion-item>
-          <ion-item *ngIf="formularioUser.get('password1').errors && formularioUser.get('password1').dirty">
-              <p *ngIf="formularioUser.get('password1').hasError('required')" class="error">
-                <ion-label color="danger">La contraseña es requerida</ion-label>
-              </p>
-              <p *ngIf="formularioUser.get('password1').hasError('minlength')" class="error">
-                <ion-label color="danger">El mínimo de caracteres permitidos es 6</ion-label>
-              </p>
-          </ion-item>        
-        </ion-list>
-        <div class="padding">
-          <ion-button color="success" ion-button block type="submit" [disabled]="!formularioUser.valid"  (click)="presentAlertConfirm" >Guardar</ion-button>
-        </div>
-      </form>
-    </div>
+    <ion-grid>
+        <ion-row>
+          <ion-col size="1" text-center>           
+          </ion-col>
+          <ion-col size="10" text-center>  
+              <div><h1>Registro de datos</h1></div>
+              <div >
+                <form  [formGroup]='formularioUser' novalidate>
+                  <ion-list>
+                    <ion-item>
+                      <ion-input
+                        formControlName="nombre"
+                        type="text"
+                        placeholder="Nombre"
+                        name="nombre">
+                      </ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="formularioUser.get('nombre').errors && formularioUser.get('nombre').dirty">
+                      <p *ngIf="formularioUser.get('nombre').hasError('required')" class="error" >
+                        <ion-label color="danger">El nombre es requerido</ion-label>
+                      </p>
+                      <p *ngIf="formularioUser.get('nombre').hasError('maxlength')" class="error">
+                        <ion-label color="danger">El máximo de caracteres permitidos es 30</ion-label>
+                      </p>
+                    </ion-item>
+                    <ion-item>
+                      <ion-input
+                        formControlName="apellido"
+                        type="text"
+                        placeholder="Apellido"
+                        name="apellido">
+                      </ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="formularioUser.get('apellido').errors && formularioUser.get('apellido').dirty">
+                      <p *ngIf="formularioUser.get('apellido').hasError('required')" class="error">
+                        <ion-label color="danger">El apellido es requerido</ion-label>
+                      </p>
+                      <p *ngIf="formularioUser.get('apellido').hasError('maxlength')" class="error">
+                        <ion-label color="danger">El máximo de caracteres permitidos es 30</ion-label>
+                        </p>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input required type="text" placeholder="Fecha de nacimiento"></ion-input>
+                        <ion-datetime display-format="DD/MM/YYYY" >
+                        </ion-datetime>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input
+                          formControlName="usuario"
+                          type="text"
+                          placeholder="Usuario"
+                          name="usuario">
+                        </ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="formularioUser.get('usuario').errors && formularioUser.get('usuario').dirty">
+                        <p *ngIf="formularioUser.get('usuario').hasError('required')" class="error">
+                          <ion-label color="danger">El nombre de usuario es requerido</ion-label>
+                        </p>
+                        <p *ngIf="formularioUser.get('apellido').hasError('maxlength')" class="error">
+                          <ion-label color="danger">El máximo de caracteres permitidos es 10</ion-label>
+                          </p>
+                    </ion-item>
+                    <ion-item>
+                      <ion-input
+                        formControlName="correo"
+                        type="email"
+                        placeholder="Correo"
+                        name="correo">
+                      </ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="formularioUser.get('correo').errors && formularioUser.get('correo').dirty">
+                      <p *ngIf="formularioUser.get('correo').hasError('required')" class="error">
+                        <ion-label color="danger">El correo es requerido</ion-label>
+                      </p>
+                      <p *ngIf="formularioUser.get('correo').hasError('email')" class="error">
+                        <ion-label color="danger">El correo electrónico indicado no es válido</ion-label>
+                      </p>
+                    </ion-item>
+                    <ion-item>
+                      <ion-input
+                          formControlName="password"
+                          type="password"
+                          placeholder="Password"
+                          name="password">
+                      </ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="formularioUser.get('password').errors && formularioUser.get('password').dirty">
+                        <p *ngIf="formularioUser.get('password').hasError('required')" class="error">
+                          <ion-label color="danger">La contraseña es requerida</ion-label>
+                        </p>
+                        <p *ngIf="formularioUser.get('password').hasError('minlength')" class="error">
+                            <ion-label color="danger">El mínimo de caracteres permitidos es 6</ion-label>
+                          </p>
+                    </ion-item>
+                    <ion-item>
+                      <ion-input
+                          formControlName="password1"
+                          type="password"
+                          placeholder="Confirmar password"
+                          name="password1">
+                      </ion-input>
+                    </ion-item>
+                    <ion-item *ngIf="formularioUser.get('password1').errors && formularioUser.get('password1').dirty">
+                        <p *ngIf="formularioUser.get('password1').hasError('required')" class="error">
+                          <ion-label color="danger">La contraseña es requerida</ion-label>
+                        </p>
+                        <p *ngIf="formularioUser.get('password1').hasError('minlength')" class="error">
+                          <ion-label color="danger">El mínimo de caracteres permitidos es 6</ion-label>
+                        </p>
+                    </ion-item>        
+                  </ion-list>
+                  <div class="padding">
+                    <ion-button color="success" ion-button block type="submit" [disabled]="!formularioUser.valid"  (click)="presentAlertConfirm" >Guardar</ion-button>
+                  </div>
+                </form>
+              </div>
+            </ion-col>
+        
+            <ion-col size="1">                
+            </ion-col>
+            </ion-row>
+        </ion-grid>
   </ion-content>
 
 

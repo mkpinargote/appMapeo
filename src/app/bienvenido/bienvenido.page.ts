@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-bienvenido',
   templateUrl: './bienvenido.page.html',
   styleUrls: ['./bienvenido.page.scss'],
 })
-export class BienvenidoPage implements OnInit {
+export class BienvenidoPage {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public navCtrl: NavController){}
+    
+  IrLoguear() {
+        this.navCtrl.navigateForward(`Login`);
+  }    
+  IrPrincipal() {
+    this.navCtrl.navigateForward(`principal`);
   }
-
 }
