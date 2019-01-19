@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, NumericValueAccessor } from '@ionic/angular';
 import {Geolocation} from '@ionic-native/geolocation/ngx'
+import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot';
 
 declare var google: any;
 
@@ -12,25 +13,29 @@ declare var google: any;
 export class DetectarRedesPage implements OnInit {
 
   mapRef = null;
-
   constructor(public loadingRedes: LoadingController, 
     private geolocation: Geolocation,
-    private loadCtrl: LoadingController) {}
+    private loadCtrl: LoadingController,
+    private hotspot: Hotspot) {}
 
   
 
   ngOnInit() {
-    this.loadMap();
+    //this.loadMap();
+    this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
+      console.log(networks);
+    });
   }
-    async presentLoading() {
+
+ /*    async presentLoading() {
       const loading = await this.loadingRedes.create({
       message: 'Buscando redes',
       duration: 2000
     });
       return await loading.present();
-    }
+    } */
   
-
+/* 
   async loadMap(){
     const loading = await this.loadCtrl.create();
     loading.present();
@@ -49,9 +54,9 @@ export class DetectarRedesPage implements OnInit {
     });
     
   
-  }
+  } */
 
-  private addMarker(lat: number, lng: number){
+/*   private addMarker(lat: number, lng: number){
     const marker = new google.maps.Marker({
       position: { lat, lng },
       //zoom:8,
@@ -66,7 +71,7 @@ export class DetectarRedesPage implements OnInit {
       lat: rta.coords.latitude,
       lng: rta.coords.longitude
     };
-  }
+  } */
 
   
 }
