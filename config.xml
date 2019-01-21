@@ -83,5 +83,11 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-hotspot" spec="1.2.10" />
+    <plugin name="cordova-plugin-facebook4" spec="4.1.0">
+        <variable name="APP_ID" value="344511559719122" />
+        <variable name="APP_NAME" value="appMapeo" />
+        <variable name="FACEBOOK_HYBRID_APP_EVENTS" value="false" />
+        <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.38.1" />
+    </plugin>
     <engine name="android" spec="7.1.4" />
 </widget>

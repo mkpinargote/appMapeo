@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot';
+import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 @Component({
   selector: 'app-search-wifi',
   templateUrl: './search-wifi.page.html',
@@ -10,16 +10,9 @@ export class SearchWifiPage implements OnInit {
   constructor(private hotspot: Hotspot) { }
   ngOnInit() {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
-      debugger
-      console.log(networks);
       this.data = networks;
-  
     });
   }
   ionViewDidLoad() {
-    
-
-
-
   }
 }
