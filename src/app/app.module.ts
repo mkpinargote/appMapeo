@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {Geolocation} from '@ionic-native/geolocation/ngx'
-
+import { Facebook } from '@ionic-native/facebook/ngx';
+import {HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,11 +22,13 @@ import {Geolocation} from '@ionic-native/geolocation/ngx'
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Geolocation,
+    Facebook,
     
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-bienvenido',
@@ -7,8 +9,9 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./bienvenido.page.scss'],
 })
 export class BienvenidoPage {
-
-  constructor(public navCtrl: NavController){}
+  user:any ={};
+  userdata:string;
+  constructor(public navCtrl: NavController, private fb: Facebook, private http: HttpClient){}
     
   IrLoguear() {
         this.navCtrl.navigateForward(`Login`);
@@ -16,4 +19,25 @@ export class BienvenidoPage {
   IrPrincipal() {
     this.navCtrl.navigateForward(`principal`);
   }
+  loginFb(){
+    this.fb.login(['public_profile', 'email'])
+    .then((res: FacebookLoginResponse) => {
+      if (res.status==='connected'){
+      this.user.img = 'https://graph.facebook.com/'+res.authResponse.userID+'/picture?type=square';
+      this.getData(res.authResponse.accessToken);
+    }else{
+        alert('error al conectar');
+      }  
+        console.log('Logueado a Facebook!', res)
+      })
+      .catch(e => console.log('Error al concetar con Facebook', e));
+    }
+    getData(access_token:string){
+      let url ='https://graph.facebook.com/me?fields=id,name,first_name,last_name,email&access_token=' + access_token;
+      this.http.get(url).subscribe(data => {
+        this.userdata = JSON.stringify(data);
+        console.log(data);
+      });
+    }
+
 }
