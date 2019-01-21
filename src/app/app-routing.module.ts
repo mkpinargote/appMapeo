@@ -16,9 +16,10 @@ const routes: Routes = [
     loadChildren: './list/list.module#ListPageModule'
   },
   { path: 'principal', loadChildren: './principal/principal.module#PrincipalPageModule' },
-  { path: 'DetectarRedes', loadChildren: './detectar-redes/detectar-redes.module#DetectarRedesPageModule' },
   { path: 'Login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'bienvenido', loadChildren: './bienvenido/bienvenido.module#BienvenidoPageModule' }
+  { path: 'bienvenido', loadChildren: './bienvenido/bienvenido.module#BienvenidoPageModule' },
+  { path: 'search-wifi', loadChildren: './search-wifi/search-wifi.module#SearchWifiPageModule' }
+
 ];
 
 @NgModule({

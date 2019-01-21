@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetectarRedesPage } from './detectar-redes.page';
+import { SearchWifiPage } from './search-wifi.page';
 
-describe('DetectarRedesPage', () => {
-  let component: DetectarRedesPage;
-  let fixture: ComponentFixture<DetectarRedesPage>;
+describe('SearchWifiPage', () => {
+  let component: SearchWifiPage;
+  let fixture: ComponentFixture<SearchWifiPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetectarRedesPage ],
+      declarations: [ SearchWifiPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DetectarRedesPage);
+    fixture = TestBed.createComponent(SearchWifiPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

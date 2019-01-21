@@ -28,7 +28,7 @@ export class AppComponent {
     },
     {
       title: 'Buscar redes',
-      url: '/DetectarRedes',
+      url: '/search-wifi',
       icon: 'wifi'
     },
     {

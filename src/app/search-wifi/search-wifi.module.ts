@@ -4,13 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-
-import { DetectarRedesPage } from './detectar-redes.page';
+import { SearchWifiPage } from './search-wifi.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: DetectarRedesPage
+    component: SearchWifiPage
   }
 ];
 
@@ -21,6 +20,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DetectarRedesPage]
+  declarations: [SearchWifiPage]
 })
-export class DetectarRedesPageModule {}
+export class SearchWifiPageModule {}
