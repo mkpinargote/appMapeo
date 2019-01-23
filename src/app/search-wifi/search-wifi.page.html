@@ -9,28 +9,44 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  {{data|json}}
-  <span  *ngFor="let x of data">
-<ion-list>
-  <ion-grid>
-  <ion-row>
-    <ion-col size="6">
-      <ion-icon name="wifi"></ion-icon>{{x.SSID}}
-    </ion-col>
-    <ion-col size="6">Frecuencia: {{x.frequency}}</ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col size="12">
-      <p>Tipo Seguridad: {{x.capabilities}}</p>
-    </ion-col>
-  </ion-row>
-  </ion-grid>
-
-</ion-list>
-
-  </span>
- 
-  <!--   <ion-button shape="round" color="primary" fill="outline" (click)="presentLoading">Buscar redes</ion-button>
- -->
-  <ion-button>Buscar redes</ion-button>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-item-group>
+    <ion-item-divider color="light">Redes Disponibles</ion-item-divider>
+  </ion-item-group>
+  <ion-list>
+    <ion-grid *ngFor="let x of data">
+      <ion-item>
+        <ion-row>
+          <ion-col size="12">
+            <ion-icon name="wifi"></ion-icon>{{x.SSID}}
+          </ion-col>
+          <ion-col size="12" class="letterSmall">Frecuencia: {{x.frequency}}</ion-col>
+          <ion-col size="12" class="letterSmall">Tipo Seguridad: {{x.capabilities}}</ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-grid>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content 
+      loadingSpinner="bubbles" 
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="search" (click)="goSearchWifi()">
+      <ion-label>Buscar</ion-label>
+      <ion-icon name="search"></ion-icon>
+      <ion-badge>{{contador}}</ion-badge>
+    </ion-tab-button>
+    <ion-tab-button tab="ios-map" (click)="goToMapa()">
+      <ion-label>Mapa</ion-label>
+      <ion-icon name="ios-map"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
