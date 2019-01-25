@@ -18,7 +18,8 @@ const routes: Routes = [
   { path: 'principal', loadChildren: './principal/principal.module#PrincipalPageModule' },
   { path: 'Login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'bienvenido', loadChildren: './bienvenido/bienvenido.module#BienvenidoPageModule' },
-  { path: 'search-wifi', loadChildren: './search-wifi/search-wifi.module#SearchWifiPageModule' },  { path: 'mapa', loadChildren: './mapa/mapa.module#MapaPageModule' }
+  { path: 'search-wifi', loadChildren: './search-wifi/search-wifi.module#SearchWifiPageModule' },
+  { path: 'mapa/:cont', loadChildren: './mapa/mapa.module#MapaPageModule' }
 
 
 ];

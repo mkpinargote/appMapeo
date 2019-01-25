@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component, OnInit, ViewChild  } from '@angular/core';
+import { NavController  } from '@ionic/angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
+import { MapaPage } from '../mapa/mapa.page';
 @Component({
   selector: "app-search-wifi",
   templateUrl: "./search-wifi.page.html",
@@ -12,31 +13,31 @@ export class SearchWifiPage implements OnInit {
   constructor(public navCtrl: NavController, private hotspot: Hotspot) {}
   ngOnInit() {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
-      this.data = networks;
-      this.contador = networks.length;
+      this.restarVacio(networks);
     });
   }
   ionViewDidLoad() {}
   goSearchWifi() {
     this.navCtrl.navigateForward(`search-wifi`);
   }
-  goToMapa() {
-    this.navCtrl.navigateForward(`mapa`);
+  goToMapa(cont: string) {
+    this.navCtrl.navigateForward(`mapa/${cont}`);
+
   }
   doRefresh(event) {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
-      this.data = networks;
-      this.contador = networks.length;
-      event.complete();
-    });
+      this.restarVacio(networks);
+    }); setTimeout(() => {
+      event.target.complete();
+    }, 1500);
   }
-  doInfinite(infiniteScroll) {
-    this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
-      this.data = this.data.concat(networks);
-      this.contador = networks.length;
-      infiniteScroll.complete();
-    });
-
+  restarVacio(networks){
+    this.data = networks;
+    this.contador = networks.length;
+    for (let datas of this.data) {
+      if (datas.SSID == '') {
+        this.contador = this.contador - 1;
+      }
+    }
   }
-
 }
