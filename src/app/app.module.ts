@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Hotspot } from '@ionic-native/hotspot/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import {HttpClientModule } from '@angular/common/http';
-
+import {GoogleMaps} from '@ionic-native/google-maps/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -30,6 +30,7 @@ import {HttpClientModule } from '@angular/common/http';
     Geolocation,
     Hotspot,
     Facebook,
+    GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     
   ],
