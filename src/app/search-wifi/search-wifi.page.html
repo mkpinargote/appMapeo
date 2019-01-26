@@ -18,20 +18,20 @@
   </ion-item-group>
   <ion-list>
     <ion-grid *ngFor="let x of data">
-      <ion-item *ngIf="x.SSID !='' " >
+      <ion-item *ngIf="x.SSID !='' ">
         <ion-row>
           <ion-col size="11">
             <ion-icon name="wifi"></ion-icon>{{x.SSID}}
           </ion-col>
           <ion-col size="1" class="padding7">
-            <div  float-left> 
-            <ion-icon name="add-circle-outline"></ion-icon>
+            <div float-left (click)="presentAlert()">
+              <ion-icon class="sizeIcon" name="add-circle-outline"></ion-icon>
             </div>
           </ion-col>
-        <ion-col size="12" class="letterSmall">Frecuencia: {{x.frequency}}</ion-col>
-        <ion-col size="12" class="letterSmall">Tipo Seguridad: {{x.capabilities}}</ion-col>
+          <ion-col size="12" class="letterSmall">Frecuencia: {{x.frequency}}</ion-col>
+          <ion-col size="12" class="letterSmall">Tipo Seguridad: {{x.capabilities}}</ion-col>
         </ion-row>
-  
+
       </ion-item>
     </ion-grid>
   </ion-list>
@@ -39,18 +39,18 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-      <ion-tabs>
-        <ion-tab-bar slot="bottom">
-          <ion-tab-button tab="search" (click)="goSearchWifi()">
-            <ion-label>Buscar</ion-label>
-            <ion-icon name="search"></ion-icon>
-            <ion-badge>{{contador}}</ion-badge>
-          </ion-tab-button>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="search" (click)="goSearchWifi()">
+          <ion-label>Buscar</ion-label>
+          <ion-icon name="search"></ion-icon>
+          <ion-badge>{{contador}}</ion-badge>
+        </ion-tab-button>
         <ion-tab-button tab="ios-map" (click)="goToMapa(contador)">
-            <ion-label>Mapa</ion-label>
-            <ion-icon name="ios-map"></ion-icon>
-          </ion-tab-button>     
-        </ion-tab-bar>
-      </ion-tabs>
+          <ion-label>Mapa</ion-label>
+          <ion-icon name="ios-map"></ion-icon>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
   </ion-toolbar>
 </ion-footer>

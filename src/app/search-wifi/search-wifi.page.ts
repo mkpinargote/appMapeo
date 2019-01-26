@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { NavController  } from '@ionic/angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
-import { MapaPage } from '../mapa/mapa.page';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: "app-search-wifi",
   templateUrl: "./search-wifi.page.html",
@@ -10,12 +10,43 @@ import { MapaPage } from '../mapa/mapa.page';
 export class SearchWifiPage implements OnInit {
   data: any;
   contador: any;
-  constructor(public navCtrl: NavController, private hotspot: Hotspot) {}
+  constructor(public alertController: AlertController, public navCtrl: NavController, private hotspot: Hotspot) {}
   ngOnInit() {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
     });
   }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Red',
+      message: 'Desea guardar esta red?',
+      inputs: [
+        {
+          name: 'txtpassword',
+          type: 'text',
+          placeholder: 'contraseña'
+        }],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Guardar',
+          handler: (data) => {
+             console.log(data);
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   ionViewDidLoad() {}
   goSearchWifi() {
     this.navCtrl.navigateForward(`search-wifi`);
