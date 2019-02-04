@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Platform } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 declare var google;
 import {
   GoogleMaps,
@@ -12,9 +12,8 @@ import {
   GoogleMapOptions,
   CameraPosition,
   MarkerOptions,
-  Marker,
-  Environment
-} from '@ionic-native/google-maps';
+  Marker
+} from '@ionic-native/google-maps/ngx';
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.page.html',
@@ -30,8 +29,8 @@ export class MapaPage implements OnInit {
   constructor(private geolocation: Geolocation,
     public navCtrl: NavController,
     private route: ActivatedRoute,
-    private platform: Platform,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    public alertController: AlertController
   ) {
     this.contador = this.route.snapshot.paramMap.get('cont');
   }
@@ -47,25 +46,32 @@ export class MapaPage implements OnInit {
   async loadMap() {
     const loading = await this.loadingCtrl.create();
     loading.present();
-    Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': '(your api key for `https://`)',
-      'API_KEY_FOR_BROWSER_DEBUG': '(your api key for `http://`)'
-    });
     const myLatLng = await this.getLocation();
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: myLatLng.lat,
-          lng: myLatLng.lng
-        },
-        zoom: 18,
-        tilt: 30
-      }
-    };
-    this.map = GoogleMaps.create('map_canvas', mapOptions);
-    loading.dismiss();
-    this.addMaker(myLatLng.lat, myLatLng.lng);
+    const mapEle: HTMLElement = document.getElementById('map_canvas');
+    this.mapRef = new google.maps.Map(mapEle, {
+      center: myLatLng,
+      zoom: 17
+    });
+    google.maps.event
+      .addListenerOnce(this.mapRef, 'idle', () => {
+        loading.dismiss();
+        this.addMaker(myLatLng.lat, myLatLng.lng);
+       
+      });
   }
+
+  private addMaker(lat: number, lng: number) {
+    const marker = new google.maps.Marker({
+      position: { lat, lng },
+      map: this.mapRef,
+      animation: google.maps.Animation.DROP,
+      title: 'Hello World!'
+    });
+    google.maps.event.addListener(marker, 'click', () => {
+      this.aletMarket();
+    });
+  }
+
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
     return {
@@ -73,19 +79,14 @@ export class MapaPage implements OnInit {
       lng: rta.coords.longitude
     };
   }
-  private addMaker(lat: number, lng: number) {
-    let marker: Marker = this.map.addMarkerSync({
-      title: 'Ionic',
-      icon: 'red',
-      animation: 'DROP',
-      position: {
-        lat: lat,
-        lng: lng
-      }
+
+  async aletMarket() {
+    const alert = await this.alertController.create({
+      header: 'red-home',
+      subHeader: 'password: 2332',
+      buttons: ['OK']
     });
-    marker.showInfoWindow();
-    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      alert('clicked');
-    });
+
+    await alert.present();
   }
 }

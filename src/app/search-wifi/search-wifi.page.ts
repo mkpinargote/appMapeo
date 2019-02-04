@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class SearchWifiPage implements OnInit {
   data: any;
-  contador: any;
+  cont: any;
   constructor(public alertController: AlertController, public navCtrl: NavController, private hotspot: Hotspot) {}
   ngOnInit() {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
@@ -64,10 +64,10 @@ export class SearchWifiPage implements OnInit {
   }
   restarVacio(networks){
     this.data = networks;
-    this.contador = networks.length;
+    this.cont = networks.length;
     for (let datas of this.data) {
       if (datas.SSID == '') {
-        this.contador = this.contador - 1;
+        this.cont = this.cont - 1;
       }
     }
   }

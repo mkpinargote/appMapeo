@@ -94,7 +94,7 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBq95X3kzCCo21DZlGRNSwWLeWC5AKqbkc" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyBq95X3kzCCo21DZlGRNSwWLeWC5AKqbkc" />
         <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
-        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="23.+" />
     </plugin>
     <engine name="android" spec="7.1.4" />
     <engine name="browser" spec="5.0.4" />
