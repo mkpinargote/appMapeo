@@ -7,7 +7,7 @@
 <ion-content padding>
   <div class="principal"></div><p></p>
   <div class="fondo-blanco">
-    <p><ion-button shape="undefined" color="primary" fill="outline" expand="block" (click)="loginFb()">Continuar con Facebook</ion-button></p>
+    <p><ion-button shape="undefined" text-capitalize color="tertiary" fill="outline" expand="block" (click)="loginFb()">Continuar con Facebook</ion-button></p>
     <img [src]="user.img" alt="">
     <p>{{userdata |json}}</p>
     <ion-grid>
@@ -15,8 +15,8 @@
         <ion-col size="3" text-center>           
         </ion-col>
         <ion-col size="6" text-center>
-            <ion-button shape="undefined" size="small" fill="clear" (click)="IrPrincipal()">Regístrese</ion-button>
-            <ion-button shape="undefined" size="small" fill="clear" (click)="IrLoguear()">Inicie sesión</ion-button>
+            <ion-button shape="undefined" text-capitalize color="tertiary" size="small" fill="clear" (click)="IrPrincipal()">Regístrese</ion-button>
+            <ion-button shape="undefined" text-capitalize color="tertiary" size="small" fill="clear" (click)="IrLoguear()">Inicie sesión</ion-button>
         </ion-col>
         <ion-col size="3">                
         </ion-col>

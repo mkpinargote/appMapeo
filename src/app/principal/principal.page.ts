@@ -41,8 +41,8 @@ export class PrincipalPage implements OnInit {
      * @description Asignamos a la propiedad "formularioUser" los campos que se van a controlar de la vista
      */
     this.formularioUser = this.fb.group({
-      nombre:['',[Validators.required,Validators.maxLength(30)]],
-      apellido:['',[Validators.required,Validators.maxLength(30)]],
+      nombre:['',[Validators.required,Validators.maxLength(20)]],
+      apellido:['',[Validators.required,Validators.maxLength(20)]],
       correo:['',[Validators.required,Validators.email]],
       usuario:['',[Validators.required,Validators.maxLength(10)]],
       password:['',[Validators.required,Validators.minLength(6),Validators.maxLength(12)]],

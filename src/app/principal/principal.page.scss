@@ -1,0 +1,25 @@
+.size-peq{ 
+    font-size: 15px; 
+    color:rgb(230, 134, 55); 
+    font-family: 'Roboto-Light'; 
+    opacity: 1; 
+}
+
+
+.ion-color-input {
+    //div {border-bottom-color: #3f7e7e;}
+
+    padding: 0 ! important;
+    border-bottom-color: #3f7e7e !important;
+    border-bottom-style: ridge !important; 
+    border-bottom-width: thin;
+    margin-bottom: 0 !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+}
+
+.ion-fecha{
+    border-color:"tertiary" !important;
+    --background-rgb: 50, 182, 189 !important;
+        
+}
