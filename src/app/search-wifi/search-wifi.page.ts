@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild  } from '@angular/core';
 import { NavController  } from '@ionic/angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: "app-search-wifi",
   templateUrl: "./search-wifi.page.html",
@@ -10,16 +12,21 @@ import { AlertController } from '@ionic/angular';
 export class SearchWifiPage implements OnInit {
   data: any;
   cont: any;
-  constructor(public alertController: AlertController, public navCtrl: NavController, private hotspot: Hotspot) {}
+
+  constructor(public alertController: AlertController,
+     public navCtrl: NavController, 
+     private hotspot: Hotspot,
+     public toastController: ToastController,
+     public loadingController: LoadingController) {}
   ngOnInit() {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
     });
   }
-  async presentAlert() {
+  async presentAlert(SSID: any) {
+    const loading = await this.loadingController.create();
     const alert = await this.alertController.create({
-      header: 'Red',
-      message: 'Desea guardar esta red?',
+      header: 'Red: '+SSID,
       inputs: [
         {
           name: 'txtpassword',
@@ -32,13 +39,24 @@ export class SearchWifiPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            let mensaje = 'Operación cancelada';
+            this.alertConexFalse(mensaje);
           }
         }, {
-          text: 'Guardar',
+          
+          text: 'Conectar',
           handler: (data) => {
-             console.log(data);
-            console.log('Confirm Okay');
+            
+              loading.present();
+            this.hotspot.connectToWifi(SSID, data.txtpassword)
+              .then((data) => {
+                loading.dismiss();
+                this.alertConex() ;    
+              }, (error) => {
+                  let mensaje = 'No se pudo conectar';
+                  this.alertConexFalse(mensaje);
+              })
+
           }
         }
       ]
@@ -46,8 +64,6 @@ export class SearchWifiPage implements OnInit {
 
     await alert.present();
   }
-
-  ionViewDidLoad() {}
   goSearchWifi() {
     this.navCtrl.navigateForward(`search-wifi`);
   }
@@ -71,4 +87,19 @@ export class SearchWifiPage implements OnInit {
       }
     }
   }
+  async alertConex() {
+    const toast = await this.toastController.create({
+      message: 'Conectado',
+      duration: 2000
+    });
+    toast.present();
+  }
+  async alertConexFalse(mensaje: any) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
+  }
+
 }
