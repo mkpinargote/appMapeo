@@ -21,6 +21,8 @@ export class LoginPage  implements OnInit {
     this.buildForm();
   }
 
+ // focusInput(input){}
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
@@ -71,9 +73,7 @@ export class LoginPage  implements OnInit {
     await alert.present();
   }
 
-
-
-
+  
   ngOnInit() {
   }
 

@@ -24,28 +24,29 @@
   --ion-color-secondary-tint: #24d6ea;
 
   /** tertiary **/
-  --ion-color-tertiary: #7044ff;
-  --ion-color-tertiary-rgb: 112, 68, 255;
+  --ion-color-tertiary: #3f7e7e;
+  --ion-color-tertiary-rgb: 50, 182, 189;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #633ce0;
-  --ion-color-tertiary-tint: #7e57ff;
+  --ion-color-tertiary-shade: #376f6f;
+  --ion-color-tertiary-tint: #528b8b;
 
+ 
   /** success **/
-  --ion-color-success: #10dc60;
-  --ion-color-success-rgb: 16, 220, 96;
-  --ion-color-success-contrast: #ffffff;
+  --ion-color-success: #959c98;
+  --ion-color-success-rgb: 255, 181, 71;
+  --ion-color-success-contrast: #0f0f0f;
   --ion-color-success-contrast-rgb: 255, 255, 255;
-  --ion-color-success-shade: #0ec254;
-  --ion-color-success-tint: #28e070;
+  --ion-color-success-shade: #959c98;
+  --ion-color-success-tint: #959c98;
 
   /** warning **/
-  --ion-color-warning: #ffce00;
-  --ion-color-warning-rgb: 255, 206, 0;
-  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning: #f59d2b;
+  --ion-color-warning-rgb: 255, 181, 71;
+  --ion-color-warning-contrast: #0f0f0f;
   --ion-color-warning-contrast-rgb: 255, 255, 255;
-  --ion-color-warning-shade: #e0b500;
-  --ion-color-warning-tint: #ffd31a;
+  --ion-color-warning-shade: #f59d2b;
+  --ion-color-warning-tint: #f59d2b;
 
   /** danger **/
   --ion-color-danger: #f04141;
@@ -78,7 +79,7 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
-  
+
   /** favorite **/
   --ion-color-favorite: #69bb7b;
   --ion-color-favorite-rgb: 105,187,123;
@@ -86,6 +87,7 @@
   --ion-color-favorite-contrast-rgb: 255,255,255;
   --ion-color-favorite-shade: #5ca56c;
   --ion-color-favorite-tint: #78c288;
+
 }
 /* Set text color of the entire app for iOS only */
 .ion-color-lightvibrant {
