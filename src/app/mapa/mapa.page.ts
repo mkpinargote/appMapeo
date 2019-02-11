@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 declare var google;
 import {
   GoogleMaps,
@@ -30,12 +31,36 @@ export class MapaPage implements OnInit {
     public navCtrl: NavController,
     private route: ActivatedRoute,
     private loadingCtrl: LoadingController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private hotspot: Hotspot,
   ) {
     this.contador = this.route.snapshot.paramMap.get('cont');
   }
   ngOnInit() {
-    this.loadMap();
+    this.hotspot.isConnectedToInternet().then((data) => {
+      if (data==true){
+        this.loadMap();
+      }else{
+        this.AlertNotConexion()
+      }
+    });
+    
+  }
+  async AlertNotConexion() {
+    const alert1 = await this.alertController.create({
+      header: 'Conexión',
+      message: 'Se requiere conexión a internet',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.goSearchWifi();
+          }
+        }
+      ]
+    });
+
+    await alert1.present();
   }
   goSearchWifi() {
     this.navCtrl.navigateForward(`search-wifi`);

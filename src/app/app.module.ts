@@ -13,6 +13,7 @@ import { Hotspot } from '@ionic-native/hotspot/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import {HttpClientModule } from '@angular/common/http';
 import {GoogleMaps} from '@ionic-native/google-maps/ngx';
+import { Network } from '@ionic-native/network/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -30,6 +31,7 @@ import {GoogleMaps} from '@ionic-native/google-maps/ngx';
     Geolocation,
     Hotspot,
     Facebook,
+    Network,
     GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     

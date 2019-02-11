@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
-import { NavController  } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { Network } from '@ionic-native/network/ngx';
+import { Subscription } from 'rxjs/Subscription';
+//import jQuery from 'jquery';
 @Component({
   selector: "app-search-wifi",
   templateUrl: "./search-wifi.page.html",
@@ -12,28 +15,47 @@ import { LoadingController } from '@ionic/angular';
 export class SearchWifiPage implements OnInit {
   data: any;
   cont: any;
-
+  dataSSID:any ;
+  dataIPAddress: any;
+  datalinkSpeed: any;
+  dataSecurity:any;
   constructor(public alertController: AlertController,
      public navCtrl: NavController, 
      private hotspot: Hotspot,
      public toastController: ToastController,
-     public loadingController: LoadingController) {}
+     public loadingController: LoadingController,
+     private network: Network) {}
   ngOnInit() {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
     });
+    this.hotspot.getConnectionInfo().then((data) => {
+      this.dataSSID = data.SSID.substring(1, data.SSID.length-1);
+      this.dataIPAddress= data.IPAddress.substring(1);;
+      this.datalinkSpeed= data.linkSpeed +"Mbps";
+      this.dataSecurity = "WPA/WPA2 PSK";
+    });
+    // this.hotspot.getNetConfig().then((data) => {
+    //   debugger
+    //   console.log("getNetConfig: " + data);
+    // });
   }
   async presentAlert(SSID: any) {
-    const loading = await this.loadingController.create();
+    const toast = await this.toastController.create({
+      message: 'Conectando...',
+      color:'tertiary',
+    });
     const alert = await this.alertController.create({
       header: 'Red: '+SSID,
       inputs: [
         {
           name: 'txtpassword',
-          type: 'text',
+          type: 'password',
           placeholder: 'contraseña'
-        }],
+        }
+        ],
       buttons: [
+        
         {
           text: 'Cancelar',
           role: 'cancel',
@@ -43,20 +65,18 @@ export class SearchWifiPage implements OnInit {
             this.alertConexFalse(mensaje);
           }
         }, {
-          
           text: 'Conectar',
           handler: (data) => {
-            
-              loading.present();
+            toast.present();
             this.hotspot.connectToWifi(SSID, data.txtpassword)
               .then((data) => {
-                loading.dismiss();
+                toast.dismiss();
                 this.alertConex() ;    
               }, (error) => {
-                  let mensaje = 'No se pudo conectar';
+                  toast.dismiss();
+                  let mensaje = 'Error al conectar';
                   this.alertConexFalse(mensaje);
               })
-
           }
         }
       ]
@@ -69,7 +89,6 @@ export class SearchWifiPage implements OnInit {
   }
   goToMapa(cont: string) {
     this.navCtrl.navigateForward(`mapa/${cont}`);
-
   }
   doRefresh(event) {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
@@ -101,5 +120,12 @@ export class SearchWifiPage implements OnInit {
     });
     toast.present();
   }
-
+  async displayNetworkUpdate(connectionState: string) {
+    let networkType = this.network.type;
+    const toast = await this.toastController.create({
+      message: `You are now ${connectionState} via ${networkType}`,
+      duration: 3000
+    });
+    toast.present();
+  }
 }

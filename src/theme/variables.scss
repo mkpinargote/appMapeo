@@ -30,8 +30,17 @@
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
   --ion-color-tertiary-shade: #376f6f;
   --ion-color-tertiary-tint: #528b8b;
+  
 
- 
+   /** dark-light **/
+  --ion-color-darkLight: #3a3939;
+  --ion-color-darkLight-rgb: 58, 57, 57;
+  --ion-color-darkLight-contrast: #ffffff;
+  --ion-color-darkLight-contrast-rgb: 255, 255, 255;
+  --ion-color-darkLight-shade: #333232;
+  --ion-color-darkLight-tint: #4e4d4d;
+
+
   /** success **/
   --ion-color-success: #959c98;
   --ion-color-success-rgb: 255, 181, 71;

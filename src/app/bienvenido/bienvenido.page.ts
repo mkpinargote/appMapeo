@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { HttpClient} from '@angular/common/http';
-
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-bienvenido',
   templateUrl: './bienvenido.page.html',
@@ -11,7 +11,10 @@ import { HttpClient} from '@angular/common/http';
 export class BienvenidoPage {
   user:any ={};
   userdata:string;
-  constructor(public navCtrl: NavController, private fb: Facebook, private http: HttpClient){}
+  constructor(public navCtrl: NavController, 
+              private fb: Facebook, 
+              private http: HttpClient,
+              public menuCtrl: MenuController){}
     
   IrLoguear() {
         this.navCtrl.navigateForward(`Login`);
@@ -39,5 +42,7 @@ export class BienvenidoPage {
         console.log(data);
       });
     }
-
+  ionViewWillEnter() {
+    //this.menuCtrl.enable(false);
+  }
 }

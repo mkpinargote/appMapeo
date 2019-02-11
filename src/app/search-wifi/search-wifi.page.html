@@ -17,25 +17,30 @@
     <ion-item-divider color="light">Redes Disponibles</ion-item-divider>
   </ion-item-group>
   <ion-list>
-<ion-grid *ngFor="let x of data">
-  <ion-item *ngIf="x.SSID !='' ">
-    <ion-row>
-      <ion-col size="11">
-        <ion-icon name="wifi"></ion-icon>{{x.SSID}}
-      </ion-col>
-      <ion-col size="1" class="padding7">
-        <div float-left (click)="presentAlert(x.SSID)">
-          <ion-icon name="arrow-dropright-circle"></ion-icon>
-        </div>
-      </ion-col>
-      <ion-col size="12" class="letterSmall">Frecuencia: {{x.frequency}}</ion-col>
-      <ion-col size="12" class="letterSmall">Tipo Seguridad: {{x.capabilities}}</ion-col>
-    </ion-row>
-
-  </ion-item>
-</ion-grid>
+    <ion-grid *ngFor="let x of data">
+      <ion-item *ngIf="x.SSID !='' ">
+      <ion-row no-padding>
+          <ion-col size="9">
+            <ion-icon name="wifi"></ion-icon>{{x.SSID}}
+          </ion-col>
+          <ion-col size="3" class="padding7" *ngIf="x.SSID != dataSSID">
+          <div float-right (click)="presentAlert(x.SSID)">
+            <ion-icon class="sizeIcon"  name="arrow-dropright-circle" slot="end"></ion-icon>
+            </div>
+          </ion-col>
+          <ion-col size="3" class="padding7" *ngIf="x.SSID == dataSSID">
+            <ion-text float-right color="tertiary" text-end class="fsize">
+              Conectado
+            </ion-text>
+          </ion-col>
+          <ion-col size="12" class="letterSmall" *ngIf="x.SSID == dataSSID">Intensidad: {{datalinkSpeed}}</ion-col>
+          <ion-col size="12" class="letterSmall" *ngIf="x.SSID == dataSSID">Dirección Ip: {{dataIPAddress}}</ion-col>
+          <ion-col size="12" class="letterSmall" *ngIf="x.SSID == dataSSID">Seguridad: {{dataSecurity}}</ion-col>
+          <ion-col size="12" class="letterSmall" *ngIf="x.SSID != dataSSID">Seguridad: {{x.capabilities}}</ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-grid>
   </ion-list>
-
 </ion-content>
 <ion-footer>
   <ion-toolbar>
@@ -44,9 +49,9 @@
         <ion-tab-button tab="search" (click)="goSearchWifi()">
           <ion-label>Buscar</ion-label>
           <ion-icon name="search"></ion-icon>
-<ion-badge>{{cont}}</ion-badge>
+          <ion-badge>{{cont}}</ion-badge>
         </ion-tab-button>
-<ion-tab-button tab="ios-map" (click)="goToMapa(cont)">
+        <ion-tab-button tab="ios-map" (click)="goToMapa(cont)">
           <ion-label>Mapa</ion-label>
           <ion-icon name="ios-map"></ion-icon>
         </ion-tab-button>
