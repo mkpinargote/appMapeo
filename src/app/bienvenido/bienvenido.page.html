@@ -9,14 +9,17 @@
   <!--     <p>{{userdata |json}}</p> -->
   <ion-grid>
     <ion-row>
-      <ion-col size="12" text-center>
+      <ion-col size="12" text-right>
         <ion-button class="register-btn" color="darkLight" fill="outline" expand="block" (click)="IrPrincipal()">
           <ion-icon name="mail" padding-end></ion-icon>Regístrate
         </ion-button>
       </ion-col>
-      <ion-col size="12" text-center>
-        <ion-button shape="undefined" text-capitalize color="tertiary" size="small" fill="clear" (click)="IrLoguear()">
-          ¿Ya eres miembro?<b> &nbsp; Iniciar sesión</b></ion-button>
+      <ion-col size="6" text-right class="ppding5">
+        ¿Ya eres miembro?
+      </ion-col>
+      <ion-col size="6" float-right class="ppding5">
+        <span color="tertiary" (click)="IrLoguear()">
+          <b>Iniciar sesión</b></span>
       </ion-col>
     </ion-row>
   </ion-grid>

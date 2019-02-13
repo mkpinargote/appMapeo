@@ -3,9 +3,8 @@ import { NavController } from '@ionic/angular';
 import { AlertController, ActionSheetController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertOptions } from '@ionic/core';
+import { MenuController } from '@ionic/angular';
 
-
-//@IonicPage()
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -14,19 +13,14 @@ import { AlertOptions } from '@ionic/core';
 export class LoginPage  implements OnInit {
   formularioLogin:FormGroup;
   constructor(public actionSheetController: ActionSheetController,  public navCtrl1: NavController,
-    public alertCtrl: AlertController,
-    private alertController: AlertController,
-    private fb: FormBuilder
+              public alertCtrl: AlertController,
+              private alertController: AlertController,
+              private fb: FormBuilder,
+              public navCtrl: NavController,
+              public menuCtrl: MenuController
   ) {
     this.buildForm();
   }
-
- // focusInput(input){}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
-  }
-
   saveData(){
     const alert = this.alertCtrl.create(<AlertOptions>{
       title : "Datos enviados",
@@ -37,7 +31,6 @@ export class LoginPage  implements OnInit {
     alert.finally()
     this.buildForm();
   }
-
   buildForm() {
     /**
      * @description Asignamos a la propiedad "formularioLogin" los campos que se van a controlar de la vista
@@ -47,8 +40,6 @@ export class LoginPage  implements OnInit {
       password:['',[Validators.required,Validators.minLength(6),Validators.maxLength(12)]]
       });
   }
-
-
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Confirm!',
@@ -69,14 +60,13 @@ export class LoginPage  implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
-
-  
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+  }
   ngOnInit() {
   }
-
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Acción',
@@ -98,6 +88,8 @@ export class LoginPage  implements OnInit {
     });
     await actionSheet.present();
   }
-
+  goToSearchWifi() {
+    this.navCtrl.navigateForward(`search-wifi`);
   }
+}
   

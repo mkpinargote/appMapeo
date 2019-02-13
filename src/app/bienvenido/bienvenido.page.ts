@@ -43,6 +43,6 @@ export class BienvenidoPage {
       });
     }
   ionViewWillEnter() {
-    //this.menuCtrl.enable(false);
+    this.menuCtrl.enable(false);
   }
 }

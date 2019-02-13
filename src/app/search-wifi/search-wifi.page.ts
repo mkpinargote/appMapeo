@@ -5,7 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
-import { Subscription } from 'rxjs/Subscription';
+import { MenuController } from '@ionic/angular';
 //import jQuery from 'jquery';
 @Component({
   selector: "app-search-wifi",
@@ -24,7 +24,8 @@ export class SearchWifiPage implements OnInit {
      private hotspot: Hotspot,
      public toastController: ToastController,
      public loadingController: LoadingController,
-     private network: Network) {}
+     private network: Network,
+     public menuCtrl: MenuController) {}
   ngOnInit() {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
@@ -35,10 +36,6 @@ export class SearchWifiPage implements OnInit {
       this.datalinkSpeed= data.linkSpeed +"Mbps";
       this.dataSecurity = "WPA/WPA2 PSK";
     });
-    // this.hotspot.getNetConfig().then((data) => {
-    //   debugger
-    //   console.log("getNetConfig: " + data);
-    // });
   }
   async presentAlert(SSID: any) {
     const toast = await this.toastController.create({
@@ -127,5 +124,8 @@ export class SearchWifiPage implements OnInit {
       duration: 3000
     });
     toast.present();
+  }
+  ionViewWillEnter() {
+    this.menuCtrl.enable(true);
   }
 }

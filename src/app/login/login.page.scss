@@ -1,85 +1,34 @@
-// .item-inner, ion-item { 
-//     border-bottom-color: transparent !important; 
-//     box-shadow: none !important; 
-//     }  
-  
-//     .md,.ios,.wp{
-//         .ion_input{
-//             border-bottom: none;
-//             box-shadow: none;
-//         }
-//    }
-
     .img-login {
-        background: url(../assets/imagenes/ww.jpg);
-        background-repeat: no-repeat;
-        background-size: auto;
-        background-position: center;
+        background: url(../assets/imagenes/logo2.png);
         width: 100%;
         height: 100%;
-        margin: auto;
-        z-index: 2;
+        background-repeat: no-repeat;
+        background-size: 60%;
+        background-position: center;
         position: relative;
-        
+        display: flex;
     }
-    
     .ion-color-input {
-        //div {border-bottom-color: #3f7e7e;}
-
         padding: 0 ! important;
         border-bottom-color: #3f7e7e !important;
-        border-bottom-style: ridge !important; 
+        border-bottom-style: ridge !important;
         border-bottom-width: thin;
         margin-bottom: 0 !important;
-        margin-left:0 !important;
-        margin-right:0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
         
-
-    
-
-
-        //
-            // border-color: #3f7e7e ! important;
-              
-        
-       // border-color: "#3f7e7e";
-        // --ion-color-base: var(--ion-color-apk) !important;
-        // --ion-color-base-rgb: var(--ion-color-apk-rgb) !important;
-        // --ion-color-contrast: var(--ion-color-apk-contrast) !important;
-        // --ion-color-contrast-rgb: var(--ion-color-apk-contrast-rgb) !important;
-        // --ion-color-shade: var(--ion-color-apk-shade) !important;
-        // --ion-color-tint: var(--ion-color-apk-tint) !important;
-
-        // width: 100%;
-        // height: 100px;
-        // -moz-border-radius: 50px;
-        // -webkit-border-radius: 50px;
-        // border-radius: 10px;
-        // margin-bottom: 10px;
-        // --ion-color-: "#3f7e7e";
-
     }
-
-
-    .size-peq{ 
-        font-size: 15px; 
-        color:rgb(230, 134, 55); 
-        font-family: 'Roboto-Light'; 
-        opacity: 1; 
-    } 
-
-
-    // .ion-color-apk {
-    //     --ion-color-base: var(--ion-color-apk) !important;
-    //     --ion-color-base-rgb: var(--ion-color-apk-rgb) !important;
-    //     --ion-color-contrast: var(--ion-color-apk-contrast) !important;
-    //     --ion-color-contrast-rgb: var(--ion-color-apk-contrast-rgb) !important;
-    //     --ion-color-shade: var(--ion-color-apk-shade) !important;
-    //     --ion-color-tint: var(--ion-color-apk-tint) !important;
-    // }
-    
-
-    // .color-enc{ 
-    //     margin: 0; 
-    //     color:#32b6bd86; 
-    // } 
+    .size-peq {
+        font-size: 15px;
+        color: rgb(230, 134, 55);
+        font-family: 'Roboto-Light';
+        opacity: 1;
+    }
+    .paddRight{
+        padding-right: 10px;
+    }
+    .paddTop{
+        padding-bottom: 10px;
+        padding-top: 10px;
+     
+    }
