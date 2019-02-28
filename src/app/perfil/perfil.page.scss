@@ -1,0 +1,27 @@
+#header{
+    background-image: url('../assets/imagenes/wifi-img.png')!important;
+    border-radius: 50%;
+    background-position: center;
+    background-color: brown;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    height: 100px;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+
+
+
+.flexcontainer {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+ }
+

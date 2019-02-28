@@ -14,6 +14,7 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 import {HttpClientModule } from '@angular/common/http';
 import {GoogleMaps} from '@ionic-native/google-maps/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { Camera} from '@ionic-native/camera/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -33,6 +34,7 @@ import { Network } from '@ionic-native/network/ngx';
     Facebook,
     Network,
     GoogleMaps,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     
   ],

@@ -16,7 +16,7 @@
                   <ion-list>
                     <ion-item lines="none">
                       <ion-icon padding-end name="person" item-start></ion-icon>
-                      <ion-input autofocus class="ion-color-input" maxlength="20" color="tertiary"
+                      <ion-input autofocus class="form-control" maxlength="20" color="tertiary"
                         formControlName="nombre"
                         type="text"
                         placeholder="Nombre"
@@ -51,7 +51,7 @@
                     <ion-item lines="none">
                         <ion-icon padding-end name="calendar" item-start></ion-icon>
                         <ion-input required type="datetime" class="ion-color-input" color="tertiary" placeholder="Fecha de nacimiento"></ion-input>
-                        <ion-datetime class="ion-fecha" display-format="DD/MM/YYYY" min="1920" >
+                        <ion-datetime class="ion-fecha"  display-format="DD/MM/YYYY" min="1920" >
                         </ion-datetime>
                     </ion-item>
                     <ion-item lines="none">
@@ -67,8 +67,8 @@
                         <p *ngIf="formularioUser.get('usuario').hasError('required')" class="error">
                           <ion-label class="size-peq">El nombre de usuario es requerido</ion-label>
                         </p>
-                        <p *ngIf="formularioUser.get('apellido').hasError('maxlength')" class="error">
-                          <ion-label class="size-peq">El máximo de caracteres permitidos es 10</ion-label>
+                        <p *ngIf="formularioUser.get('usuario').hasError('minlength')" class="error">
+                          <ion-label class="size-peq">El mínimo de caracteres permitidos es 6</ion-label>
                           </p>
                     </ion-item>
                     <ion-item lines="none">

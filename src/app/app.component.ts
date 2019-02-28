@@ -17,6 +17,11 @@ export class AppComponent {
       icon: 'list'
     },
     {
+      title: 'Perfil de usuario',
+      url: '/perfil',
+      icon: 'person'
+    },
+    {
       title: 'Buscar redes',
       url: '/search-wifi',
       icon: 'wifi'
