@@ -26,6 +26,11 @@ export class AppComponent {
       url: '/search-wifi',
       icon: 'wifi'
     },
+    {
+      title: 'Cerrar Sesión',
+      url: '/bienvenido',
+      icon: 'power'
+    },
   ];
 
   constructor(

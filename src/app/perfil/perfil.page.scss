@@ -1,3 +1,11 @@
+page-perfil{
+    .ion-input{
+        background-color: transparent !important;
+        text-shadow: 1px 1px 1px rgb(0,0,0);
+    }
+}
+
+
 #header{
     background-image: url('../assets/imagenes/wifi-img.png')!important;
     border-radius: 50%;
@@ -24,4 +32,67 @@
     -webkit-justify-content: center;
     justify-content: center;
  }
+
+
+//  .bg {
+//     --background: radial-gradient(#d1f0e8f3 0%,  #fff 100%) !important;
+// } 
+
+.bg {
+    --background: white !important;
+} 
+
+// .bgImg {
+//     background-image: url( '../assets/imagenes/ww.jpg');
+//     background-repeat: no-repeat;
+//     background-size: contain;
+
+// }
+
+.bg-hidden {
+    --background: transparent !important;
+}
+
+.ion-color-div {
+  //div {border-bottom-color: #3f7e7e;}
+
+  padding: 0 !important;
+  //background:#d1f0e8f3 !important;
+  }
+
+.ion-color-item {
+    padding: 0 !important;
+    
+}
+
+.ion-size-item {
+    padding: 0 !important;
+    --background: transparent !important;
+    //background: #d1f0e8f3 !important;
+    height: 40px;
+}
+
+.ion-size-user {
+    padding: 0 !important;
+    //background: #d1f0e8f3 !important;
+    height: 50px;
+}
+
+.ion-size-fab-save {
+    padding: 0 !important;
+    //background :#d1f0e8f3 !important;
+    height: 75px;
+}
+
+
+
+
+
+// .item-input-has-focus .label-md[stacked],
+// .input-has-focus .label-md[stacked],
+// .item-input-has-focus .label-md[floating],
+// .input-has-focus .label-md[floating],
+// {
+// color: #3f7e7e !important;
+// }
 

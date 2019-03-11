@@ -6,18 +6,19 @@
     <ion-title>Iniciar Sesión</ion-title>
 </ion-toolbar>
 </ion-header>
-<ion-content padding>
-  <ion-grid>
+<ion-content padding class="bg">
+  <ion-grid >
     <ion-row>
       <ion-col size="12" text-center>
         <div class="img-login">
         </div>
         <div>
-          <form [formGroup]='formularioLogin' novalidate>
-            <ion-list>
-              <ion-item lines="none">
+
+          <form [formGroup]='formularioLogin' novalidate >
+            <ion-list no-line>
+              <ion-item lines="none" class="bg-hidden">
                 <ion-icon padding-end name="person" item-left></ion-icon>
-                <ion-input class="ion-color-input" maxlength="10" color="tertiary" formControlName="usuario" type="text"
+                <ion-input  maxlength="10" color="tertiary" formControlName="usuario" type="text"
                   placeholder="Usuario" name="usuario">
                 </ion-input>
               </ion-item>
@@ -29,9 +30,10 @@
                   <ion-label class="size-peq">El máximo de caracteres permitidos es 10</ion-label>
                 </p>
               </ion-item>
-              <ion-item lines="none">
+
+              <ion-item lines="none" >
                 <ion-icon padding-end name="key" item-left></ion-icon>
-                <ion-input class="ion-color-input" maxlength="12" color="tertiary" formControlName="password" type="password"
+                <ion-input maxlength="12" color="tertiary" formControlName="password" type="password"
                   placeholder="Contraseña" name="password">
                 </ion-input>
               </ion-item>
@@ -43,18 +45,19 @@
                   <ion-label class="size-peq">El mínimo de caracteres permitidos es 6</ion-label>
                 </p>
               </ion-item>
-<br><br>
-<ion-button class="paddTop" expand="block" shape="round" size="default" color="tertiary" type="submit"
-  [disabled]="!formularioLogin.valid"
-(click)="goToSearchWifi()"> Acceder</ion-button>
             </ion-list>
+              
+              <ion-button class="paddTop" expand="block" shape="round" size="default" color="tertiary" type="submit"
+        [disabled]="!formularioLogin.valid"
+(click)="goToSearchWifi()"> Acceder</ion-button>
+           
           </form>
         </div>
       </ion-col>
-      <!-- <ion-col size="1">                
-        </ion-col> -->
     </ion-row>
   </ion-grid>
+
+
 
 
 </ion-content>
