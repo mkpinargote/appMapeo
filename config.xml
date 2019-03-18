@@ -94,10 +94,10 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBq95X3kzCCo21DZlGRNSwWLeWC5AKqbkc" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyBq95X3kzCCo21DZlGRNSwWLeWC5AKqbkc" />
         <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
-        <variable name="ANDROID_SUPPORT_V4_VERSION" value="23.+" />
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="17.+" />
     </plugin>
     <plugin name="cordova-plugin-network-information" spec="2.0.1" />
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
-    <engine name="android" spec="7.1.4" />
     <engine name="browser" spec="5.0.4" />
+    <engine name="android" spec="7.1.4" />
 </widget>

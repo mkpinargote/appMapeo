@@ -14,29 +14,29 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-item-group no-padding>
-    <ion-item-divider color="light">Redes Disponibles</ion-item-divider>
+<ion-item-divider color="light" (click)="getRedes()">Redes Disponibles</ion-item-divider>
   </ion-item-group>
   <ion-list>
     <ion-grid *ngFor="let x of data">
       <ion-item *ngIf="x.SSID !='' ">
-      <ion-row no-padding>
+        <ion-row no-padding (click)="presentAlert(x.SSID)" *ngIf="x.SSID != dataSSID">
+          <ion-col size="12">
+            <ion-icon name="wifi"></ion-icon>{{x.SSID}}
+          </ion-col>
+          <ion-col size="12" class="letterSmall">Seguridad: {{x.capabilities}}</ion-col>
+        </ion-row>
+        <ion-row no-padding *ngIf="x.SSID == dataSSID">
           <ion-col size="9">
             <ion-icon name="wifi"></ion-icon>{{x.SSID}}
           </ion-col>
-          <ion-col size="3" class="padding7" *ngIf="x.SSID != dataSSID">
-          <div float-right (click)="presentAlert(x.SSID)">
-            <ion-icon class="sizeIcon"  name="arrow-dropright-circle" slot="end"></ion-icon>
+          <ion-col size="3" class="padding7">
+            <div float-right>
+<ion-icon class="sizeIcon" name="share-alt" slot="end" (click)="savedRed()"></ion-icon>
             </div>
           </ion-col>
-          <ion-col size="3" class="padding7" *ngIf="x.SSID == dataSSID">
-            <ion-text float-right color="tertiary" text-end class="fsize">
-              Conectado
-            </ion-text>
-          </ion-col>
-          <ion-col size="12" class="letterSmall" *ngIf="x.SSID == dataSSID">Intensidad: {{datalinkSpeed}}</ion-col>
-          <ion-col size="12" class="letterSmall" *ngIf="x.SSID == dataSSID">Dirección Ip: {{dataIPAddress}}</ion-col>
-          <ion-col size="12" class="letterSmall" *ngIf="x.SSID == dataSSID">Seguridad: {{dataSecurity}}</ion-col>
-          <ion-col size="12" class="letterSmall" *ngIf="x.SSID != dataSSID">Seguridad: {{x.capabilities}}</ion-col>
+          <ion-col size="12" class="letterSmall">Intensidad: {{datalinkSpeed}}</ion-col>
+          <ion-col size="12" class="letterSmall">Dirección Ip: {{dataIPAddress}}</ion-col>
+          <ion-col size="12" class="letterSmall">Seguridad: {{dataSecurity}}</ion-col>
         </ion-row>
       </ion-item>
     </ion-grid>

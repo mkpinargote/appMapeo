@@ -6,6 +6,8 @@ import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Network } from '@ionic-native/network/ngx';
 import { MenuController } from '@ionic/angular';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { RedesService } from '../../app/api/red/redes.service';
 //import jQuery from 'jquery';
 @Component({
   selector: "app-search-wifi",
@@ -19,13 +21,20 @@ export class SearchWifiPage implements OnInit {
   dataIPAddress: any;
   datalinkSpeed: any;
   dataSecurity:any;
+  redes: any;
+  red: any = {};
+  latituds:any;
+  longituds:any;
+
   constructor(public alertController: AlertController,
      public navCtrl: NavController, 
      private hotspot: Hotspot,
      public toastController: ToastController,
      public loadingController: LoadingController,
      private network: Network,
-     public menuCtrl: MenuController) {}
+     public menuCtrl: MenuController,
+    public redesServices: RedesService,
+    private geolocation: Geolocation) {}
   ngOnInit() {
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
@@ -36,7 +45,9 @@ export class SearchWifiPage implements OnInit {
       this.datalinkSpeed= data.linkSpeed +"Mbps";
       this.dataSecurity = "WPA/WPA2 PSK";
     });
+    this.getCoordenate();
   }
+
   async presentAlert(SSID: any) {
     const toast = await this.toastController.create({
       message: 'Conectando...',
@@ -65,10 +76,19 @@ export class SearchWifiPage implements OnInit {
           text: 'Conectar',
           handler: (data) => {
             toast.present();
+            var pass = data.txtpassword;
             this.hotspot.connectToWifi(SSID, data.txtpassword)
               .then((data) => {
                 toast.dismiss();
-                this.alertConex() ;    
+                this.alertConex();
+                this.getCoordenate();
+                this.red = { tipoRed: 'wifi', nombreRed: SSID, passwordRed: pass, estadoRed: 1, latitud: this.latituds, longitud: this.longituds, idUser:1 };
+                this.redesServices.addRed(this.red)
+                  .then(data => {
+                    console.log(data);
+                  }, (error) => {
+                    console.log(error);
+                  });
               }, (error) => {
                   toast.dismiss();
                   let mensaje = 'Error al conectar';
@@ -81,6 +101,7 @@ export class SearchWifiPage implements OnInit {
 
     await alert.present();
   }
+  
   goSearchWifi() {
     this.navCtrl.navigateForward(`search-wifi`);
   }
@@ -128,4 +149,24 @@ export class SearchWifiPage implements OnInit {
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
   }
+  getRedes() {
+    this.redesServices.getRedes()
+      .then(data => {
+        this.redes = data;
+        console.log(data);
+      });
+  }
+  async getCoordenate(){
+    const myLatLng = await this.getLocation();
+    this.latituds = myLatLng.lng;
+    this.longituds = myLatLng.lng;
+  }
+  private async getLocation() {
+    const rta = await this.geolocation.getCurrentPosition();
+    return {
+      lat: rta.coords.latitude,
+      lng: rta.coords.longitude
+    };
+  }
+  
 }
