@@ -1,6 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
+<ion-header color="tertiary">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start" color="tertiary">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
@@ -14,29 +14,77 @@
     </ion-refresher-content>
   </ion-refresher>
   <ion-item-group no-padding>
-<ion-item-divider color="light" (click)="getRedes()">Redes Disponibles</ion-item-divider>
+    <ion-item-divider color="light">
+      <ion-row>
+        <ion-col size="11" float-left>
+          Redes Disponibles
+        </ion-col>
+        <ion-col size="1">
+          <div float-right>
+            <ion-icon class="sizeIcon padding40" name="add-circle-outline" slot="end"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-item-divider>
   </ion-item-group>
   <ion-list>
     <ion-grid *ngFor="let x of data">
-      <ion-item *ngIf="x.SSID !='' ">
+      <ion-item *ngIf="x.SSID !=''">
         <ion-row no-padding (click)="presentAlert(x.SSID)" *ngIf="x.SSID != dataSSID">
-          <ion-col size="12">
-            <ion-icon name="wifi"></ion-icon>{{x.SSID}}
+          <ion-col size="12" class="letterSmall" *ngIf="x.level < -50 && x.level >= -65">
+            <ion-row no-padding>
+              <ion-col size="2">
+                <div class="img-excelente"></div>
+              </ion-col>
+              <ion-col size="10" class="wifispace">
+                {{x.SSID}} {{x.level}}
+              </ion-col>
+            </ion-row>
           </ion-col>
-          <ion-col size="12" class="letterSmall">Seguridad: {{x.capabilities}}</ion-col>
+          <ion-col size="12" class="letterSmall" *ngIf="x.level <= -66  && x.level >= -80 ">
+            <ion-row no-padding>
+              <ion-col size="2">
+                <div class="img-muybuena"></div>
+              </ion-col>
+              <ion-col size="10" class="wifispace">
+                {{x.SSID}} {{x.level}}
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="12" class="letterSmall" *ngIf="x.level <= -81 && x.level >= -95 ">
+            <ion-row no-padding>
+              <ion-col size="2">
+                <div class="img-buena"></div>
+              </ion-col>
+              <ion-col size="10" class="wifispace">
+                {{x.SSID}} {{x.level}}
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="12" class="letterSmall" *ngIf="x.level <= -96 && x.level > -120 ">
+            <ion-row no-padding>
+              <ion-col size="2">
+                <div class="img-mala"></div>
+              </ion-col>
+              <ion-col size="10" class="wifispace">
+                {{x.SSID}} {{x.level}}
+              </ion-col>
+            </ion-row>
+          </ion-col>
         </ion-row>
-        <ion-row no-padding *ngIf="x.SSID == dataSSID">
-          <ion-col size="9">
-            <ion-icon name="wifi"></ion-icon>{{x.SSID}}
+        <ion-row no-padding *ngIf="x.SSID === dataSSID">
+          <ion-col size="11" (click)="showDataRed()" float-left>
+            {{x.SSID}}
+            <ion-text color="tertiary" class="fsize10">Conectado</ion-text>
           </ion-col>
-          <ion-col size="3" class="padding7">
+          <ion-col size="1" float-right>
             <div float-right>
-<ion-icon class="sizeIcon" name="share-alt" slot="end" (click)="savedRed()"></ion-icon>
+              <ion-icon class="sizeIcon" name="share-alt" slot="end" (click)="savedRed()"></ion-icon>
             </div>
           </ion-col>
-          <ion-col size="12" class="letterSmall">Intensidad: {{datalinkSpeed}}</ion-col>
+          <!-- <ion-col size="12" class="letterSmall">Intensidad: {{datalinkSpeed}}</ion-col>
           <ion-col size="12" class="letterSmall">Dirección Ip: {{dataIPAddress}}</ion-col>
-          <ion-col size="12" class="letterSmall">Seguridad: {{dataSecurity}}</ion-col>
+          <ion-col size="12" class="letterSmall">Seguridad: {{dataSecurity}}</ion-col> -->
         </ion-row>
       </ion-item>
     </ion-grid>

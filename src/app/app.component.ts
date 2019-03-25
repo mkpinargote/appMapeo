@@ -26,6 +26,11 @@ export class AppComponent {
       url: '/search-wifi',
       icon: 'wifi'
     },
+    {
+      title: 'Mis redes',
+      url: '/misredes',
+      icon: 'wifi'
+    },
   ];
 
   constructor(

@@ -1,6 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
+<ion-header color="tertiary">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start" color="tertiary">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
@@ -9,8 +9,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
-<div id="map_canvas"></div>
+  <div id="map_canvas"></div>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
@@ -19,9 +18,9 @@
         <ion-tab-button tab="search" (click)="goSearchWifi()">
           <ion-label>Buscar</ion-label>
           <ion-icon name="search"></ion-icon>
-            <ion-badge>{{contador}}</ion-badge>
+          <ion-badge>{{contador}}</ion-badge>
         </ion-tab-button>
-<ion-tab-button tab="ios-map" (click)="goToMapa()">
+        <ion-tab-button tab="ios-map" (click)="goToMapa()">
           <ion-label>Mapa</ion-label>
           <ion-icon name="ios-map"></ion-icon>
         </ion-tab-button>

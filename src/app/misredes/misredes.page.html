@@ -1,0 +1,28 @@
+<ion-header color="tertiary">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start" color="tertiary">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Mis redes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"  refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+<ion-item *ngFor="let red of redesUser.redes">
+    <ion-label>
+      <h2 class="size10"><ion-text color="tertiary">Tipo:</ion-text> {{red.tipoRed}}</h2>
+      <h2 class="size10"><ion-text color="tertiary">Red: </ion-text>{{red.nombreRed}}</h2>
+      <h2 class="size10"><ion-text color="tertiary">Contraseña: </ion-text>{{red.passwordRed}}</h2>
+      <h2 class="size10"><ion-text color="tertiary">Contraseña: </ion-text>{{red.estadoRed}}</h2>
+    </ion-label>
+  </ion-item>
+   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="cargando...">
+     </ion-infinite-scroll-content>
+   </ion-infinite-scroll>
+</ion-content>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +21,16 @@ export class RedesService {
       });
     });
   }
-
+  getRedesUser(id:any) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl + '/user/red/'+id)
+      .subscribe(data => {
+        resolve(data);
+      }, (err) => {
+        reject(err);
+      });
+    });
+  }
   addRed(data:any) {
     return new Promise((resolve, reject) => {
       const url = `${this.apiUrl}/redes`;

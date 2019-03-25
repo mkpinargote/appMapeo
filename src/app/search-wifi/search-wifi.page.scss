@@ -1,5 +1,45 @@
 .letterSmall{font-size:12px !important;} 
 .padding7{padding-left: 11px};
+.padding40 {padding-left: 160px};
+.padding35 {
+    padding-left: 15px
+}
+
+;
 .sizeIcon{size: 12px;}
 .button-transpart { background-color: transparent;}
-.fsize{font-size: 10px}
+.fsize10{font-size: 10px}
+
+ .img-excelente {
+     background: url(../assets/imagenes/4.png);
+     width: 40px;
+     height: 40px;
+     background-repeat: no-repeat;
+     background-size: 60%;
+    
+ }
+ .img-muybuena {
+     background: url(../assets/imagenes/3.png);
+     width: 40px;
+     height: 40px;
+     background-repeat: no-repeat;
+     background-size: 60%;
+ }
+ .img-buena {
+     background: url(../assets/imagenes/2.png);
+     width: 40px;
+     height: 40px;
+     background-repeat: no-repeat;
+     background-size: 60%;
+ }
+ .img-mala {
+     background: url(../assets/imagenes/1.png);
+     width: 40px;
+     height: 40px;
+     background-repeat: no-repeat;
+     background-size: 60%;
+ }
+.wifispace{
+    padding-top: 10px;
+    padding-left: 10px;
+}

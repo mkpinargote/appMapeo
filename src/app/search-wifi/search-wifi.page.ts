@@ -36,18 +36,67 @@ export class SearchWifiPage implements OnInit {
     public redesServices: RedesService,
     private geolocation: Geolocation) {}
   ngOnInit() {
+    this.getConeccionActual();
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
     });
+  }
+
+  // async addRed(){
+  //   const alert = await this.alertController.create({
+  //     header: 'Añadir red',
+  //     inputs: [
+  //       {
+  //         name: 'Nombre de red',
+  //         type: 'text',
+  //         placeholder: 'Introducir nombre de red'
+  //       }
+  //     ],
+  //     buttons: [
+
+  //       {
+  //         text: 'Cancelar',
+  //         role: 'cancel',
+  //         cssClass: 'secondary',
+  //         handler: (blah) => {
+  //           let mensaje = 'Operación cancelada';
+  //           this.alertConexFalse(mensaje);
+  //         }
+  //       }, {
+  //         text: 'Conectar',
+  //         handler: (data) => {
+            
+  //         }
+  //       }
+  //     ]
+  //   });
+
+  //   await alert.present();
+  //   this.hotspot.addWifiNetwork(this.dataSSID, mode, data.txtpassword)
+  //     .then((data) => {
+
+
+  //     })
+
+  // }
+ 
+  async showDataRed() {
+    const alert = await this.alertController.create({
+      header: this.dataSSID,
+      message: 'intensidad',
+      buttons: ['OK']
+    });
+  }
+  getConeccionActual(){
     this.hotspot.getConnectionInfo().then((data) => {
-      this.dataSSID = data.SSID.substring(1, data.SSID.length-1);
-      this.dataIPAddress= data.IPAddress.substring(1);;
-      this.datalinkSpeed= data.linkSpeed +"Mbps";
+      debugger
+      this.dataSSID = data.SSID.substring(1, data.SSID.length - 1);
+      this.dataIPAddress = data.IPAddress.substring(1);;
+      this.datalinkSpeed = data.linkSpeed + "Mbps";
       this.dataSecurity = "WPA/WPA2 PSK";
     });
     this.getCoordenate();
   }
-
   async presentAlert(SSID: any) {
     const toast = await this.toastController.create({
       message: 'Conectando...',
@@ -63,7 +112,6 @@ export class SearchWifiPage implements OnInit {
         }
         ],
       buttons: [
-        
         {
           text: 'Cancelar',
           role: 'cancel',
@@ -98,7 +146,6 @@ export class SearchWifiPage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
   
@@ -109,6 +156,7 @@ export class SearchWifiPage implements OnInit {
     this.navCtrl.navigateForward(`mapa/${cont}`);
   }
   doRefresh(event) {
+    this.getConeccionActual();
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
     }); setTimeout(() => {
@@ -149,13 +197,7 @@ export class SearchWifiPage implements OnInit {
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
   }
-  getRedes() {
-    this.redesServices.getRedes()
-      .then(data => {
-        this.redes = data;
-        console.log(data);
-      });
-  }
+  
   async getCoordenate(){
     const myLatLng = await this.getLocation();
     this.latituds = myLatLng.lng;
