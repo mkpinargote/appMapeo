@@ -31,6 +31,11 @@ export class AppComponent {
       url: '/misredes',
       icon: 'wifi'
     },
+    {
+     title: 'Cerrar Sesión',
+      url: '/bienvenido',
+      icon: 'power'
+    },
   ];
 
   constructor(

@@ -6,8 +6,8 @@
     <ion-title>Registrarse</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-    <ion-grid>
+<ion-content class="bg">
+    <ion-grid padding-start>
         <ion-row>
           <ion-col size="11" text-center >  
               <div><h1>Registro de datos</h1></div>
@@ -16,7 +16,7 @@
                   <ion-list>
                     <ion-item lines="none">
                       <ion-icon padding-end name="person" item-start></ion-icon>
-                      <ion-input autofocus class="form-control" maxlength="20" color="tertiary"
+                      <ion-input autofocus class="ion-color-input" maxlength="20" color="tertiary"
                         formControlName="nombre"
                         type="text"
                         placeholder="Nombre"
@@ -50,10 +50,27 @@
                     </ion-item>
                     <ion-item lines="none">
                         <ion-icon padding-end name="calendar" item-start></ion-icon>
-                        <ion-input required type="datetime" class="ion-color-input" color="tertiary" placeholder="Fecha de nacimiento"></ion-input>
-                        <ion-datetime class="ion-fecha"  display-format="DD/MM/YYYY" min="1920" >
-                        </ion-datetime>
+                        <ion-input required type="date" class="ion-color-input" color="tertiary" placeholder="Fec. Nac."></ion-input>
+                        <!-- <ion-datetime class="ion-fecha"  display-format="DD/MM/YYYY" min="1920" >
+                        </ion-datetime> -->
                     </ion-item>
+                    <ion-item lines="none">
+                      <ion-icon padding-end name="mail" item-start></ion-icon>
+                    <ion-input class="ion-color-input" color="tertiary"
+                      formControlName="correo"
+                      type="email"
+                      placeholder="Email"
+                      name="correo">
+                    </ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="formularioUser.get('correo').errors && formularioUser.get('correo').dirty">
+                    <p *ngIf="formularioUser.get('correo').hasError('required')" class="error">
+                      <ion-label class="size-peq">El correo es requerido</ion-label>
+                    </p>
+                    <p *ngIf="formularioUser.get('correo').hasError('email')" class="error">
+                      <ion-label class="size-peq">El correo electrónico indicado no es válido</ion-label>
+                    </p>
+                  </ion-item>
                     <ion-item lines="none">
                         <ion-icon padding-end name="person" item-start></ion-icon>
                         <ion-input class="ion-color-input" maxlength="10" color="tertiary"
@@ -70,23 +87,6 @@
                         <p *ngIf="formularioUser.get('usuario').hasError('minlength')" class="error">
                           <ion-label class="size-peq">El mínimo de caracteres permitidos es 6</ion-label>
                           </p>
-                    </ion-item>
-                    <ion-item lines="none">
-                        <ion-icon padding-end name="mail" item-start></ion-icon>
-                      <ion-input class="ion-color-input" color="tertiary"
-                        formControlName="correo"
-                        type="email"
-                        placeholder="Correo"
-                        name="correo">
-                      </ion-input>
-                    </ion-item>
-                    <ion-item *ngIf="formularioUser.get('correo').errors && formularioUser.get('correo').dirty">
-                      <p *ngIf="formularioUser.get('correo').hasError('required')" class="error">
-                        <ion-label class="size-peq">El correo es requerido</ion-label>
-                      </p>
-                      <p *ngIf="formularioUser.get('correo').hasError('email')" class="error">
-                        <ion-label class="size-peq">El correo electrónico indicado no es válido</ion-label>
-                      </p>
                     </ion-item>
                     <ion-item lines="none">
                         <ion-icon padding-end name="key" item-start></ion-icon>
@@ -124,11 +124,12 @@
                           <ion-label class="size-peq">El mínimo de caracteres permitidos es 6</ion-label>
                         </p>
                     </ion-item>        
-                    <p></p>
+                    
+                </ion-list>
+                <p></p>
                   <div class="padding">
                     <ion-button color="tertiary" ion-button block type="submit" [disabled]="!formularioUser.valid"  (click)="presentAlertConfirm" >Guardar</ion-button>
                   </div>
-                </ion-list>
                 </form>
               </div>
             </ion-col>

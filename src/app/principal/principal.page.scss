@@ -1,3 +1,19 @@
+page-principal{
+    .ion-grid{
+        align-content: center;
+    }
+
+    .ion-list{
+        align-items: center;
+    }
+
+
+    .scroll-content{
+        justify-content: center;
+        display: flex !important;
+         align-items: center !important;
+    }
+}
 .size-peq{ 
     font-size: 15px; 
     color:rgb(230, 134, 55); 
@@ -16,6 +32,9 @@
     margin-bottom: 0 !important;
     margin-left:0 !important;
     margin-right:0 !important;
+    align-content: center;
+    
+    
 }
 
 .ion-fecha{
@@ -29,7 +48,9 @@
     --placeholder-color: #3f7e7e;
 }
 
-
+.bg {
+    --background: white !important;
+}
 
 .form-control-line .form-group {
     overflow: hidden;
