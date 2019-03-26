@@ -5,6 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
+import { RedesService } from '../../app/api/red/redes.service';
 declare var google;
 import {
   GoogleMaps,
@@ -27,12 +28,14 @@ export class MapaPage implements OnInit {
   latitud: any;
   longitud: any;
   map: GoogleMap;
+  redes: any;
   constructor(private geolocation: Geolocation,
     public navCtrl: NavController,
     private route: ActivatedRoute,
     private loadingCtrl: LoadingController,
     public alertController: AlertController,
     private hotspot: Hotspot,
+
   ) {
     this.contador = this.route.snapshot.paramMap.get('cont');
   }
@@ -81,9 +84,8 @@ export class MapaPage implements OnInit {
       .addListenerOnce(this.mapRef, 'idle', () => {
         loading.dismiss();
         this.addMaker(myLatLng.lat, myLatLng.lng);
-       
       });
-  }
+    }
 
   private addMaker(lat: number, lng: number) {
     const marker = new google.maps.Marker({
@@ -96,6 +98,7 @@ export class MapaPage implements OnInit {
       this.aletMarket();
     });
   }
+
 
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
@@ -114,4 +117,5 @@ export class MapaPage implements OnInit {
 
     await alert.present();
   }
+
 }
