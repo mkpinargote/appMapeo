@@ -27,12 +27,12 @@ export class SearchWifiPage implements OnInit {
   longituds:any;
 
   constructor(public alertController: AlertController,
-     public navCtrl: NavController, 
-     private hotspot: Hotspot,
-     public toastController: ToastController,
-     public loadingController: LoadingController,
-     private network: Network,
-     public menuCtrl: MenuController,
+    public navCtrl: NavController, 
+    private hotspot: Hotspot,
+    public toastController: ToastController,
+    public loadingController: LoadingController,
+    private network: Network,
+    public menuCtrl: MenuController,
     public redesServices: RedesService,
     private geolocation: Geolocation) {}
   ngOnInit() {
@@ -89,7 +89,6 @@ export class SearchWifiPage implements OnInit {
   }
   getConeccionActual(){
     this.hotspot.getConnectionInfo().then((data) => {
-      debugger
       this.dataSSID = data.SSID.substring(1, data.SSID.length - 1);
       this.dataIPAddress = data.IPAddress.substring(1);;
       this.datalinkSpeed = data.linkSpeed + "Mbps";
@@ -210,5 +209,6 @@ export class SearchWifiPage implements OnInit {
       lng: rta.coords.longitude
     };
   }
+  
   
 }

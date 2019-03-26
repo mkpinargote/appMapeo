@@ -42,4 +42,15 @@ export class RedesService {
         });
     });
   }
+  updateEstadoRed(id:number, data:any, ) {
+    return new Promise((resolve, reject) => {
+      const url = `${this.apiUrl}/redes/${id}`;
+      this.http.put(url, data, this.httpOptions)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }

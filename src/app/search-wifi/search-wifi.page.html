@@ -72,7 +72,7 @@
             </ion-row>
           </ion-col>
         </ion-row>
-        <ion-row no-padding *ngIf="x.SSID === dataSSID">
+        <ion-row no-padding *ngIf="x.SSID == dataSSID">
           <ion-col size="11" (click)="showDataRed()" float-left>
             {{x.SSID}}
             <ion-text color="tertiary" class="fsize10">Conectado</ion-text>
