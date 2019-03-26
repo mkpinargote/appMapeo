@@ -19,7 +19,9 @@ const routes: Routes = [
   { path: 'Login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'bienvenido', loadChildren: './bienvenido/bienvenido.module#BienvenidoPageModule' },
   { path: 'search-wifi', loadChildren: './search-wifi/search-wifi.module#SearchWifiPageModule' },
-  { path: 'mapa/:cont', loadChildren: './mapa/mapa.module#MapaPageModule' },  { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
+  { path: 'mapa/:cont', loadChildren: './mapa/mapa.module#MapaPageModule' },
+  { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
+  { path: 'estadistica', loadChildren: './estadistica/estadistica.module#EstadisticaPageModule' },
   { path: 'misredes', loadChildren: './misredes/misredes.module#MisredesPageModule' }
 
 

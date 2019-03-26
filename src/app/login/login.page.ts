@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { AlertController, ActionSheetController } from '@ionic/angular';
+import { NavController, MenuController, AlertController, ActionSheetController} from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertOptions } from '@ionic/core';
-import { MenuController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-login',
@@ -90,6 +89,10 @@ export class LoginPage  implements OnInit {
   }
   goToSearchWifi() {
     this.navCtrl.navigateForward(`search-wifi`);
+  }
+
+  onClickFunction($event) {
+    console.log('Event caught');
   }
 }
   
