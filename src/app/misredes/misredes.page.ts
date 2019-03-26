@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RedesService } from '../../app/api/red/redes.service';
 import { LoadingController, Refresher } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-
+import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 @Component({
   selector: 'app-misredes',
   templateUrl: './misredes.page.html',
@@ -15,13 +15,21 @@ export class MisredesPage implements OnInit {
   estadoCompartir: string;
   constructor(public redesServices: RedesService,
     private loadingCtrl: LoadingController,
-    public alertController: AlertController) {
+    public alertController: AlertController,
+    private hotspot: Hotspot, ) {
     this.estadoCompartir = 'Compartir';
     this.estadoCompartido = 'Desvincular';
   }
 
   ngOnInit() {
-    this.getMyredes();
+    this.hotspot.isConnectedToInternet().then((data) => {
+      if (data == true) {
+        this.getMyredes();
+      } else {
+        this.AlertNotConexion()
+      }
+    });
+
   }
 
   async getMyredes() {
@@ -85,5 +93,20 @@ export class MisredesPage implements OnInit {
     });
     await alert.present();
   }
+  async AlertNotConexion() {
+    const alert1 = await this.alertController.create({
+      header: 'Conexión',
+      message: 'Se requiere conexión a internet',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
 
+          }
+        }
+      ]
+    });
+
+    await alert1.present();
+  }
 }

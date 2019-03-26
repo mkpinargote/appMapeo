@@ -24,7 +24,7 @@ export class AppComponent {
     {
       title: 'Buscar redes',
       url: '/search-wifi',
-      icon: 'wifi'
+      icon: 'search'
     },
     {
       title: 'Estadistica',

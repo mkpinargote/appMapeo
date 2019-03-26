@@ -81,11 +81,14 @@ export class SearchWifiPage implements OnInit {
   // }
  
   async showDataRed() {
+    debugger
+    this.getConeccionActual();
     const alert = await this.alertController.create({
       header: this.dataSSID,
-      message: 'intensidad',
-      buttons: ['OK']
+      message: '<strong>Intensidad de señal: </strong></br>' + this.datalinkSpeed + '</br><strong>Seguridad: </strong></br>' + this.dataSecurity + '</br><strong>IP: </strong></br>' + this.dataIPAddress,
+      buttons: [{text: 'Ok'}]
     });
+    await alert.present();
   }
   getConeccionActual(){
     this.hotspot.getConnectionInfo().then((data) => {
