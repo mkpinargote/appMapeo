@@ -13,12 +13,13 @@ export class RedesService {
   constructor(public http: HttpClient) { }
 
   getRedes() {
-    return new Promise(resolve => {
-      this.http.get(this.apiUrl + '/redes').subscribe(data => {
-        resolve(data);
-      }, err => {
-        console.log(err);
-      });
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl + '/redes', this.httpOptions)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
     });
   }
   getRedesUser(id:any) {

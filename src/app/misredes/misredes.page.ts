@@ -3,6 +3,7 @@ import { RedesService } from '../../app/api/red/redes.service';
 import { LoadingController, Refresher } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
+
 @Component({
   selector: 'app-misredes',
   templateUrl: './misredes.page.html',
