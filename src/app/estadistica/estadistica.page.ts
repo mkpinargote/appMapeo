@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 
 
 //declare var google;
+
 @Component({
   selector: 'app-estadistica',
   templateUrl: './estadistica.page.html',
@@ -33,34 +34,39 @@ export class EstadisticaPage  {
   // public doughnutChartType:string='doughnut';
 
 
-  running = false;
   options = {
-    series: [{
-      type: 'gauge',
-      detail: {formatter: '{value}%'},
-      data: [{value: 50, name: 'Sensor'}]
-    }]
+    color: ['#3398DB'],
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    xAxis: [
+      {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        axisTick: {
+          alignWithLabel: true
+        }
+      }
+    ],
+    yAxis: [
+      {
+        type: 'value'
+      }
+    ],
+    series: [
+      {
+        name: 'Test',
+        type: 'bar',
+        barWidth: '60%',
+        data: [10, 52, 200, 334, 390, 330, 220]
+      }
+    ]
   };
-  datas: any = null;
-  private interval = null;
-
-  start() {
-    this.running = true;
-    this.interval = setInterval(() => {
-      this.datas = {
-        series: [{
-          data: [{value: Number((Math.random() * 100).toFixed(1))}]
-        }]
-      };
-    }, 2000);
-  }
-
-  stop() {
-    this.running = false;
-    clearInterval(this.interval);
-  }
-
 }
+ 
 
 
 
@@ -160,8 +166,3 @@ export class EstadisticaPage  {
   //       var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
   //       chart.draw(data, options);
   //     }
-  
-  
-
-
-

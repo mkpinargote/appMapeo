@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { timer } from 'rxjs/observable/timer';
+
 
 @Component({
   selector: 'app-root',
@@ -11,11 +11,11 @@ import { timer } from 'rxjs/observable/timer';
 })
 export class AppComponent {
   public appPages = [
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
+    // {
+    //   title: 'List',
+    //   url: '/list',
+    //   icon: 'list'
+    // },
     {
       title: 'Perfil de usuario',
       url: '/perfil',
