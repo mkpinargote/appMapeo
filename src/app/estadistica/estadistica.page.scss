@@ -1,16 +1,20 @@
 @media screen and (orientation: portrait) {
   .demo-chart {
+    width: 100vw;
     height: 82vh;
-    display: block;
-    width: auto;
+    // height: 82vh;
+    // display: block;
+    // width: auto;
   }
 }
 
 @media screen and (orientation: landscape) {
   .demo-chart {
-    height: 60vh;
-    display: block;
-    width: auto;
+    width: 100vw;
+    height: 68vh;
+    // height: 60vh;
+    // display: block;
+    // width: auto;
   }
 }
 
