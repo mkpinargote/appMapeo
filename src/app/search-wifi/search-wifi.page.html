@@ -37,7 +37,7 @@
                 <div class="img-excelente"></div>
               </ion-col>
               <ion-col size="10" class="wifispace">
-                {{x.SSID}} {{x.level}}
+                {{x.SSID}}
               </ion-col>
             </ion-row>
           </ion-col>
@@ -47,7 +47,7 @@
                 <div class="img-muybuena"></div>
               </ion-col>
               <ion-col size="10" class="wifispace">
-                {{x.SSID}} {{x.level}}
+                {{x.SSID}}
               </ion-col>
             </ion-row>
           </ion-col>
@@ -57,7 +57,7 @@
                 <div class="img-buena"></div>
               </ion-col>
               <ion-col size="10" class="wifispace">
-                {{x.SSID}} {{x.level}}
+                {{x.SSID}}
               </ion-col>
             </ion-row>
           </ion-col>
@@ -67,21 +67,19 @@
                 <div class="img-mala"></div>
               </ion-col>
               <ion-col size="10" class="wifispace">
-                {{x.SSID}} {{x.level}}
+                {{x.SSID}}
               </ion-col>
             </ion-row>
           </ion-col>
         </ion-row>
-        <ion-row no-padding *ngIf="x.SSID === dataSSID">
-          <ion-col size="11" (click)="showDataRed()" float-left>
-            {{x.SSID}}
-            <ion-text color="tertiary" class="fsize10">Conectado</ion-text>
+        <ion-row no-padding *ngIf="x.SSID == dataSSID">
+          <ion-col size="12" (click)="showDataRed()" no-padding>
+            <ion-text color="primary" style="padding-left: 7px;">{{x.SSID}}</ion-text>
           </ion-col>
-          <ion-col size="1" float-right>
-            <div float-right>
-              <ion-icon class="sizeIcon" name="share-alt" slot="end" (click)="savedRed()"></ion-icon>
-            </div>
+          <ion-col size="12" no-padding>
+            <ion-text color="tertiary" class="fsize10" style="padding-left: 7px;">Conectado</ion-text>
           </ion-col>
+  
           <!-- <ion-col size="12" class="letterSmall">Intensidad: {{datalinkSpeed}}</ion-col>
           <ion-col size="12" class="letterSmall">Dirección Ip: {{dataIPAddress}}</ion-col>
           <ion-col size="12" class="letterSmall">Seguridad: {{dataSecurity}}</ion-col> -->

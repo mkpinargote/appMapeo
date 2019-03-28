@@ -27,12 +27,12 @@ export class SearchWifiPage implements OnInit {
   longituds:any;
 
   constructor(public alertController: AlertController,
-     public navCtrl: NavController, 
-     private hotspot: Hotspot,
-     public toastController: ToastController,
-     public loadingController: LoadingController,
-     private network: Network,
-     public menuCtrl: MenuController,
+    public navCtrl: NavController, 
+    private hotspot: Hotspot,
+    public toastController: ToastController,
+    public loadingController: LoadingController,
+    private network: Network,
+    public menuCtrl: MenuController,
     public redesServices: RedesService,
     private geolocation: Geolocation) {}
   ngOnInit() {
@@ -81,15 +81,17 @@ export class SearchWifiPage implements OnInit {
   // }
  
   async showDataRed() {
+    debugger
+    this.getConeccionActual();
     const alert = await this.alertController.create({
       header: this.dataSSID,
-      message: 'intensidad',
-      buttons: ['OK']
+      message: '<strong>Intensidad de señal: </strong></br>' + this.datalinkSpeed + '</br><strong>Seguridad: </strong></br>' + this.dataSecurity + '</br><strong>IP: </strong></br>' + this.dataIPAddress,
+      buttons: [{text: 'Ok'}]
     });
+    await alert.present();
   }
   getConeccionActual(){
     this.hotspot.getConnectionInfo().then((data) => {
-      debugger
       this.dataSSID = data.SSID.substring(1, data.SSID.length - 1);
       this.dataIPAddress = data.IPAddress.substring(1);;
       this.datalinkSpeed = data.linkSpeed + "Mbps";
@@ -210,5 +212,6 @@ export class SearchWifiPage implements OnInit {
       lng: rta.coords.longitude
     };
   }
+  
   
 }
