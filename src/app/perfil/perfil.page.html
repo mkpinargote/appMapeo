@@ -1,29 +1,32 @@
 <ion-header color="tertiary">
     <ion-toolbar color="tertiary">
-        <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+        <ion-buttons slot="start" color="tertiary">
+            <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Perfil de usuario</ion-title>
+        <ion-title>
+           Perfil de usuario
+        </ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content class="bg" no-padding>
+<ion-content>
     <div padding class="ion-color-div">
         <ion-fab vertical="top" horizontal="end" slot="fixed" color="tertiary">
             <ion-fab-button mini color="tertiary">
                 <ion-icon name="create" (click)="isDisabled()"></ion-icon>
             </ion-fab-button>
         </ion-fab>
-        <div id="header"></div>
+        <div>
+            <img *ngIf="imageFileName" [src]="imageFileName" alt="file" class="foto">
+        </div>
         <ion-row>
             <ion-col class="flexcontainer">
                 <ion-fab>
-                    <button ion-fab (click)="ActionsPhoto()">
+                    <button ion-fab (click)="ActionsPhoto()" type='file'>
                         <ion-icon name="camera" color="tertiary"></ion-icon>
                     </button>
                 </ion-fab>
             </ion-col>
         </ion-row>
-
         <ion-row text-center>
             <ion-col class="flexcontainer">
                 <h3>Aqui va el usuario</h3>
@@ -90,11 +93,9 @@
             </ion-row>
         </ion-grid>
     </ion-list>
-
     <ion-fab vertical="bottom" horizontal="center" slot="fixed" color="tertiary">
         <ion-fab-button mini color="tertiary" [disabled]="is_edit">
             <ion-icon name="save"></ion-icon>
         </ion-fab-button>
     </ion-fab>
-
 </ion-content>

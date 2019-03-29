@@ -20,8 +20,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {ChartsModule} from 'ng2-charts'
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import {NgxEchartsModule} from 'ngx-echarts';
-
-
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +38,6 @@ import {NgxEchartsModule} from 'ngx-echarts';
     BrowserModule, 
     ChartsModule,
     NgxEchartsModule,
-    //[BrowserAnimationsModule]
     Ng2GoogleChartsModule,
      
   ],
@@ -50,6 +50,9 @@ import {NgxEchartsModule} from 'ngx-echarts';
     Network,
     GoogleMaps,
     Camera,
+    WebView,
+    FileTransfer,
+    File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     
   ],
