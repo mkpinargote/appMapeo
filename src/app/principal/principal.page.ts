@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionSheetController, AlertController, NavController } from '@ionic/angular';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { AlertOptions } from '@ionic/core';
-//import { NavController } from '@ionic/angular';
-
-
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserService } from '../../app/api/user/user.service';
+import { Storage } from '@ionic/storage';
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
@@ -12,28 +11,22 @@ import { AlertOptions } from '@ionic/core';
 })
 
 export class PrincipalPage implements OnInit {
-  formularioUser:FormGroup;
-  constructor(public actionSheetController: ActionSheetController,  public navCtrl: NavController,
+  formularioUser: FormGroup;
+  user: any;
+  msgdata: any;
+  constructor(public actionSheetController: ActionSheetController, public navCtrl: NavController,
     public alertCtrl: AlertController,
-    private alertController: AlertController,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public userService: UserService,
+    private storage: Storage,
+    public loadingCtrl: LoadingController,
   ) {
+    this.user = { 'imagen': 'usuario.png' };
     this.buildForm();
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
-  }
-
-  saveData(){
-    const alert = this.alertCtrl.create(<AlertOptions>{
-      title : "Datos enviados",
-      message : "Los registros fueron enviados correctamente",
-      buttons : ['Ok']}
-      );
-
-    alert.finally()
+  saveData() {
     this.buildForm();
+    this.saveUsuario();
   }
 
   buildForm() {
@@ -41,68 +34,39 @@ export class PrincipalPage implements OnInit {
      * @description Asignamos a la propiedad "formularioUser" los campos que se van a controlar de la vista
      */
     this.formularioUser = this.fb.group({
-      nombre:['',[Validators.required,Validators.maxLength(20)]],
-      apellido:['',[Validators.required,Validators.maxLength(20)]],
-      correo:['',[Validators.required,Validators.email]],
-      usuario:['',[Validators.required,Validators.minLength(6),Validators.maxLength(10)]],
-      password:['',[Validators.required,Validators.minLength(6),Validators.maxLength(12)]],
-      password1:['',[Validators.required,Validators.minLength(6),Validators.maxLength(12)]],
-      });
-  }
-
-
-  async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'Message <strong>text</strong>!!!',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Okay',
-          handler: () => {
-            console.log('Confirm Okay');
-          }
-        }
-      ]
+      nombre: ['', [Validators.required, Validators.maxLength(20)]],
+      imagen: ['', [Validators.maxLength(20)]],
+      f_nacimiento: ['', [Validators.required, Validators.maxLength(20)]],
+      apellido: ['', [Validators.required, Validators.maxLength(20)]],
+      correo: ['', [Validators.required, Validators.email]],
+      usuario: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
+      password1: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
     });
-
-    await alert.present();
   }
-
-
-
 
   ngOnInit() {
   }
-
-  async presentActionSheet() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Acción',
-      buttons: [{
-        text: 'Guardar',
-        role: 'guardar',
-        icon: 'save',
-        handler: () => {
-          console.log('save clicked');
-        }
-      },  {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
+  goSearchWifi() {
+    this.navCtrl.navigateForward(`search-wifi`);
+  }
+  async saveUsuario() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Registrando...',
     });
-    await actionSheet.present();
+    await loading.present();
+    this.userService.addUser(this.user)
+      .then(data => {
+        this.storage.set('user', data['user']);
+        this.storage.set('id', data['userId']);
+        this.goSearchWifi();
+        loading.dismiss();
+      }, (err) => {
+        loading.dismiss();
+        this.msgdata = err.error['message'];
+      });
   }
 
-  }
+}
 
 

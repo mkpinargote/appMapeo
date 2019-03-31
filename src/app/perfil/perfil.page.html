@@ -29,7 +29,7 @@
         </ion-row>
         <ion-row text-center>
             <ion-col class="flexcontainer">
-                <h3>Aqui va el usuario</h3>
+                <h3>{{user.user}}</h3>
             </ion-col>
         </ion-row>
     </div>
@@ -40,7 +40,7 @@
                     Nombre:
                 </ion-col>
                 <ion-col size="7">
-                    <ion-input class="ion-input" [disabled]="is_edit" id="name" type="text" value="va el nombre">
+                    <ion-input class="ion-input" [(ngModel)]="user['nombre']" [disabled]="is_edit" type="text">
                     </ion-input>
                 </ion-col>
             </ion-row>
@@ -49,7 +49,8 @@
                     Apellido:
                 </ion-col>
                 <ion-col size="7">
-                    <ion-input [disabled]="is_edit" id="name" type="text" value="va apellido"></ion-input>
+                    <ion-input [(ngModel)]="user['apellido']" [disabled]="is_edit" id="name" type="text">
+                    </ion-input>
                 </ion-col>
             </ion-row>
             <ion-row class="ion-size-item">
@@ -57,7 +58,8 @@
                     Fecha Nac.:
                 </ion-col>
                 <ion-col size="7">
-                    <ion-input [disabled]="is_edit" id="name" type="date" value="va fecNac"></ion-input>
+                    <ion-input [(ngModel)]="user.f_nacimiento" [disabled]="is_edit" id="name" type="date">
+                    </ion-input>
                 </ion-col>
             </ion-row>
             <ion-row class="ion-size-item">
@@ -65,7 +67,8 @@
                     Email:
                 </ion-col>
                 <ion-col size="7">
-                    <ion-input [disabled]="is_edit" id="name" type="text" value="va email"></ion-input>
+                    <ion-input [(ngModel)]="user.email" [disabled]="is_edit" id="name" type="text"
+                        ></ion-input>
                 </ion-col>
             </ion-row>
             <ion-col size=12 no-padding>
@@ -80,15 +83,8 @@
                     Usuario:
                 </ion-col>
                 <ion-col size="7">
-                    <ion-input [disabled]="is_edit" id="name" type="text" value="va usuario"></ion-input>
-                </ion-col>
-            </ion-row>
-            <ion-row ion-item color="tertiary" class="ion-size-item">
-                <ion-col size="5" padding-start align-self-center>
-                    Contraseña:
-                </ion-col>
-                <ion-col size="7">
-                    <ion-input [disabled]="is_edit" id="name" type="text" value="va clave"></ion-input>
+                    <ion-input [(ngModel)]="user.user" [disabled]="is_edit" id="name" type="text" >
+                    </ion-input>
                 </ion-col>
             </ion-row>
         </ion-grid>

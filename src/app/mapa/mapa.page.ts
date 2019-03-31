@@ -42,13 +42,13 @@ export class MapaPage implements OnInit {
     this.contador = this.route.snapshot.paramMap.get('cont');
   }
   ngOnInit() {
-    // this.hotspot.isConnectedToInternet().then((data) => {
-    //  if (data == true) {
-    this.loadMap();
-    //   } else {
-    //    this.AlertNotConexion()
-    //  }
-    //  });
+    this.hotspot.isConnectedToInternet().then((data) => {
+      if (data == true) {
+        this.loadMap();
+      } else {
+        this.AlertNotConexion()
+      }
+    });
 
   }
   async AlertNotConexion() {
@@ -107,25 +107,9 @@ export class MapaPage implements OnInit {
           icon: 'https://icon-icons.com/icons2/165/PNG/32/mapmarker_marker_outside_chartreuse_23006.png'
         });
         this.addMaker(myLatLng);
-        //cityCircle.setRaduius();
       });
   }
   private addMaker(posicionAcual: any) {
-
-    // function rad(x) {
-    //   return x * Math.PI / 180;
-    // };
-
-    // function getDistance(p1, p2) {
-    //   //	http://es.wikipedia.org/wiki/F{1f0778fe2e852b61c79949ce7b4bb677680b76fea251b03768a071033ace27eb}C3{1f0778fe2e852b61c79949ce7b4bb677680b76fea251b03768a071033ace27eb}B3rmula_del_Haversine
-    //   var R = 6378137; //radio de la tierra en metros
-    //   var dLat = rad(p2.lat() - p1.lat());
-    //   var dLong = rad(p2.lng() - p1.lng());
-    //   var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
-    //   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    //   var d = R * c;
-    //   return d;
-    // };
     this.redesServices.getRedes()
       .then(data => {
         var location = [];
@@ -134,9 +118,6 @@ export class MapaPage implements OnInit {
         for (i = 0; i < location.length; i++) {
           var marker_lat_lng = new google.maps.LatLng(location[i].latitud, location[i].longitud);
           var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(posicionAcual, marker_lat_lng); //distance in meters between your location and the marker
-          // console.log('obteniendo distancia con formula Haversine:' + getDistance(posicionAcual, marker_lat_lng));
-          // console.log('obteniendo con Google :' +
-          //   google.maps.geometry.spherical.computeDistanceBetween(posicionAcual, marker_lat_lng));
           if (distance_from_location <= 300) {
             var infowindow = new google.maps.InfoWindow();
             const marker = new google.maps.Marker({

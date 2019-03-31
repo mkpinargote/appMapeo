@@ -8,7 +8,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { UserService } from '../../app/api/user/user.service';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
@@ -24,6 +24,9 @@ export class PerfilPage {
   imageURI: any;
   imageFileName: any;
   lastImage: string = null;
+  Iduser:number;
+  user: any;
+  imagenBD:any;
   constructor(public navCtrl: NavController,
     public fb: FormBuilder,
     private camera: Camera,
@@ -32,7 +35,8 @@ export class PerfilPage {
     private transfer: FileTransfer,
     public toastController: ToastController,
     public loadingCtrl: LoadingController,
-    public userService: UserService) {
+    public userService: UserService,
+    private storage: Storage) {
   }
   async ActionsPhoto() {
     const actionSheet = await this.actionSheetController.create({
@@ -83,6 +87,23 @@ export class PerfilPage {
       // Handle error
     });
   }
+  ngOnInit() {
+    this.storage.get('id').then((val) => {
+      this.Iduser = val;
+      this.getUsuario(this.Iduser);
+    });
+  
+  } 
+  getUsuario(id:number) {
+    this.userService.getUser(id)
+      .then(data => {
+      this.user=data['user'];
+      this.imagenBD = data['user']['imagen'];
+      this.imageFileName = "https://agile-scrubland-87518.herokuapp.com/imagenes/" + this.imagenBD;
+      }, (err) => {
+        
+      });
+  } 
   getimage() {
     const options: CameraOptions = {
       quality: 70,
@@ -108,19 +129,19 @@ export class PerfilPage {
       message: 'Cargando...',
     });
     await loading.present();
-   var imagenBD = new Date().getTime() + ".jpg";
+   this.imagenBD = new Date().getTime() + ".jpg";
    const fileTransfer: FileTransferObject = this.transfer.create();
    let options: FileUploadOptions = {
      fileKey: 'file',
-     fileName: imagenBD,
+     fileName: this.imagenBD,
      chunkedMode: false,
      httpMethod: 'post',
      mimeType: 'image/jpeg',
      headers: {}
    }
-   fileTransfer.upload(this.myphoto, encodeURI('https://agile-scrubland-87518.herokuapp.com/api/v01/user/imagen/1'), options)
+   fileTransfer.upload(this.myphoto, encodeURI('https://agile-scrubland-87518.herokuapp.com/api/v01/user/imagen/' + this.Iduser), options)
      .then((data) => {
-       this.imageFileName = "https://agile-scrubland-87518.herokuapp.com/imagenes/" + imagenBD;
+       this.imageFileName = "https://agile-scrubland-87518.herokuapp.com/imagenes/" + this.imagenBD;
        this.presentToast("Imagen actualizada");
        loading.dismiss();
      }, (err) => {
