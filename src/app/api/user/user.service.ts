@@ -56,4 +56,15 @@ export class UserService {
         });
     });
   }
+  loginUser(data: any, ) {
+    return new Promise((resolve, reject) => {
+      const url = `${this.apiUrl}/user/login`;
+      this.http.post(url, data, this.httpOptions)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }
