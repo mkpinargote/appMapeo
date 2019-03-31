@@ -1,20 +1,16 @@
 <ion-header color="tertiary">
     <ion-toolbar color="tertiary">
-        <ion-buttons slot="start" color="tertiary">
-            <ion-menu-button></ion-menu-button>
+        <ion-buttons slot="start" (click)="cancelar()">
+            cancelar
         </ion-buttons>
-        <ion-title>
-           Perfil de usuario
-        </ion-title>
+          <ion-buttons slot="end" (click)="updateUsuario()">
+              guardar
+          </ion-buttons>
+        <ion-title>Mi perfil</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content>
     <div padding class="ion-color-div">
-        <ion-fab vertical="top" horizontal="end" slot="fixed" color="tertiary">
-            <ion-fab-button mini color="tertiary">
-                <ion-icon name="create" (click)="isDisabled()"></ion-icon>
-            </ion-fab-button>
-        </ion-fab>
         <div>
             <img *ngIf="imageFileName" [src]="imageFileName" alt="file" class="foto">
         </div>
@@ -40,7 +36,7 @@
                     Nombre:
                 </ion-col>
                 <ion-col size="7">
-                    <ion-input class="ion-input" [(ngModel)]="user['nombre']" [disabled]="is_edit" type="text">
+                    <ion-input class="ion-input" [(ngModel)]="user['nombre']" type="text">
                     </ion-input>
                 </ion-col>
             </ion-row>
@@ -49,7 +45,7 @@
                     Apellido:
                 </ion-col>
                 <ion-col size="7">
-                    <ion-input [(ngModel)]="user['apellido']" [disabled]="is_edit" id="name" type="text">
+                    <ion-input [(ngModel)]="user['apellido']" type="text">
                     </ion-input>
                 </ion-col>
             </ion-row>
@@ -58,7 +54,7 @@
                     Fecha Nac.:
                 </ion-col>
                 <ion-col size="7">
-                    <ion-input [(ngModel)]="user.f_nacimiento" [disabled]="is_edit" id="name" type="date">
+                    <ion-input [(ngModel)]="user.f_nacimiento" type="date">
                     </ion-input>
                 </ion-col>
             </ion-row>
@@ -67,9 +63,14 @@
                     Email:
                 </ion-col>
                 <ion-col size="7">
-                    <ion-input [(ngModel)]="user.email" [disabled]="is_edit" id="name" type="text"
+                    <ion-input [(ngModel)]="user.email" type="text"
                         ></ion-input>
                 </ion-col>
+                 <ion-col size="12">
+                     <ion-text color="danger">
+                         {{msgdata}}
+                     </ion-text>
+                 </ion-col>
             </ion-row>
             <ion-col size=12 no-padding>
                 <ion-item-divider color="light" text-center no-padding>
@@ -78,20 +79,26 @@
                     </ion-label>
                 </ion-item-divider>
             </ion-col>
-            <ion-row class="ion-size-item">
-                <ion-col size="5" padding-start align-self-center>
-                    Usuario:
-                </ion-col>
-                <ion-col size="7">
-                    <ion-input [(ngModel)]="user.user" [disabled]="is_edit" id="name" type="text" >
-                    </ion-input>
-                </ion-col>
-            </ion-row>
+             <ion-row class="ion-size-item">
+                 <ion-col size="5" padding-start align-self-center>
+                     Usuario:
+                 </ion-col>
+                 <ion-col size="7">
+                     <ion-text color="tertiary"  style="padding-left: 30px;">
+                         cambiar
+                     </ion-text>
+                 </ion-col>
+             </ion-row>
+              <ion-row class="ion-size-item">
+                  <ion-col size="5" padding-start align-self-center>
+                      Contraseña:
+                  </ion-col>
+                  <ion-col size="7">
+                      <ion-text color="tertiary" style="padding-left: 30px;">
+                          cambiar
+                      </ion-text>
+                  </ion-col>
+              </ion-row>
         </ion-grid>
     </ion-list>
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed" color="tertiary">
-        <ion-fab-button mini color="tertiary" [disabled]="is_edit">
-            <ion-icon name="save"></ion-icon>
-        </ion-fab-button>
-    </ion-fab>
 </ion-content>

@@ -27,6 +27,7 @@ export class PerfilPage {
   Iduser:number;
   user: any;
   imagenBD:any;
+  msgdata: any;
   constructor(public navCtrl: NavController,
     public fb: FormBuilder,
     private camera: Camera,
@@ -104,6 +105,14 @@ export class PerfilPage {
         
       });
   } 
+  updateUsuario() {
+    this.userService.updateUser(this.Iduser, this.user)
+      .then(data => {
+        this.presentToast(data['message']);
+      }, (err) => {
+          this.msgdata = err.error['message'];
+      });
+  } 
   getimage() {
     const options: CameraOptions = {
       quality: 70,
@@ -120,7 +129,9 @@ export class PerfilPage {
       // Handle error
     });
   }
- 
+  cancelar() {
+    this.navCtrl.navigateForward(`search-wifi`);
+  }
   isDisabled() {
     this.is_edit = false;
   }

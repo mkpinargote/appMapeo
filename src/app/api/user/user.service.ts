@@ -45,5 +45,15 @@ export class UserService {
         });
     });
   }
-
+  updateUser(id: number, data: any, ) {
+    return new Promise((resolve, reject) => {
+      const url = `${this.apiUrl}/users/${id}`;
+      this.http.put(url, data, this.httpOptions)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
 }
