@@ -75,8 +75,8 @@ export class MapaPage implements OnInit {
   async loadMap() {
     const loading = await this.loadingCtrl.create();
     loading.present();
-    // const myLatLng = await this.getLocation();
-    const myLatLng = new google.maps.LatLng(40.723333, -73.983438);
+    const myLatLng = await this.getLocation();
+    //const myLatLng = new google.maps.LatLng(40.723333, -73.983438);
     const mapEle: HTMLElement = document.getElementById('map_canvas');
     this.mapRef = new google.maps.Map(mapEle, {
       center: myLatLng,

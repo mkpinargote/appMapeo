@@ -3,7 +3,7 @@ import { RedesService } from '../../app/api/red/redes.service';
 import { LoadingController, Refresher } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-misredes',
   templateUrl: './misredes.page.html',
@@ -14,10 +14,12 @@ export class MisredesPage implements OnInit {
   estado: boolean;
   estadoCompartido: string;
   estadoCompartir: string;
+  Iduser:any;
   constructor(public redesServices: RedesService,
     private loadingCtrl: LoadingController,
     public alertController: AlertController,
-    private hotspot: Hotspot, ) {
+    private hotspot: Hotspot,
+    private storage: Storage ) {
     this.estadoCompartir = 'Compartir';
     this.estadoCompartido = 'Desvincular';
   }
@@ -25,25 +27,27 @@ export class MisredesPage implements OnInit {
   ngOnInit() {
     this.hotspot.isConnectedToInternet().then((data) => {
       if (data == true) {
-        this.getMyredes();
+        this.storage.get('id').then((val) => {
+          this.Iduser = val;
+        });
+        this.getMyredes(this.Iduser);
       } else {
         this.AlertNotConexion()
       }
     });
 
   }
-
-  async getMyredes() {
+  async getMyredes(id:number) {
     const loading = await this.loadingCtrl.create();
     loading.present();
-    this.redesServices.getRedesUser(1)
+    this.redesServices.getRedesUser(id)
       .then(data => {
         loading.dismiss();
         this.redesUser = data;
       });
   }
   doRefresh(event) {
-    this.redesServices.getRedesUser(1)
+    this.redesServices.getRedesUser(this.Iduser)
       .then(data => {
         event.target.complete();
         this.redesUser = data;
@@ -51,7 +55,7 @@ export class MisredesPage implements OnInit {
   }
 
   loadData(event) {
-    this.redesServices.getRedesUser(1)
+    this.redesServices.getRedesUser(this.Iduser)
       .then(data => {
         event.target.complete();
         this.redesUser = this.redesUser.concat(data);
@@ -86,7 +90,7 @@ export class MisredesPage implements OnInit {
             let datas = { 'estadoRed': estadoRed };
             this.redesServices.updateEstadoRed(id, datas)
               .then(data => {
-                this.getMyredes();
+                this.getMyredes(this.Iduser);
               });
           }
         }
