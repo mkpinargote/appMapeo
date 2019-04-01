@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Directive, HostListener, Input } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 import { ActionSheetController } from '@ionic/angular';
 import { NgIf } from '@angular/common';
@@ -16,7 +16,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 export class PerfilPage {
   SampleGroup: FormGroup;
-  image: SafeResourceUrl;
+  image: any;
   myphoto: any;
   mostrark: boolean = true;
   name: string;

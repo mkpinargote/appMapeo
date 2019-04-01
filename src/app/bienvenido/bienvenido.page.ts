@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 import { HttpClient} from '@angular/common/http';
 import { MenuController } from '@ionic/angular';
+
 @Component({
   selector: 'app-bienvenido',
   templateUrl: './bienvenido.page.html',
