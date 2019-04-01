@@ -16,7 +16,6 @@ import {GoogleMaps} from '@ionic-native/google-maps/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { Camera} from '@ionic-native/camera/ngx';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-//import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ChartsModule} from 'ng2-charts'
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import {NgxEchartsModule} from 'ngx-echarts';

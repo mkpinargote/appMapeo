@@ -79,9 +79,8 @@ export class SearchWifiPage implements OnInit {
   //     })
 
   // }
- 
+  //Muestra el detalle de la red como ip, frecuencia .....
   async showDataRed() {
-    debugger
     this.getConeccionActual();
     const alert = await this.alertController.create({
       header: this.dataSSID,
@@ -90,6 +89,7 @@ export class SearchWifiPage implements OnInit {
     });
     await alert.present();
   }
+  //obtiene la información de la red actual conectada
   getConeccionActual(){
     this.hotspot.getConnectionInfo().then((data) => {
       this.dataSSID = data.SSID.substring(1, data.SSID.length - 1);
@@ -99,6 +99,7 @@ export class SearchWifiPage implements OnInit {
     });
     this.getCoordenate();
   }
+  //para conectarme a una red mapeada 
   async presentAlert(SSID: any) {
     const toast = await this.toastController.create({
       message: 'Conectando...',
@@ -127,6 +128,7 @@ export class SearchWifiPage implements OnInit {
           handler: (data) => {
             toast.present();
             var pass = data.txtpassword;
+            //con este métodi me conecto a la red 
             this.hotspot.connectToWifi(SSID, data.txtpassword)
               .then((data) => {
                 toast.dismiss();
@@ -157,6 +159,7 @@ export class SearchWifiPage implements OnInit {
   goToMapa(cont: string) {
     this.navCtrl.navigateForward(`mapa/${cont}`);
   }
+  //para refrescar la busqueda de ñas redews 
   doRefresh(event) {
     this.getConeccionActual();
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
@@ -165,6 +168,7 @@ export class SearchWifiPage implements OnInit {
       event.target.complete();
     }, 1500);
   }
+  //restar redes sin nombre
   restarVacio(networks){
     this.data = networks;
     this.cont = networks.length;
@@ -174,6 +178,7 @@ export class SearchWifiPage implements OnInit {
       }
     }
   }
+  //para presentar mensaje de conectado
   async alertConex() {
     const toast = await this.toastController.create({
       message: 'Conectado',
@@ -181,6 +186,7 @@ export class SearchWifiPage implements OnInit {
     });
     toast.present();
   }
+   //para presentar mensaje de toasta
   async alertConexFalse(mensaje: any) {
     const toast = await this.toastController.create({
       message: mensaje,
@@ -196,15 +202,17 @@ export class SearchWifiPage implements OnInit {
     });
     toast.present();
   }
+  //para inahabilitarvel menu 
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
   }
-  
+  //obtenrr cordenadas
   async getCoordenate(){
     const myLatLng = await this.getLocation();
     this.latituds = myLatLng.lng;
     this.longituds = myLatLng.lng;
   }
+  //obtener coordenadas método mapa
   private async getLocation() {
     const rta = await this.geolocation.getCurrentPosition();
     return {
