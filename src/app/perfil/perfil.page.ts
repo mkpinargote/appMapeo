@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef, Directive, HostListener, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-
-import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 import { ActionSheetController } from '@ionic/angular';
-import { NgIf } from '@angular/common';
-import { NgControl } from "@angular/forms";
+import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { UserService } from '../../app/api/user/user.service';
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.page.html',
@@ -16,16 +17,27 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 export class PerfilPage {
   SampleGroup: FormGroup;
-  image: any;
   myphoto: any;
   mostrark: boolean = true;
   name: string;
   is_edit: boolean = true;
-
+  imageURI: any;
+  imageFileName: any;
+  lastImage: string = null;
+  Iduser:number;
+  user: any;
+  imagenBD:any;
+  msgdata: any;
   constructor(public navCtrl: NavController,
     public fb: FormBuilder,
     private camera: Camera,
-    public actionSheetController: ActionSheetController, ) {
+    public actionSheetController: ActionSheetController, 
+    private webview: WebView,
+    private transfer: FileTransfer,
+    public toastController: ToastController,
+    public loadingCtrl: LoadingController,
+    public userService: UserService,
+    private storage: Storage) {
   }
   async ActionsPhoto() {
     const actionSheet = await this.actionSheetController.create({
@@ -58,42 +70,102 @@ export class PerfilPage {
     });
     await actionSheet.present();
   }
-
   takephoto() {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality: 70,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       saveToPhotoAlbum: true,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    debugger
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      targetWidth: 500,
+      targetHeight: 500,
+    };
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      this.myphoto = 'data:image/jpeg;base64,' + imageData;
+      this.myphoto = imageData;
+      this.uploadFile();
     }, (err) => {
       // Handle error
     });
   }
+  ngOnInit() {
+    this.storage.get('id').then((val) => {
+      this.Iduser = val;
+      this.getUsuario(this.Iduser);
+    });
+  
+  } 
+  getUsuario(id:number) {
+    this.userService.getUser(id)
+      .then(data => {
+      this.user=data['user'];
+      this.imagenBD = data['user']['imagen'];
+      this.imageFileName = "https://agile-scrubland-87518.herokuapp.com/imagenes/" + this.imagenBD;
+      }, (err) => {
+        
+      });
+  } 
+  updateUsuario() {
+    this.userService.updateUser(this.Iduser, this.user)
+      .then(data => {
+        this.presentToast(data['message']);
+      }, (err) => {
+          this.msgdata = err.error['message'];
+      });
+  } 
   getimage() {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      quality: 70,
+      destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      saveToPhotoAlbum: true
+      saveToPhotoAlbum: true,
+      targetWidth: 500,
+      targetHeight: 500,
     }
-
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      this.image = 'data:image/jpeg;base64,' + imageData;
+      this.myphoto = imageData;
+      this.uploadFile();
     }, (err) => {
       // Handle error
     });
+  }
+  cancelar() {
+    this.navCtrl.navigateForward(`search-wifi`);
   }
   isDisabled() {
     this.is_edit = false;
   }
-
+ async uploadFile() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+    });
+    await loading.present();
+   this.imagenBD = new Date().getTime() + ".jpg";
+   const fileTransfer: FileTransferObject = this.transfer.create();
+   let options: FileUploadOptions = {
+     fileKey: 'file',
+     fileName: this.imagenBD,
+     chunkedMode: false,
+     httpMethod: 'post',
+     mimeType: 'image/jpeg',
+     headers: {}
+   }
+   fileTransfer.upload(this.myphoto, encodeURI('https://agile-scrubland-87518.herokuapp.com/api/v01/user/imagen/' + this.Iduser), options)
+     .then((data) => {
+       this.imageFileName = "https://agile-scrubland-87518.herokuapp.com/imagenes/" + this.imagenBD;
+       this.presentToast("Imagen actualizada");
+       loading.dismiss();
+     }, (err) => {
+        console.log(err);
+          loading.dismiss();
+        this.presentToast(err);
+      });
+  }
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
 }

@@ -1,20 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 @Injectable({
   providedIn: 'root'
 })
-
-export class RedesService {
-   httpOptions = {
+export class UserService {
+  httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   apiUrl = 'https://agile-scrubland-87518.herokuapp.com/api/v01';
   constructor(public http: HttpClient) { }
 
-  getRedes() {
+  uploadImagen (file:any){
     return new Promise((resolve, reject) => {
-      this.http.get(this.apiUrl + '/redes', this.httpOptions)
+      const url = `${this.apiUrl}/user/imagen/1`;
+      let posData = new FormData();
+      posData.append('file', file);
+      this.http.post(url, posData, this.httpOptions)   
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
+  getUser(id: any) {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl + '/users/' + id)
         .subscribe(data => {
           resolve(data);
         }, (err) => {
@@ -22,19 +34,9 @@ export class RedesService {
         });
     });
   }
-  getRedesUser(id:any) {
+  addUser(data: any) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.apiUrl + '/user/red/'+id)
-      .subscribe(data => {
-        resolve(data);
-      }, (err) => {
-        reject(err);
-      });
-    });
-  }
-  addRed(data:any) {
-    return new Promise((resolve, reject) => {
-      const url = `${this.apiUrl}/redes`;
+      const url = `${this.apiUrl}/users`;
       this.http.post(url, data, this.httpOptions)
         .subscribe(res => {
           resolve(res);
@@ -43,10 +45,21 @@ export class RedesService {
         });
     });
   }
-  updateEstadoRed(id:number, data:any, ) {
+  updateUser(id: number, data: any, ) {
     return new Promise((resolve, reject) => {
-      const url = `${this.apiUrl}/redes/${id}`;
+      const url = `${this.apiUrl}/users/${id}`;
       this.http.put(url, data, this.httpOptions)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+  loginUser(data: any, ) {
+    return new Promise((resolve, reject) => {
+      const url = `${this.apiUrl}/user/login`;
+      this.http.post(url, data, this.httpOptions)
         .subscribe(res => {
           resolve(res);
         }, (err) => {
