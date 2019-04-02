@@ -42,7 +42,9 @@ export class MisredesPage implements OnInit {
       .then(data => {
         loading.dismiss();
         this.redesUser = data;
+        debugger
       }, (error) => {
+        debugger
           loading.dismiss();
       })
   }

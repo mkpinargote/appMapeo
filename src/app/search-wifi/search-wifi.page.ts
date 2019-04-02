@@ -8,7 +8,7 @@ import { Network } from '@ionic-native/network/ngx';
 import { MenuController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { RedesService } from '../../app/api/red/redes.service';
-//import jQuery from 'jquery';
+import { Storage } from '@ionic/storage';
 @Component({
   selector: "app-search-wifi",
   templateUrl: "./search-wifi.page.html",
@@ -25,7 +25,7 @@ export class SearchWifiPage implements OnInit {
   red: any = {};
   latituds:any;
   longituds:any;
-
+  Iduser: any;
   constructor(public alertController: AlertController,
     public navCtrl: NavController, 
     private hotspot: Hotspot,
@@ -34,11 +34,16 @@ export class SearchWifiPage implements OnInit {
     private network: Network,
     public menuCtrl: MenuController,
     public redesServices: RedesService,
-    private geolocation: Geolocation) {}
+    private geolocation: Geolocation,
+    private storage: Storage) {}
   ngOnInit() {
     this.getConeccionActual();
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
+    });
+    this.storage.get('id').then((val) => {
+      debugger
+      this.Iduser = val;
     });
   }
 
@@ -134,11 +139,14 @@ export class SearchWifiPage implements OnInit {
                 toast.dismiss();
                 this.alertConex();
                 this.getCoordenate();
-                this.red = { tipoRed: 'wifi', nombreRed: SSID, passwordRed: pass, estadoRed: 1, latitud: this.latituds, longitud: this.longituds, idUser:1 };
+                this.red = { tipoRed: 'wifi', nombreRed: SSID, passwordRed: pass, estadoRed: 1, latitud: this.latituds, longitud: this.longituds, idUser: this.Iduser };
+               debugger
                 this.redesServices.addRed(this.red)
                   .then(data => {
+                    debugger
                     console.log(data);
                   }, (error) => {
+                    debugger
                     console.log(error);
                   });
               }, (error) => {
