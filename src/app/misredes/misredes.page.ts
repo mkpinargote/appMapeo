@@ -23,7 +23,6 @@ export class MisredesPage implements OnInit {
     this.estadoCompartir = 'Compartir';
     this.estadoCompartido = 'Desvincular';
   }
-
   ngOnInit() {
     this.hotspot.isConnectedToInternet().then((data) => {
       if (data == true) {
@@ -31,12 +30,10 @@ export class MisredesPage implements OnInit {
           this.Iduser = val;
           this.getMyredes(this.Iduser);
         });
-        
       } else {
         this.AlertNotConexion()
       }
     });
-
   }
   async getMyredes(id:number) {
     const loading = await this.loadingCtrl.create();
@@ -56,7 +53,6 @@ export class MisredesPage implements OnInit {
         this.redesUser = data;
       });
   }
-
   loadData(event) {
     this.redesServices.getRedesUser(this.Iduser)
       .then(data => {
