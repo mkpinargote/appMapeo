@@ -150,7 +150,7 @@ export class PerfilPage {
      mimeType: 'image/jpeg',
      headers: {}
    }
-   fileTransfer.upload(this.myphoto, encodeURI('https://agile-scrubland-87518.herokuapp.com/api/v01/user/imagen/' + this.Iduser), options)
+   fileTransfer.upload(this.myphoto, encodeURI('https://agile-scrubland-87518.herokuapp.com/api/v01/users/imagen/' + this.Iduser), options)
      .then((data) => {
        this.imageFileName = "https://agile-scrubland-87518.herokuapp.com/imagenes/" + this.imagenBD;
        this.presentToast("Imagen actualizada");
