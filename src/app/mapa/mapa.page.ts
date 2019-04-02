@@ -78,6 +78,7 @@ export class MapaPage implements OnInit {
     loading.present();
     const myLatLngs = await this.getLocation();
     debugger
+    console.log('Latitud ' + myLatLngs.lat +' Longitud '+ myLatLngs.lng);
     const myLatLng = new google.maps.LatLng(myLatLngs.lat, myLatLngs.lng);
     const mapEle: HTMLElement = document.getElementById('map_canvas');
     this.mapRef = new google.maps.Map(mapEle, {
