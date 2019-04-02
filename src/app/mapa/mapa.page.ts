@@ -43,12 +43,12 @@ export class MapaPage implements OnInit {
   }
   ngOnInit() {
    this.hotspot.isConnectedToInternet().then((data) => {
-      if (data == true) {
+     // if (data == true) {
         this.loadMap();
-      } else {
-        this.AlertNotConexion()
-      }
-    });
+    //   } else {
+    //     this.AlertNotConexion()
+    //   }
+     });
 
   }
   async AlertNotConexion() {
@@ -78,7 +78,7 @@ export class MapaPage implements OnInit {
     loading.present();
     const myLatLngs = await this.getLocation();
     debugger
-    const myLatLng = new google.maps.LatLng(myLatLngs.lat, myLatLngs.lat);
+    const myLatLng = new google.maps.LatLng(myLatLngs.lat, myLatLngs.lng);
     const mapEle: HTMLElement = document.getElementById('map_canvas');
     this.mapRef = new google.maps.Map(mapEle, {
       center: myLatLng,
