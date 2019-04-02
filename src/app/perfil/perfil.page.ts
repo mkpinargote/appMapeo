@@ -115,7 +115,7 @@ export class PerfilPage {
   } 
   getimage() {
     const options: CameraOptions = {
-      quality: 70,
+      quality: 50,
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       saveToPhotoAlbum: true,
