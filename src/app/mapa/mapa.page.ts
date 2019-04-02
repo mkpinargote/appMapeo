@@ -42,13 +42,13 @@ export class MapaPage implements OnInit {
     this.contador = this.route.snapshot.paramMap.get('cont');
   }
   ngOnInit() {
-    //this.hotspot.isConnectedToInternet().then((data) => {
-      //if (data == true) {
+   this.hotspot.isConnectedToInternet().then((data) => {
+      if (data == true) {
         this.loadMap();
-      //} else {
+      } else {
         this.AlertNotConexion()
-      //}
-    //});
+      }
+    });
 
   }
   async AlertNotConexion() {
