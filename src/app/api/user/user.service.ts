@@ -12,7 +12,7 @@ export class UserService {
 
   uploadImagen (file:any){
     return new Promise((resolve, reject) => {
-      const url = `${this.apiUrl}/user/imagen/1`;
+      const url = `${this.apiUrl}/users/imagen/1`;
       let posData = new FormData();
       posData.append('file', file);
       this.http.post(url, posData, this.httpOptions)   
@@ -58,7 +58,7 @@ export class UserService {
   }
   loginUser(data: any, ) {
     return new Promise((resolve, reject) => {
-      const url = `${this.apiUrl}/user/login`;
+      const url = `${this.apiUrl}/users/login`;
       this.http.post(url, data, this.httpOptions)
         .subscribe(res => {
           resolve(res);
