@@ -29,8 +29,9 @@ export class MisredesPage implements OnInit {
       if (data == true) {
         this.storage.get('id').then((val) => {
           this.Iduser = val;
+          this.getMyredes(this.Iduser);
         });
-        this.getMyredes(this.Iduser);
+        
       } else {
         this.AlertNotConexion()
       }
@@ -44,7 +45,9 @@ export class MisredesPage implements OnInit {
       .then(data => {
         loading.dismiss();
         this.redesUser = data;
-      });
+      }, (error) => {
+          loading.dismiss();
+      })
   }
   doRefresh(event) {
     this.redesServices.getRedesUser(this.Iduser)
