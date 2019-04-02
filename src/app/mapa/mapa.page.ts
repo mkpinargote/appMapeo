@@ -42,13 +42,13 @@ export class MapaPage implements OnInit {
     this.contador = this.route.snapshot.paramMap.get('cont');
   }
   ngOnInit() {
-    this.hotspot.isConnectedToInternet().then((data) => {
-      if (data == true) {
+   this.hotspot.isConnectedToInternet().then((data) => {
+     // if (data == true) {
         this.loadMap();
-      } else {
-        this.AlertNotConexion()
-      }
-    });
+    //   } else {
+    //     this.AlertNotConexion()
+    //   }
+     });
 
   }
   async AlertNotConexion() {
@@ -73,10 +73,12 @@ export class MapaPage implements OnInit {
     this.navCtrl.navigateForward(`mapa`);
   }
   async loadMap() {
+    debugger
     const loading = await this.loadingCtrl.create();
     loading.present();
-    const myLatLng = await this.getLocation();
-    //const myLatLng = new google.maps.LatLng(40.723333, -73.983438);
+    const myLatLngs = await this.getLocation();
+    debugger
+    const myLatLng = new google.maps.LatLng(myLatLngs.lat, myLatLngs.lng);
     const mapEle: HTMLElement = document.getElementById('map_canvas');
     this.mapRef = new google.maps.Map(mapEle, {
       center: myLatLng,
@@ -96,6 +98,7 @@ export class MapaPage implements OnInit {
       center: myLatLng,
       radius: 300
     });
+    debugger
     google.maps.event
       .addListenerOnce(this.mapRef, 'idle', () => {
         loading.dismiss();
@@ -110,12 +113,15 @@ export class MapaPage implements OnInit {
       });
   }
   private addMaker(posicionAcual: any) {
+    debugger
     this.redesServices.getRedes()
       .then(data => {
+        debugger
         var location = [];
         location = data['redes'];
         var i;
         for (i = 0; i < location.length; i++) {
+          var f = location[i].latitud;
           var marker_lat_lng = new google.maps.LatLng(location[i].latitud, location[i].longitud);
           var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(posicionAcual, marker_lat_lng); //distance in meters between your location and the marker
           if (distance_from_location <= 300) {
