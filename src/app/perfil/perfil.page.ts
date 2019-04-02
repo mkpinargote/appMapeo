@@ -72,7 +72,7 @@ export class PerfilPage {
   }
   takephoto() {
     const options: CameraOptions = {
-      quality: 70,
+      quality: 50,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       saveToPhotoAlbum: true,
@@ -115,7 +115,7 @@ export class PerfilPage {
   } 
   getimage() {
     const options: CameraOptions = {
-      quality: 70,
+      quality: 50,
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       saveToPhotoAlbum: true,

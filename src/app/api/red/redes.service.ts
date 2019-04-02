@@ -24,7 +24,7 @@ export class RedesService {
   }
   getRedesUser(id:any) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.apiUrl + '/user/red/'+id)
+      this.http.get(this.apiUrl + '/redes/user/'+id)
       .subscribe(data => {
         resolve(data);
       }, (err) => {

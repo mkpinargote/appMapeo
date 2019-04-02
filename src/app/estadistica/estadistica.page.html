@@ -9,10 +9,9 @@
   
   <ion-content padding>
     <div style="display:block;">
-      <canvas baseChart
-      [data]='doughnutChartData'
-      [labels]='doughnutChartLabels'
-      [chartType]='doughnutChartType'>
-      </canvas>
+           <canvas baseChart width="300" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
+             [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+             [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+             (chartClick)="chartClicked($event)"></canvas>
     </div>    
   </ion-content>

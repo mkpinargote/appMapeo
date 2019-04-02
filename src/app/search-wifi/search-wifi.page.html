@@ -31,7 +31,7 @@
     <ion-grid *ngFor="let x of data">
       <ion-item *ngIf="x.SSID !=''">
         <ion-row no-padding (click)="presentAlert(x.SSID)" *ngIf="x.SSID != dataSSID">
-          <ion-col size="12" class="letterSmall" *ngIf="x.level < -50 && x.level >= -65">
+          <ion-col size="12" class="letterSmall" *ngIf="x.level < -20 && x.level >= -65">
             <ion-row no-padding>
               <ion-col size="2">
                 <div class="img-excelente"></div>
