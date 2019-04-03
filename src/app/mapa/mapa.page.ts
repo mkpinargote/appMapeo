@@ -43,13 +43,12 @@ export class MapaPage implements OnInit {
   }
   ngOnInit() {
    this.hotspot.isConnectedToInternet().then((data) => {
-     // if (data == true) {
+     if (data == true) {
         this.loadMap();
-    //   } else {
-    //     this.AlertNotConexion()
-    //   }
+       } else {
+        this.AlertNotConexion()
+      }
      });
-
   }
   async AlertNotConexion() {
     const alert1 = await this.alertController.create({
@@ -73,11 +72,9 @@ export class MapaPage implements OnInit {
     this.navCtrl.navigateForward(`mapa`);
   }
   async loadMap() {
-    debugger
     const loading = await this.loadingCtrl.create();
     loading.present();
     const myLatLngs = await this.getLocation();
-    debugger
     console.log('Latitud ' + myLatLngs.lat +' Longitud '+ myLatLngs.lng);
     const myLatLng = new google.maps.LatLng(myLatLngs.lat, myLatLngs.lng);
     const mapEle: HTMLElement = document.getElementById('map_canvas');
@@ -99,7 +96,6 @@ export class MapaPage implements OnInit {
       center: myLatLng,
       radius: 300
     });
-    debugger
     google.maps.event
       .addListenerOnce(this.mapRef, 'idle', () => {
         loading.dismiss();
@@ -114,10 +110,8 @@ export class MapaPage implements OnInit {
       });
   }
   private addMaker(posicionAcual: any) {
-    debugger
     this.redesServices.getRedes()
       .then(data => {
-        debugger
         var location = [];
         location = data['redes'];
         var i;

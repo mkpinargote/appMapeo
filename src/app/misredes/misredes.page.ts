@@ -42,9 +42,7 @@ export class MisredesPage implements OnInit {
       .then(data => {
         loading.dismiss();
         this.redesUser = data;
-        debugger
       }, (error) => {
-        debugger
           loading.dismiss();
       })
   }
@@ -63,7 +61,6 @@ export class MisredesPage implements OnInit {
       });
   }
   async changeRedMapa(id: number, estadoRed: boolean) {
-    debugger
     let comparar;
     if (estadoRed == false) {
       comparar = this.estadoCompartido;
@@ -90,13 +87,10 @@ export class MisredesPage implements OnInit {
               estadoRed = true;
             }
             let datas = { 'estadoRed': estadoRed };
-            debugger
             this.redesServices.updateEstadoRed(id, datas)
               .then(data => {
-                debugger
                 this.getMyredes(this.Iduser);
               }, (error) => {
-                debugger
       
               })
           }
@@ -118,7 +112,6 @@ export class MisredesPage implements OnInit {
         }
       ]
     });
-
     await alert1.present();
   }
 }

@@ -26,6 +26,7 @@ export class SearchWifiPage implements OnInit {
   latituds:any;
   longituds:any;
   Iduser: any;
+
   constructor(public alertController: AlertController,
     public navCtrl: NavController, 
     private hotspot: Hotspot,
@@ -38,11 +39,11 @@ export class SearchWifiPage implements OnInit {
     private storage: Storage) {}
   ngOnInit() {
     this.getConeccionActual();
+    this.getCoordenate();
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
     });
     this.storage.get('id').then((val) => {
-      debugger
       this.Iduser = val;
     });
   }
@@ -86,7 +87,6 @@ export class SearchWifiPage implements OnInit {
   // }
   //Muestra el detalle de la red como ip, frecuencia .....
   async showDataRed() {
-    this.getConeccionActual();
     const alert = await this.alertController.create({
       header: this.dataSSID,
       message: '<strong>Intensidad de señal: </strong></br>' + this.datalinkSpeed + '</br><strong>Seguridad: </strong></br>' + this.dataSecurity + '</br><strong>IP: </strong></br>' + this.dataIPAddress,
@@ -102,7 +102,6 @@ export class SearchWifiPage implements OnInit {
       this.datalinkSpeed = data.linkSpeed + "Mbps";
       this.dataSecurity = "WPA/WPA2 PSK";
     });
-    this.getCoordenate();
   }
   //para conectarme a una red mapeada 
   async presentAlert(SSID: any) {
@@ -125,34 +124,28 @@ export class SearchWifiPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            let mensaje = 'Operación cancelada';
-            this.alertConexFalse(mensaje);
+            this.alertConex('Operación cancelada');
           }
         }, {
           text: 'Conectar',
           handler: (data) => {
             toast.present();
             var pass = data.txtpassword;
-            //con este métodi me conecto a la red 
+            //con este método me conecto a la red 
             this.hotspot.connectToWifi(SSID, data.txtpassword)
               .then((data) => {
                 toast.dismiss();
-                this.alertConex();
-                this.getCoordenate();
+                this.alertConex('conectado');
                 this.red = { tipoRed: 'wifi', nombreRed: SSID, passwordRed: pass, estadoRed: 1, latitud: this.latituds, longitud: this.longituds, idUser: this.Iduser };
-               debugger
                 this.redesServices.addRed(this.red)
                   .then(data => {
-                    debugger
-                    console.log(data);
+                    this.alertConex("red guardada");
                   }, (error) => {
-                    debugger
-                    console.log(error);
+                      this.alertConex("no se puedo guardar la red");
                   });
               }, (error) => {
                   toast.dismiss();
-                  let mensaje = 'Error al conectar';
-                  this.alertConexFalse(mensaje);
+                  this.alertConex('Error al conectar');
               })
           }
         }
@@ -160,7 +153,6 @@ export class SearchWifiPage implements OnInit {
     });
     await alert.present();
   }
-  
   goSearchWifi() {
     this.navCtrl.navigateForward(`search-wifi`);
   }
@@ -169,7 +161,6 @@ export class SearchWifiPage implements OnInit {
   }
   //para refrescar la busqueda de ñas redews 
   doRefresh(event) {
-    this.getConeccionActual();
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
     }); setTimeout(() => {
@@ -186,16 +177,8 @@ export class SearchWifiPage implements OnInit {
       }
     }
   }
-  //para presentar mensaje de conectado
-  async alertConex() {
-    const toast = await this.toastController.create({
-      message: 'Conectado',
-      duration: 2000
-    });
-    toast.present();
-  }
-   //para presentar mensaje de toasta
-  async alertConexFalse(mensaje: any) {
+  //para presentar mensaje
+  async alertConex(mensaje: any) {
     const toast = await this.toastController.create({
       message: mensaje,
       duration: 2000
@@ -217,7 +200,7 @@ export class SearchWifiPage implements OnInit {
   //obtenrr cordenadas
   async getCoordenate(){
     const myLatLng = await this.getLocation();
-    this.latituds = myLatLng.lng;
+    this.latituds = myLatLng.lat;
     this.longituds = myLatLng.lng;
   }
   //obtener coordenadas método mapa
