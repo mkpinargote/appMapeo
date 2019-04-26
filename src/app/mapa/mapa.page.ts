@@ -43,13 +43,12 @@ export class MapaPage implements OnInit {
   }
   ngOnInit() {
    this.hotspot.isConnectedToInternet().then((data) => {
-     // if (data == true) {
+     if (data == true) {
         this.loadMap();
-    //   } else {
-    //     this.AlertNotConexion()
-    //   }
+       } else {
+        this.AlertNotConexion()
+      }
      });
-
   }
   async AlertNotConexion() {
     const alert1 = await this.alertController.create({
@@ -73,11 +72,10 @@ export class MapaPage implements OnInit {
     this.navCtrl.navigateForward(`mapa`);
   }
   async loadMap() {
-    debugger
     const loading = await this.loadingCtrl.create();
     loading.present();
     const myLatLngs = await this.getLocation();
-    debugger
+    console.log('Latitud ' + myLatLngs.lat +' Longitud '+ myLatLngs.lng);
     const myLatLng = new google.maps.LatLng(myLatLngs.lat, myLatLngs.lng);
     const mapEle: HTMLElement = document.getElementById('map_canvas');
     this.mapRef = new google.maps.Map(mapEle, {
@@ -98,7 +96,6 @@ export class MapaPage implements OnInit {
       center: myLatLng,
       radius: 300
     });
-    debugger
     google.maps.event
       .addListenerOnce(this.mapRef, 'idle', () => {
         loading.dismiss();
@@ -109,14 +106,14 @@ export class MapaPage implements OnInit {
           title: 'Ubicación actual',
           icon: 'https://icon-icons.com/icons2/165/PNG/32/mapmarker_marker_outside_chartreuse_23006.png'
         });
-        this.addMaker(myLatLng);
+        this.addMaker(myLatLng, myLatLngs.lat, myLatLngs.lng);
       });
   }
-  private addMaker(posicionAcual: any) {
+  private addMaker(posicionAcual: any, lat:any, lng:any) {
+    console.log("posicon dddd"+posicionAcual);
     debugger
-    this.redesServices.getRedes()
+    this.redesServices.getRedes({ latitud: lat, longitud: lng })
       .then(data => {
-        debugger
         var location = [];
         location = data['redes'];
         var i;

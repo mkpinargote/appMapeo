@@ -12,9 +12,10 @@ export class RedesService {
   apiUrl = 'https://agile-scrubland-87518.herokuapp.com/api/v01';
   constructor(public http: HttpClient) { }
 
-  getRedes() {
+  getRedes(data: any) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.apiUrl + '/redes', this.httpOptions)
+      const url = `${this.apiUrl}/redes/publicas`;
+      this.http.post(url, data, this.httpOptions)
         .subscribe(data => {
           resolve(data);
         }, (err) => {
