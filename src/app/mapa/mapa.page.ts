@@ -106,11 +106,13 @@ export class MapaPage implements OnInit {
           title: 'Ubicación actual',
           icon: 'https://icon-icons.com/icons2/165/PNG/32/mapmarker_marker_outside_chartreuse_23006.png'
         });
-        this.addMaker(myLatLng);
+        this.addMaker(myLatLng, myLatLngs.lat, myLatLngs.lng);
       });
   }
-  private addMaker(posicionAcual: any) {
-    this.redesServices.getRedes()
+  private addMaker(posicionAcual: any, lat:any, lng:any) {
+    console.log("posicon dddd"+posicionAcual);
+    debugger
+    this.redesServices.getRedes({ latitud: lat, longitud: lng })
       .then(data => {
         var location = [];
         location = data['redes'];

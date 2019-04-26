@@ -199,6 +199,7 @@ export class SearchWifiPage implements OnInit {
   }
   //obtenrr cordenadas
   async getCoordenate(){
+    debugger
     const myLatLng = await this.getLocation();
     this.latituds = myLatLng.lat;
     this.longituds = myLatLng.lng;

@@ -46,6 +46,11 @@ export class PrincipalPage implements OnInit {
   }
 
   ngOnInit() {
+    this.storage.get('id').then((val) => {
+      if(val != null){
+        this.goSearchWifi();
+      } 
+    });
   }
   goSearchWifi() {
     this.navCtrl.navigateForward(`search-wifi`);
