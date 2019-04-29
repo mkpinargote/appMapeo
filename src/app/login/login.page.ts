@@ -46,7 +46,7 @@ export class LoginPage  implements OnInit {
       });
   }
   goSearchWifi() {
-    this.navCtrl.navigateForward(`search-wifi`);
+    this.navCtrl.navigateForward(`buscarredes`);
   }
   buildForm() {
     this.formularioLogin = this.fb.group({
