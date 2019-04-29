@@ -120,8 +120,8 @@ export class MapaPage implements OnInit {
         for (i = 0; i < location.length; i++) {
           var f = location[i].latitud;
           var marker_lat_lng = new google.maps.LatLng(location[i].latitud, location[i].longitud);
-          var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(posicionAcual, marker_lat_lng); //distance in meters between your location and the marker
-          if (distance_from_location <= 300) {
+        //  var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(posicionAcual, marker_lat_lng); //distance in meters between your location and the marker
+        //  if (distance_from_location <= 300) {
             var infowindow = new google.maps.InfoWindow();
             const marker = new google.maps.Marker({
               position: marker_lat_lng,
@@ -144,9 +144,9 @@ export class MapaPage implements OnInit {
                 infowindow.open(this.mapRef, marker);
               }
             })(marker, i));
-          } else {
-            console.log('=> is NOT in searchArea');
-          }
+          //} else {
+          //  console.log('=> is NOT in searchArea');
+          //}
         }
       });
   }

@@ -42,6 +42,7 @@ export class SearchWifiPage implements OnInit {
     this.getCoordenate();
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
+      debugger
     });
     this.storage.get('id').then((val) => {
       this.Iduser = val;
@@ -170,6 +171,7 @@ export class SearchWifiPage implements OnInit {
   //restar redes sin nombre
   restarVacio(networks){
     this.data = networks;
+    debugger
     this.cont = networks.length;
     for (let datas of this.data) {
       if (datas.SSID == '') {
@@ -197,7 +199,7 @@ export class SearchWifiPage implements OnInit {
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
   }
-  //obtenrr cordenadas
+  //obtener coordenadas
   async getCoordenate(){
     debugger
     const myLatLng = await this.getLocation();
@@ -213,5 +215,8 @@ export class SearchWifiPage implements OnInit {
     };
   }
   
-  
+  formateaValor(valor) {
+  // si no es un número devuelve el valor, o lo convierte a número con 2 decimales
+  return isNaN(valor) ? valor : parseFloat(valor).toFixed(1);
+}
 }
