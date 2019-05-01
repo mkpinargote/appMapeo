@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 import { AlertController } from '@ionic/angular';
@@ -17,18 +17,18 @@ import { Storage } from '@ionic/storage';
 export class SearchWifiPage implements OnInit {
   data: any;
   cont: any;
-  dataSSID:any ;
+  dataSSID: any;
   dataIPAddress: any;
   datalinkSpeed: any;
-  dataSecurity:any;
+  dataSecurity: any;
   redes: any;
   red: any = {};
-  latituds:any;
-  longituds:any;
+  latituds: any;
+  longituds: any;
   Iduser: any;
 
   constructor(public alertController: AlertController,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     private hotspot: Hotspot,
     public toastController: ToastController,
     public loadingController: LoadingController,
@@ -36,13 +36,12 @@ export class SearchWifiPage implements OnInit {
     public menuCtrl: MenuController,
     public redesServices: RedesService,
     private geolocation: Geolocation,
-    private storage: Storage) {}
+    private storage: Storage) { }
   ngOnInit() {
     this.getConeccionActual();
     this.getCoordenate();
     this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
       this.restarVacio(networks);
-      debugger
     });
     this.storage.get('id').then((val) => {
       this.Iduser = val;
@@ -72,7 +71,7 @@ export class SearchWifiPage implements OnInit {
   //       }, {
   //         text: 'Conectar',
   //         handler: (data) => {
-            
+
   //         }
   //       }
   //     ]
@@ -91,12 +90,12 @@ export class SearchWifiPage implements OnInit {
     const alert = await this.alertController.create({
       header: this.dataSSID,
       message: '<strong>Intensidad de señal: </strong></br>' + this.datalinkSpeed + '</br><strong>Seguridad: </strong></br>' + this.dataSecurity + '</br><strong>IP: </strong></br>' + this.dataIPAddress,
-      buttons: [{text: 'Ok'}]
+      buttons: [{ text: 'Ok' }]
     });
     await alert.present();
   }
   //obtiene la información de la red actual conectada
-  getConeccionActual(){
+  getConeccionActual() {
     this.hotspot.getConnectionInfo().then((data) => {
       this.dataSSID = data.SSID.substring(1, data.SSID.length - 1);
       this.dataIPAddress = data.IPAddress.substring(1);;
@@ -108,17 +107,17 @@ export class SearchWifiPage implements OnInit {
   async presentAlert(SSID: any) {
     const toast = await this.toastController.create({
       message: 'Conectando...',
-      color:'tertiary',
+      color: 'tertiary',
     });
     const alert = await this.alertController.create({
-      header: 'Red: '+SSID,
+      header: 'Red: ' + SSID,
       inputs: [
         {
           name: 'txtpassword',
           type: 'password',
           placeholder: 'contraseña'
         }
-        ],
+      ],
       buttons: [
         {
           text: 'Cancelar',
@@ -142,11 +141,11 @@ export class SearchWifiPage implements OnInit {
                   .then(data => {
                     this.alertConex("red guardada");
                   }, (error) => {
-                      this.alertConex("no se puedo guardar la red");
+                    this.alertConex("no se puedo guardar la red");
                   });
               }, (error) => {
-                  toast.dismiss();
-                  this.alertConex('Error al conectar');
+                toast.dismiss();
+                this.alertConex('Error al conectar');
               })
           }
         }
@@ -169,9 +168,8 @@ export class SearchWifiPage implements OnInit {
     }, 1500);
   }
   //restar redes sin nombre
-  restarVacio(networks){
+  restarVacio(networks) {
     this.data = networks;
-    debugger
     this.cont = networks.length;
     for (let datas of this.data) {
       if (datas.SSID == '') {
@@ -200,8 +198,7 @@ export class SearchWifiPage implements OnInit {
     this.menuCtrl.enable(true);
   }
   //obtener coordenadas
-  async getCoordenate(){
-    debugger
+  async getCoordenate() {
     const myLatLng = await this.getLocation();
     this.latituds = myLatLng.lat;
     this.longituds = myLatLng.lng;
@@ -214,9 +211,13 @@ export class SearchWifiPage implements OnInit {
       lng: rta.coords.longitude
     };
   }
-  
+
   formateaValor(valor) {
-  // si no es un número devuelve el valor, o lo convierte a número con 2 decimales
-  return isNaN(valor) ? valor : parseFloat(valor).toFixed(1);
-}
+    // si no es un número devuelve el valor, o lo convierte a número con 2 decimales
+    return isNaN(valor) ? valor : parseFloat(valor).toFixed(1);
+  }
+
+  Misredes(cont: string) {
+    this.navCtrl.navigateForward(`misredes/${cont}`);
+  }
 }

@@ -17,8 +17,8 @@ export class BuscarredesPage {
     });
     loading.present();
     setTimeout(() => {
-      this.navCtrl.navigateForward(`search-wifi`);
       loading.dismiss();
     }, 5000);
+    this.navCtrl.navigateForward(`search-wifi`);
   }
 }

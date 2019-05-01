@@ -22,8 +22,8 @@ const routes: Routes = [
   { path: 'mapa/:cont', loadChildren: './mapa/mapa.module#MapaPageModule' },
   { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
   { path: 'estadistica', loadChildren: './estadistica/estadistica.module#EstadisticaPageModule' },
-  { path: 'misredes', loadChildren: './misredes/misredes.module#MisredesPageModule' },  { path: 'buscarredes', loadChildren: './buscarredes/buscarredes.module#BuscarredesPageModule' }
-
+  { path: 'buscarredes', loadChildren: './buscarredes/buscarredes.module#BuscarredesPageModule' },
+  { path: 'misredes/:cont', loadChildren: './misredes/misredes.module#MisredesPageModule' }
 
 
 

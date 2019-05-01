@@ -38,8 +38,8 @@ export class LoginPage  implements OnInit {
       .then(data => {
         this.storage.set('user', data['user']);
         this.storage.set('id', data['userId']);
-        this.goSearchWifi();
         loading.dismiss();
+        this.goSearchWifi();
       }, (err) => {
         loading.dismiss();
         this.msgdata = err.error['message'];
