@@ -21,7 +21,7 @@ export class PrincipalPage implements OnInit {
     private storage: Storage,
     public loadingCtrl: LoadingController,
   ) {
-    this.user = { 'imagen': 'usuario.png' };
+    this.user = { 'imagen': 'https://agile-scrubland-87518.herokuapp.com/imagenes/usuario.png' };
     this.buildForm();
   }
   saveData() {

@@ -84,12 +84,6 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-hotspot" spec="1.2.10" />
-    <plugin name="cordova-plugin-facebook4" spec="4.1.0">
-        <variable name="APP_ID" value="344511559719122" />
-        <variable name="APP_NAME" value="appMapeo" />
-        <variable name="FACEBOOK_HYBRID_APP_EVENTS" value="false" />
-        <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.38.1" />
-    </plugin>
     <plugin name="cordova-plugin-geolocation" spec="4.0.1" />
     <plugin name="cordova-plugin-googlemaps" spec="2.5.0">
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBq95X3kzCCo21DZlGRNSwWLeWC5AKqbkc" />
@@ -103,6 +97,12 @@
     <plugin name="cordova-plugin-file-transfer" spec="1.7.1" />
     <plugin name="cordova-plugin-file" spec="6.0.1" />
     <plugin name="cordova-sqlite-storage" spec="3.2.0" />
+    <plugin name="cordova-plugin-facebook4" spec="4.2.1">
+        <variable name="APP_ID" value="310071876348255" />
+        <variable name="APP_NAME" value="Karo.login" />
+        <variable name="FACEBOOK_HYBRID_APP_EVENTS" value="false" />
+        <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.40.0" />
+    </plugin>
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="7.1.4" />
 </widget>
