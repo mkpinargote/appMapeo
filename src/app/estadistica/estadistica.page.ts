@@ -1,69 +1,162 @@
-
-import { Component } from '@angular/core';
-import {NavController} from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { Chart } from 'chart.js';
+import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 @Component({
   selector: 'app-estadistica',
   templateUrl: './estadistica.page.html',
   styleUrls: ['./estadistica.page.scss'],
 })
 
-export class EstadisticaPage  {
-  constructor(public navCtrl: NavController) {}
-  public lineChartData: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-    { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C' }
-  ];
-  public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChartOptions: any = {
-    responsive: true
-  };
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    }
-  ];
-  public lineChartLegend: boolean = true;
-  public lineChartType: string = 'line';
+export class EstadisticaPage {
 
-  public randomize(): void {
-    let _lineChartData: Array<any> = new Array(this.lineChartData.length);
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      _lineChartData[i] = { data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label };
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+  interval: any;
+  speedCanvas: any;
+  lineChart: any;
+  levelScan: any;
+  SSIDInfo: any;
+  BSSIDInfo: any;
+  linkSpeedInfo: any;
+  IPAddressInfo: any;
+  frequencyScan: any;
+  constructor(public navCtrl: NavController,
+    private hotspot: Hotspot) {
+    this.startTimer();
+  }
+
+  async scanWifi() {
+    this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
+      networks.forEach(element => {
+        if (element.SSID == this.SSIDInfo) {
+          this.frequencyScan = element.frequency;
+          this.levelScan = element.level;
+        }
+      })
+      this.graficaNivelSenal(this.levelScan);
+      this.graficaLine(this.levelScan);
+    });
+  }
+  async getInfoNetCurre() {
+    this.hotspot.getConnectionInfo().then((data) => {
+      this.SSIDInfo = data.SSID.substring(1, data.SSID.length - 1);
+      this.IPAddressInfo = data.IPAddress.substring(1);;
+      this.linkSpeedInfo = (parseFloat(data.linkSpeed) / 100) * 100;
+      this.BSSIDInfo = data.BSSID;
+      this.graficaVelocidad(this.linkSpeedInfo);
+    })
+  }
+
+  startTimer() {
+    this.interval = setInterval(function () {
+      this.hotspot.scanWifi().then((networks: Array<HotspotNetwork>) => {
+        networks.forEach(element => {
+          if (element.SSID == this.SSIDInfo) {
+            this.frequencyScan = element.frequency;
+            this.levelScan = element.level;
+          }
+        })
+        this.graficaNivelSenal(this.levelScan);
+        this.updateGraficaLine(this.levelScan);
+      });
+
+    }.bind(this), 2000);
+  }
+  ngOnDestroy() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
+  graficaNivelSenal(senal: number) {
+    var ctx = (<any>document.getElementById('canvas-chart1')).getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          label: "Nivel de senal",
+          backgroundColor: [
+            'rgba(70, 156, 118, 0.2)',
+            'rgba(151, 215, 187  , 0.2)'
+          ],
+          hoverBackgroundColor: [
+            "#469C76",
+            "#97D7BB"
+          ],
+          data: [senal, - 100 - (senal)]
+        }]
       }
+    });
+  }
+  //Gráfica - velocidad de enlace 
+  graficaVelocidad(velocidad: number) {
+    var ctx = (<any>document.getElementById('canvas-chart')).getContext('2d');
+    var chart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          label: "Velocidad de enlace",
+          backgroundColor: [
+            'rgba(3, 138, 238, 0.2)',
+            'rgba(146, 207, 252, 0.2)'
+          ],
+          hoverBackgroundColor: [
+            "#038AEE",
+            "#92CFFC"
+          ],
+          data: [velocidad, 100 - velocidad]
+        }]
+      }
+    });
+  }
+  //actualizar el grafico de linea
+  async updateGraficaLine(senal: number) {
+    this.lineChart.data.labels.push(senal);
+    this.lineChart.data.datasets[0].data.push(senal);
+    this.lineChart.options.scales.xAxes[0].ticks.fontColor = 'white';
+    this.lineChart.options.scales.yAxes[0].ticks.reverse = true;
+    this.lineChart.update();
+    //preguntamos si existen más de 15 label
+    if (this.lineChart.data.labels.length >= 12) {
+      this.lineChart.data.labels.shift();
+      this.lineChart.data.datasets[0].data.shift(senal);
     }
-    this.lineChartData = _lineChartData;
   }
-
-  // events
-  public chartClicked(e: any): void {
-    console.log(e);
+  //Grafica nivel de señal 
+  async graficaLine(senal: number) {
+    this.speedCanvas = (<any>document.getElementById('speedChart')).getContext('2d');
+    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontSize = 12;
+    let speedData = {
+      datasets: [{
+        fill: true,
+        label: "nivel señal",
+        data: [senal],
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+      }],
+      options: {
+        tooltips: {
+          enabled: false
+        },
+        legend: {
+          display: false,
+          position: 'bottom',
+          labels: {
+            fontColor: 'white'
+          }
+        }
+      }
+    };
+    this.lineChart = new Chart(this.speedCanvas, {
+      type: 'line',
+      data: speedData,
+    });
   }
-
-  public chartHovered(e: any): void {
-    console.log(e);
+  ngOnInit() {
+    this.getInfoNetCurre();
+    this.scanWifi();
+  }
+  formateaValor(valor) {
+    // si no es un número devuelve el valor, o lo convierte a número con 2 decimales
+    return isNaN(valor) ? valor : parseFloat(valor).toFixed(1);
   }
 }

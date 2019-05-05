@@ -18,46 +18,42 @@
   }
 }
 
+.donut-inner {
+  margin-top: -29%;
+  margin-bottom: 20%;
+  margin-left: 46%
+}
 
 
-
-// .graph {
-//     -webkit-user-select: none;
-//        -moz-user-select: none;
-//         -ms-user-select: none;
-//             user-select: none; }
-//     .graph .edge {
-//       stroke: #666;
-//       fill: none; }
-//       .graph .edge .edge-label {
-//         stroke: none;
-//         font-size: 12px;
-//         fill: #666; }
-//     .graph .panning-rect {
-//       fill: transparent;
-//       cursor: move; }
-//     .graph .node-group .node:focus {
-//       outline: none; }.graph {
-//     -webkit-user-select: none;
-//        -moz-user-select: none;
-//         -ms-user-select: none;
-//             user-select: none; }
-//     .graph .edge {
-//       stroke: #666;
-//       fill: none; }
-//       .graph .edge .edge-label {
-//         stroke: none;
-//         font-size: 12px;
-//         fill: #666; }
-//     .graph .panning-rect {
-//       fill: transparent;
-//       cursor: move; }
-//     .graph .node-group .node:focus {
-//       outline: none; }
+.donut-inner span {
+  font-size: 10px;
+  margin: 0px;
+  padding: 0px;
   
-//   .edge {
-//       path  {
-//         stroke: #666 !important;
-//       }
-//     }
+}
+.chartDiv{
+  float: left;
+  width: 50%;
+  margin: 0px;
+  padding: 0px;
   
+}
+
+canvas{
+  margin: 0px;
+  padding: 0px;
+}
+
+
+.info{
+   float: left;
+   width: 50%;
+   text-align: center !important;
+   font-size: 12px;
+   height: 80px;
+   background: #F2F2F2;
+   margin-top: 10px;
+}
+.dt{
+margin-top: 24px !important;
+}

@@ -1,17 +1,54 @@
 <ion-header color="tertiary">
   <ion-toolbar color="tertiary">
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title text-center>Estado de Red</ion-title>
+  <ion-buttons slot="start" color="tertiary">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+    <ion-title>Monitoreo</ion-title>
   </ion-toolbar>
 </ion-header>
-  
-  <ion-content padding>
-    <div style="display:block;">
-           <canvas baseChart width="300" height="400" [datasets]="lineChartData" [labels]="lineChartLabels"
-             [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
-             [chartType]="lineChartType" (chartHover)="chartHovered($event)"
-             (chartClick)="chartClicked($event)"></canvas>
-    </div>    
-  </ion-content>
+<ion-content>
+  <ion-card>
+    <ion-card-content no-padding>
+      <div class="chartDiv">
+        <canvas id="canvas-chart">    </canvas>
+         <div class="donut-inner">
+           <span>{{linkSpeedInfo}}</span>
+         </div>
+         <div style="text-align: center; font-size: 10px; color:#3E8B6A ">Velocidad enlace</div>
+      </div>
+    <div class="chartDiv">
+      <canvas id="canvas-chart1"></canvas>
+      <div class="donut-inner">
+        <span>{{levelScan}}</span>
+      </div>
+      <div style="text-align: center; font-size: 10px; color:#3E8B6A ">Nivel señal - dBm</div>
+    </div>
+    <!-- <canvas #lineCanvas></canvas> -->
+    <canvas id="speedChart" width="600" height="400"></canvas>
+    </ion-card-content>
+  </ion-card>
+<div class="info">
+  <div class="dt">Frecuencia</div>
+  <div>
+    <ion-label color="tertiary" style="font-weight: bold; font-size: 16px;">{{ formateaValor(frequencyScan/1024)}} GHz
+    </ion-label>
+  </div>
+</div>
+<div class="info">
+  <div class="dt">Red</div>
+   <ion-label color="tertiary">{{SSIDInfo}}</ion-label>
+  <div></div>
+</div>
+<div class="info">
+  <div class="dt">MAC address</div>
+  <div>
+    <ion-label color="tertiary">{{BSSIDInfo}}</ion-label>
+  </div>
+</div>
+<div class="info">
+  <div class="dt">IP address</div>
+  <div>
+    <ion-label color="tertiary">{{IPAddressInfo}}</ion-label>
+  </div>
+</div>
+</ion-content>
