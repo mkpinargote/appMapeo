@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UserService } from '../../app/api/user/user.service';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
@@ -20,6 +21,8 @@ export class PrincipalPage implements OnInit {
     public userService: UserService,
     private storage: Storage,
     public loadingCtrl: LoadingController,
+    public toastController: ToastController,
+    
   ) {
     this.user = { 'imagen': 'https://agile-scrubland-87518.herokuapp.com/imagenes/usuario.png' };
     this.buildForm();
@@ -28,7 +31,6 @@ export class PrincipalPage implements OnInit {
     this.buildForm();
     this.saveUsuario();
   }
-
   buildForm() {
     /**
      * @description Asignamos a la propiedad "formularioUser" los campos que se van a controlar de la vista
@@ -44,7 +46,6 @@ export class PrincipalPage implements OnInit {
       password1: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
     });
   }
-
   ngOnInit() {
     this.storage.get('id').then((val) => {
       if(val != null){
@@ -68,10 +69,16 @@ export class PrincipalPage implements OnInit {
         loading.dismiss();
       }, (err) => {
         loading.dismiss();
-        this.msgdata = err.error['message'];
+          this.mensajeToast(err.error['message']);
       });
   }
-
+  async mensajeToast(mensaje: any) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
+  } 
 }
 
 

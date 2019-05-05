@@ -143,7 +143,7 @@ export class PerfilPage {
    const fileTransfer: FileTransferObject = this.transfer.create();
    let options: FileUploadOptions = {
      fileKey: 'file',
-     fileName: this.imagenBD,
+     fileName: "https://agile-scrubland-87518.herokuapp.com/imagenes/"+this.imagenBD,
      chunkedMode: false,
      httpMethod: 'post',
      mimeType: 'image/jpeg',
@@ -151,12 +151,12 @@ export class PerfilPage {
    }
    fileTransfer.upload(this.myphoto, encodeURI('https://agile-scrubland-87518.herokuapp.com/api/v01/users/imagen/' + this.Iduser), options)
      .then((data) => {
-       this.imageFileName = this.imagenBD;
+       this.imageFileName = "https://agile-scrubland-87518.herokuapp.com/imagenes/"+ this.imagenBD;
        this.presentToast("Imagen actualizada");
        loading.dismiss();
      }, (err) => {
         console.log(err);
-          loading.dismiss();
+        loading.dismiss();
         this.presentToast(err);
       });
   }
