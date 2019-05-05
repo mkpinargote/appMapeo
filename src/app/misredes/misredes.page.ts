@@ -4,6 +4,8 @@ import { LoadingController, Refresher } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 import { Storage } from '@ionic/storage';
+import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-misredes',
   templateUrl: './misredes.page.html',
@@ -15,15 +17,20 @@ export class MisredesPage implements OnInit {
   estadoCompartido: string;
   estadoCompartir: string;
   Iduser:any;
+  contador: string;
   constructor(public redesServices: RedesService,
     private loadingCtrl: LoadingController,
+    public navCtrl: NavController, 
     public alertController: AlertController,
     private hotspot: Hotspot,
+    private route: ActivatedRoute,
     private storage: Storage ) {
     this.estadoCompartir = 'Compartir';
     this.estadoCompartido = 'Desvincular';
+    this.contador = this.route.snapshot.paramMap.get('cont');
   }
   ngOnInit() {
+   
     this.hotspot.isConnectedToInternet().then((data) => {
       if (data == true) {
         this.storage.get('id').then((val) => {
@@ -42,6 +49,7 @@ export class MisredesPage implements OnInit {
       .then(data => {
         loading.dismiss();
         this.redesUser = data;
+        debugger
       }, (error) => {
           loading.dismiss();
       })
@@ -60,9 +68,9 @@ export class MisredesPage implements OnInit {
         this.redesUser = this.redesUser.concat(data);
       });
   }
-  async changeRedMapa(id: number, estadoRed: boolean) {
+  async changeRedMapa(id: number, estadored: string) {
     let comparar;
-    if (estadoRed == false) {
+    if (estadored == "0") {
       comparar = this.estadoCompartido;
     } else {
       comparar = this.estadoCompartir;
@@ -81,16 +89,19 @@ export class MisredesPage implements OnInit {
         }, {
           text: 'Ok',
           handler: () => {
-            if (estadoRed == true) {
-              estadoRed = false;
+            debugger
+            if (estadored == "1") {
+              estadored = "0";
             } else {
-              estadoRed = true;
+              estadored = "1";
             }
-            let datas = { 'estadoRed': estadoRed };
+            let datas = { 'estadored': estadored };
             this.redesServices.updateEstadoRed(id, datas)
               .then(data => {
+                debugger
                 this.getMyredes(this.Iduser);
               }, (error) => {
+                debugger
       
               })
           }
@@ -113,5 +124,14 @@ export class MisredesPage implements OnInit {
       ]
     });
     await alert1.present();
+  }
+  Misredes() {
+    this.navCtrl.navigateForward(`misredes`);
+  }
+  goSearchWifi() {
+    this.navCtrl.navigateForward(`search-wifi`);
+  }
+  goToMapa() {
+    this.navCtrl.navigateForward(`mapa/${this.contador}`);
   }
 }

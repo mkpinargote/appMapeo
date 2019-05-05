@@ -30,54 +30,96 @@
   <ion-list>
     <ion-grid *ngFor="let x of data">
       <ion-item *ngIf="x.SSID !=''">
+        <ion-row no-padding *ngIf="x.SSID == dataSSID">
+          <ion-col size="10" (click)="showDataRed()" no-padding>
+            <ion-text color="primary" style="padding-left: 4px;">{{x.SSID}}</ion-text>
+          </ion-col>
+          <ion-col size="2" no-padding style="padding-left:20px;">
+            <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+          </ion-col>
+          <div>
+            <span style="font-size:12px">{{x.BSSID}}</span><br>
+            <span style="font-size:12px; color:rgb(169, 184, 39)">
+              <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
+            </span>
+          </div>
+        </ion-row>
         <ion-row no-padding (click)="presentAlert(x.SSID)" *ngIf="x.SSID != dataSSID">
           <ion-col size="12" class="letterSmall" *ngIf="x.level < -20 && x.level >= -65">
             <ion-row no-padding>
-              <ion-col size="2">
+              <ion-col size="1" no-padding>
                 <div class="img-excelente"></div>
               </ion-col>
-              <ion-col size="10" class="wifispace">
+              <ion-col size="9" class="wifispace" no-padding>
                 {{x.SSID}}
               </ion-col>
+              <ion-col size="2" no-padding>
+                <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+              </ion-col>
+              <div>
+                {{x.BSSID}}<br>
+                <span style="font-size:12px; color:rgb(169, 184, 39)">
+                  <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
+                </span>
+              </div>
             </ion-row>
           </ion-col>
           <ion-col size="12" class="letterSmall" *ngIf="x.level <= -66  && x.level >= -80 ">
             <ion-row no-padding>
-              <ion-col size="2">
+              <ion-col size="1" no-padding>
                 <div class="img-muybuena"></div>
               </ion-col>
-              <ion-col size="10" class="wifispace">
+              <ion-col size="9" class="wifispace" no-padding>
                 {{x.SSID}}
               </ion-col>
+              <ion-col size="2" no-padding>
+                <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+              </ion-col>
+              <div>
+                {{x.BSSID}}<br>
+                <span style="font-size:12px; color:rgb(169, 184, 39)">
+                  <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
+                </span>
+              </div>
             </ion-row>
           </ion-col>
           <ion-col size="12" class="letterSmall" *ngIf="x.level <= -81 && x.level >= -95 ">
             <ion-row no-padding>
-              <ion-col size="2">
+              <ion-col size="1" no-padding>
                 <div class="img-buena"></div>
               </ion-col>
-              <ion-col size="10" class="wifispace">
+              <ion-col size="9" class="wifispace" no-padding>
                 {{x.SSID}}
               </ion-col>
+              <ion-col size="2" no-padding>
+                <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+              </ion-col>
+              <div>
+                {{x.BSSID}}<br>
+                <span style="font-size:12px; color:rgb(169, 184, 39)">
+                  <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
+                </span>
+              </div>
             </ion-row>
           </ion-col>
           <ion-col size="12" class="letterSmall" *ngIf="x.level <= -96 && x.level > -120 ">
             <ion-row no-padding>
-              <ion-col size="2">
+              <ion-col size="1" no-padding>
                 <div class="img-mala"></div>
               </ion-col>
-              <ion-col size="10" class="wifispace">
+              <ion-col size="9" class="wifispace" no-padding>
                 {{x.SSID}}
               </ion-col>
+              <ion-col size="2" no-padding>
+                <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+              </ion-col>
+              <div>
+                {{x.BSSID}}<br>
+                <span style="font-size:12px; color:rgb(169, 184, 39)">
+                  <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
+                </span>
+              </div>
             </ion-row>
-          </ion-col>
-        </ion-row>
-        <ion-row no-padding *ngIf="x.SSID == dataSSID">
-          <ion-col size="12" (click)="showDataRed()" no-padding>
-            <ion-text color="primary" style="padding-left: 7px;">{{x.SSID}}</ion-text>
-          </ion-col>
-          <ion-col size="12" no-padding>
-            <ion-text color="tertiary" class="fsize10" style="padding-left: 7px;">Conectado</ion-text>
           </ion-col>
         </ion-row>
       </ion-item>
@@ -92,6 +134,10 @@
           <ion-label>Buscar</ion-label>
           <ion-icon name="search"></ion-icon>
           <ion-badge>{{cont}}</ion-badge>
+        </ion-tab-button>
+        <ion-tab-button tab="wifi" (click)="Misredes(cont)">
+          <ion-label>Mis redes</ion-label>
+          <ion-icon name="wifi"></ion-icon>
         </ion-tab-button>
         <ion-tab-button tab="ios-map" (click)="goToMapa(cont)">
           <ion-label>Mapa</ion-label>

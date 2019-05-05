@@ -42,13 +42,13 @@ export class MapaPage implements OnInit {
     this.contador = this.route.snapshot.paramMap.get('cont');
   }
   ngOnInit() {
-   this.hotspot.isConnectedToInternet().then((data) => {
-     if (data == true) {
+    this.hotspot.isConnectedToInternet().then((data) => {
+      if (data == true) {
         this.loadMap();
-       } else {
+      } else {
         this.AlertNotConexion()
       }
-     });
+    });
   }
   async AlertNotConexion() {
     const alert1 = await this.alertController.create({
@@ -75,7 +75,7 @@ export class MapaPage implements OnInit {
     const loading = await this.loadingCtrl.create();
     loading.present();
     const myLatLngs = await this.getLocation();
-    console.log('Latitud ' + myLatLngs.lat +' Longitud '+ myLatLngs.lng);
+    console.log('Latitud ' + myLatLngs.lat + ' Longitud ' + myLatLngs.lng);
     const myLatLng = new google.maps.LatLng(myLatLngs.lat, myLatLngs.lng);
     const mapEle: HTMLElement = document.getElementById('map_canvas');
     this.mapRef = new google.maps.Map(mapEle, {
@@ -109,8 +109,8 @@ export class MapaPage implements OnInit {
         this.addMaker(myLatLng, myLatLngs.lat, myLatLngs.lng);
       });
   }
-  private addMaker(posicionAcual: any, lat:any, lng:any) {
-    console.log("posicon dddd"+posicionAcual);
+  private addMaker(posicionAcual: any, lat: any, lng: any) {
+    console.log("posicon dddd" + posicionAcual);
     debugger
     this.redesServices.getRedes({ latitud: lat, longitud: lng })
       .then(data => {
@@ -120,33 +120,33 @@ export class MapaPage implements OnInit {
         for (i = 0; i < location.length; i++) {
           var f = location[i].latitud;
           var marker_lat_lng = new google.maps.LatLng(location[i].latitud, location[i].longitud);
-          var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(posicionAcual, marker_lat_lng); //distance in meters between your location and the marker
-          if (distance_from_location <= 300) {
-            var infowindow = new google.maps.InfoWindow();
-            const marker = new google.maps.Marker({
-              position: marker_lat_lng,
-              map: this.mapRef,
-              animation: google.maps.Animation.DROP,
-              title: 'Wifi',
-              icon: 'http://icons.iconarchive.com/icons/papirus-team/papirus-apps/32/fern-wifi-cracker-icon.png'
-            });
-            var geocoder = new google.maps.Geocoder();
-            // le asignamos una funcion al eventos dragend del marcado
-            google.maps.event.addListener(marker, 'click', (function (marker, i) {
-              return function () {
-                geocoder.geocode({ 'latLng': marker_lat_lng }, function (results, status) {
-                  if (status == google.maps.GeocoderStatus.OK) {
-                    var address = results[0]['formatted_address'];
-                    console.log(address);
-                  }
-                });
-                infowindow.setContent('<strong>Red:</strong> ' + location[i].nombreRed + '</br><strong>Contraseña: </strong> ' + location[i].passwordRed);
-                infowindow.open(this.mapRef, marker);
-              }
-            })(marker, i));
-          } else {
-            console.log('=> is NOT in searchArea');
-          }
+          //  var distance_from_location = google.maps.geometry.spherical.computeDistanceBetween(posicionAcual, marker_lat_lng); //distance in meters between your location and the marker
+          //  if (distance_from_location <= 300) {
+          var infowindow = new google.maps.InfoWindow();
+          const marker = new google.maps.Marker({
+            position: marker_lat_lng,
+            map: this.mapRef,
+            animation: google.maps.Animation.DROP,
+            title: 'Wifi',
+            icon: 'http://icons.iconarchive.com/icons/papirus-team/papirus-apps/32/fern-wifi-cracker-icon.png'
+          });
+          var geocoder = new google.maps.Geocoder();
+          // le asignamos una funcion al eventos dragend del marcado
+          google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+              geocoder.geocode({ 'latLng': marker_lat_lng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                  var address = results[0]['formatted_address'];
+                  console.log(address);
+                }
+              });
+              infowindow.setContent('<strong>Red:</strong> ' + location[i].nombreRed + '</br><strong>Contraseña: </strong> ' + location[i].passwordRed);
+              infowindow.open(this.mapRef, marker);
+            }
+          })(marker, i));
+          //} else {
+          //  console.log('=> is NOT in searchArea');
+          //}
         }
       });
   }
@@ -157,5 +157,8 @@ export class MapaPage implements OnInit {
       lat: rta.coords.latitude,
       lng: rta.coords.longitude
     };
+  }
+  Misredes() {
+    this.navCtrl.navigateForward(`misredes/${this.contador}`);
   }
 }
