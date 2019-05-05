@@ -98,7 +98,6 @@ export class SearchWifiPage implements OnInit {
   //obtiene la información de la red actual conectada
   getConeccionActual() {
     this.hotspot.getConnectionInfo().then((data) => {
-      debugger
       this.dataSSID = data.SSID.substring(1, data.SSID.length - 1);
       this.dataIPAddress = data.IPAddress.substring(1);;
       this.datalinkSpeed = data.linkSpeed + "Mbps";
