@@ -97,6 +97,7 @@ export class PerfilPage {
   getUsuario(id:number) {
     this.userService.getUser(id)
       .then(data => {
+        debugger
       this.user=data['user'];
       this.imagenBD = data['user']['imagen'];
       this.imageFileName = this.imagenBD;
@@ -143,7 +144,7 @@ export class PerfilPage {
    const fileTransfer: FileTransferObject = this.transfer.create();
    let options: FileUploadOptions = {
      fileKey: 'file',
-     fileName: "https://agile-scrubland-87518.herokuapp.com/imagenes/"+this.imagenBD,
+     fileName: this.imagenBD,
      chunkedMode: false,
      httpMethod: 'post',
      mimeType: 'image/jpeg',
