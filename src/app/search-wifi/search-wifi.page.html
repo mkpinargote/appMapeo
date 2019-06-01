@@ -31,11 +31,11 @@
     <ion-grid *ngFor="let x of data">
       <ion-item *ngIf="x.SSID !=''">
         <ion-row no-padding *ngIf="x.SSID == dataSSID">
-          <ion-col size="10" (click)="showDataRed()" no-padding>
+          <ion-col size="11" (click)="showDataRed()" no-padding>
             <ion-text color="primary" style="padding-left: 4px;">{{x.SSID}}</ion-text>
           </ion-col>
-          <ion-col size="2" no-padding style="padding-left:20px;">
-            <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+         <ion-col size="1" style="padding-left: 12px;" class="ion-float-left">
+            <ion-badge color="warning" class="ion-float-left">{{x.level}}dBm</ion-badge>
           </ion-col>
           <div>
             <span style="font-size:12px">{{x.BSSID}}</span><br>
@@ -50,11 +50,11 @@
               <ion-col size="1" no-padding>
                 <div class="img-excelente"></div>
               </ion-col>
-              <ion-col size="9" class="wifispace" no-padding>
+              <ion-col size="10" class="wifispace" no-padding>
                 {{x.SSID}}
               </ion-col>
-              <ion-col size="2" no-padding>
-                <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+                <ion-col size="1" style="padding-left: 12px;" class="ion-float-left">
+                <ion-badge color="warning" class="ion-float-right">{{x.level}}dBm</ion-badge>
               </ion-col>
               <div>
                 {{x.BSSID}}<br>
@@ -69,11 +69,11 @@
               <ion-col size="1" no-padding>
                 <div class="img-muybuena"></div>
               </ion-col>
-              <ion-col size="9" class="wifispace" no-padding>
+              <ion-col size="10" class="wifispace" no-padding>
                 {{x.SSID}}
               </ion-col>
-              <ion-col size="2" no-padding>
-                <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+                <ion-col size="1" style="padding-left: 12px;" class="ion-float-left">
+                <ion-badge color="warning" class="ion-float-right">{{x.level}}dBm</ion-badge>
               </ion-col>
               <div>
                 {{x.BSSID}}<br>
@@ -88,11 +88,11 @@
               <ion-col size="1" no-padding>
                 <div class="img-buena"></div>
               </ion-col>
-              <ion-col size="9" class="wifispace" no-padding>
+              <ion-col size="10" class="wifispace" no-padding>
                 {{x.SSID}}
               </ion-col>
-              <ion-col size="2" no-padding>
-                <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+              <ion-col size="1" style="padding-left: 12px;" class="ion-float-left">
+                <ion-badge color="warning" class="ion-float-right">{{x.level}}dBm</ion-badge>
               </ion-col>
               <div>
                 {{x.BSSID}}<br>
@@ -107,11 +107,11 @@
               <ion-col size="1" no-padding>
                 <div class="img-mala"></div>
               </ion-col>
-              <ion-col size="9" class="wifispace" no-padding>
+              <ion-col size="10" class="wifispace" no-padding>
                 {{x.SSID}}
               </ion-col>
-              <ion-col size="2" no-padding>
-                <ion-badge color="warning">{{x.level}}dBm</ion-badge>
+                <ion-col size="1" style="padding-left: 12px;" class="ion-float-left">
+                <ion-badge color="warning" class="ion-float-right">{{x.level}}dBm</ion-badge>
               </ion-col>
               <div>
                 {{x.BSSID}}<br>

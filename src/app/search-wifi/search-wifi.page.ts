@@ -138,10 +138,13 @@ export class SearchWifiPage implements OnInit {
                 toast.dismiss();
                 this.alertConex('conectado');
                 this.red = { tipoRed: 'wifi', nombreRed: SSID, passwordRed: pass, estadoRed: 1, latitud: this.latituds, longitud: this.longituds, idUser: this.Iduser };
+                debugger
                 this.redesServices.addRed(this.red)
                   .then(data => {
+                    debugger
                     this.alertConex("red guardada");
                   }, (error) => {
+                    debugger
                     this.alertConex("no se puedo guardar la red");
                   });
               }, (error) => {
