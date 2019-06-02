@@ -141,10 +141,8 @@ export class SearchWifiPage implements OnInit {
                 debugger
                 this.redesServices.addRed(this.red)
                   .then(data => {
-                    debugger
                     this.alertConex("Red guardada");
                   }, (error) => {
-                    debugger
                     this.alertConex("No se puedo guardar la red");
                   });
               }, (error) => {
