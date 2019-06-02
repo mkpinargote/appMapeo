@@ -140,13 +140,10 @@ export class MapaPage implements OnInit {
                   console.log(address);
                 }
               });
-              infowindow.setContent('<strong>Red:</strong> ' + location[i].nombreRed + '</br><strong>Contraseña: </strong> ' + location[i].passwordRed);
+              infowindow.setContent('<div style="font-size:11px;"><strong>Latitud:</strong> ' + location[i].latitud + '</br><strong>Longitud:</strong> ' + location[i].latitud + '</br><strong>Red:</strong> ' + location[i].nombreRed + '</br><strong>Contraseña: </strong> ' + location[i].passwordRed +'</div>');
               infowindow.open(this.mapRef, marker);
             }
           })(marker, i));
-          //} else {
-          //  console.log('=> is NOT in searchArea');
-          //}
         }
       });
   }
