@@ -37,7 +37,6 @@ export class ChangeuserPage implements OnInit {
           this.msg = 'Usuario disponible';
         }, (err) => {
             txt.style.color = 'red';
-
             this.msg ='Usuario existente';
         });
     }else{

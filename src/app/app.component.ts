@@ -27,11 +27,6 @@ export class AppComponent {
       icon: 'stats'
     },
     {
-      title: 'Mis redes',
-      url: '/misredes',
-      icon: 'wifi'
-    },
-    {
      title: 'Cerrar Sesión',
       url: '/bienvenido',
       icon: 'power'

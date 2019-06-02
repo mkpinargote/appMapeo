@@ -170,4 +170,7 @@ export class PerfilPage {
   goToUser (){
     this.navCtrl.navigateForward(`changeuser`);
   }
+  goToPass() {
+    this.navCtrl.navigateForward(`changepassword`);
+  }
 }

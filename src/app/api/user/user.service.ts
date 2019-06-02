@@ -52,6 +52,17 @@ export class UserService {
         });
     });
   }
+  updatePass(id: number, data: any, ) {
+    return new Promise((resolve, reject) => {
+      const url = `${this.apiUrl}/users/change/password/${id}`;
+      this.http.put(url, data, this.httpOptions)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   filterNickname(data: any) {
     return new Promise((resolve, reject) => {
       const url = `${this.apiUrl}/users/filter`;
