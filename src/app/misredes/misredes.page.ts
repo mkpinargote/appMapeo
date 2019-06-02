@@ -6,6 +6,7 @@ import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 import { Storage } from '@ionic/storage';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-misredes',
   templateUrl: './misredes.page.html',
@@ -24,6 +25,7 @@ export class MisredesPage implements OnInit {
     public alertController: AlertController,
     private hotspot: Hotspot,
     private route: ActivatedRoute,
+    public toastController: ToastController,
     private storage: Storage ) {
     this.estadoCompartir = 'Compartir';
     this.estadoCompartido = 'Desvincular';
@@ -42,6 +44,37 @@ export class MisredesPage implements OnInit {
       }
     });
   }
+
+  async dleteMyred(id: any) {
+    const loading = await this.alertController.create({
+      header: 'Eliminar red',
+      message: 'Está seguro de eliminar la red?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            this.alertConex('Operación cancelada');
+          }
+        }, {
+          text: 'Eliminar',
+          handler: (data) => {
+            this.redesServices.deleteRedes(id)
+              .then(data => {
+                loading.dismiss();
+                this.alertConex("red eliminada");
+                this.getMyredes(this.Iduser);
+              }, (error) => {
+                this.alertConex("error al eliminar la red");
+                loading.dismiss();
+              })
+          }
+        }
+      ]
+    });
+    await loading.present();
+  }
   async getMyredes(id:number) {
     const loading = await this.loadingCtrl.create();
     loading.present();
@@ -51,21 +84,8 @@ export class MisredesPage implements OnInit {
         this.redesUser = data;
       }, (error) => {
           loading.dismiss();
+          this.alertConex("error al cargar tus red");
       })
-  }
-  doRefresh(event) {
-    this.redesServices.getRedesUser(this.Iduser)
-      .then(data => {
-        event.target.complete();
-        this.redesUser = data;
-      });
-  }
-  loadData(event) {
-    this.redesServices.getRedesUser(this.Iduser)
-      .then(data => {
-        event.target.complete();
-        this.redesUser = this.redesUser.concat(data);
-      });
   }
   async changeRedMapa(id: number, estadored: string) {
     let comparar;
@@ -88,7 +108,6 @@ export class MisredesPage implements OnInit {
         }, {
           text: 'Ok',
           handler: () => {
-            debugger
             if (estadored == "1") {
               estadored = "0";
             } else {
@@ -97,10 +116,8 @@ export class MisredesPage implements OnInit {
             let datas = { 'estadored': estadored };
             this.redesServices.updateEstadoRed(id, datas)
               .then(data => {
-                debugger
                 this.getMyredes(this.Iduser);
               }, (error) => {
-                debugger
       
               })
           }
@@ -132,5 +149,12 @@ export class MisredesPage implements OnInit {
   }
   goToMapa() {
     this.navCtrl.navigateForward(`mapa/${this.contador}`);
+  }
+  async alertConex(mensaje: any) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
   }
 }

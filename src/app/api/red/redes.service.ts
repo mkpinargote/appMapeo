@@ -33,6 +33,16 @@ export class RedesService {
       });
     });
   }
+  deleteRedes(id: any) {
+    return new Promise((resolve, reject) => {
+      this.http.delete(this.apiUrl + '/redes/' + id)
+        .subscribe(data => {
+          resolve(data);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   addRed(data:any) {
     return new Promise((resolve, reject) => {
       const url = `${this.apiUrl}/redes`;

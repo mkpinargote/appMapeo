@@ -8,35 +8,40 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-item *ngFor="let red of redesUser.redes">
-    <ion-label>
-      <h2 class="size10">
-        <ion-text color="tertiary">Tipo:</ion-text> {{red.tipoRed}}
-      </h2>
-      <h2 class="size10">
-        <ion-text color="tertiary">Red: </ion-text>{{red.nombreRed}}
-      </h2>
-      <h2 class="size10">
-        <ion-text color="tertiary">Contraseña: </ion-text>{{red.passwordRed}}
-      </h2>
-      <h2 class="size10" *ngIf="red.estadored == 0">
-        <ion-badge color="warning">
-          <ion-text style="color:black" (click)="changeRedMapa(red.id, red.estadored)">{{estadoCompartido}}
-          </ion-text>
-        </ion-badge>
-      </h2>
-      <h2 class="size10" *ngIf="red.estadored == 1">
-        <ion-badge color="tertiary">
-        <ion-text style="color:white" (click)="changeRedMapa(red.id, red.estadored)">{{estadoCompartir}}</ion-text>
-        </ion-badge>
-      </h2>
-    </ion-label>
-  </ion-item>
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="cargando...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+<ion-content no-padding>
+  <ion-grid>
+    <div *ngFor="let red of redesUser.redes" no-padding>
+    <ion-row no-padding style="padding-left: 5px; margin-top: 10px; background-color:#FCFCFC; padding-bottom:5px; ">
+      <ion-col size="10" no-padding>
+        <ion-label>
+          <div class="size10" style="margin-top: 3px;">
+            <ion-text color="tertiary">Red: </ion-text>{{red.nombreRed}}
+          </div>
+          <div class="size10" style="margin-top: 3px;">
+            <ion-text color="tertiary">Contraseña: </ion-text>{{red.passwordRed}}
+          </div>
+          <div class="size10" *ngIf="red.estadored == 0" style="margin-top: 3px;">
+            <ion-badge color="warning">
+              <ion-text style="color:black" (click)="changeRedMapa(red.id, red.estadored)">{{estadoCompartido}}
+              </ion-text>
+            </ion-badge>
+          </div>
+          <h2 class="size10" *ngIf="red.estadored == 1" style="margin-top: 3px;">
+            <ion-badge color="tertiary">
+              <ion-text style="color:white" (click)="changeRedMapa(red.id, red.estadored)">{{estadoCompartir}}
+              </ion-text>
+            </ion-badge>
+          </h2>
+        </ion-label>
+      </ion-col>
+      <ion-col size="1" align-self-center align-items-cente>
+         <span (click)="dleteMyred(red.id)">
+             <ion-icon name="trash" color="danger"></ion-icon>
+         </span>
+      </ion-col>
+    </ion-row>
+  </div>
+  </ion-grid>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
