@@ -23,7 +23,9 @@ const routes: Routes = [
   { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
   { path: 'estadistica', loadChildren: './estadistica/estadistica.module#EstadisticaPageModule' },
   { path: 'buscarredes', loadChildren: './buscarredes/buscarredes.module#BuscarredesPageModule' },
-  { path: 'misredes/:cont', loadChildren: './misredes/misredes.module#MisredesPageModule' }
+  { path: 'misredes/:cont', loadChildren: './misredes/misredes.module#MisredesPageModule' },  { path: 'changepassword', loadChildren: './changepassword/changepassword.module#ChangepasswordPageModule' },
+  { path: 'changeuser', loadChildren: './changeuser/changeuser.module#ChangeuserPageModule' }
+
 
 
 

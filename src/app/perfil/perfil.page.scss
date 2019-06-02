@@ -8,15 +8,16 @@ page-perfil{
    // background-image: url('../assets/imagenes/user.png')!important;
     border-radius: 50%;
     background-position: center;
-    background-color: brown;
+    background-color: rgb(206, 206, 206);
     margin-left: auto;
     margin-right: auto;
     display: block;
     height: 100px;
     width: 100px;
     background-repeat: no-repeat;
-    background-size: 100% auto;
+    background-size:cover;
     margin-top:10px !important;
+  //  transform: rotate(-90deg);
 }
 .textsize12{
 font-size: 12px;

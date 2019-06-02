@@ -1,0 +1,23 @@
+<ion-header color="tertiary">
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start" (click)="cancelar()">
+      Cancelar
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="updatenickName()">
+      Guardar
+    </ion-buttons>
+    <ion-title style="padding-left: 80px;">Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <div style="margin:10px;">
+       <input type="text" placeholder="Usuario actual" style="height:35px; width:100%;" [(ngModel)]="userActual" disabled>
+   </div>
+  <div style="margin:10px;">
+      <input type="text" placeholder="Nuevo usuario" style="height:35px; width:100%;" [(ngModel)]="userNuevo" (keyup)="filterUser()">
+  </div>
+ <div>
+   <div style="margin: 10px; padding: 5px;" id="msg1" color="danger" [innerHtml]="msg"></div>
+ </div>
+</ion-content>

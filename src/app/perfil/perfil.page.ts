@@ -88,16 +88,15 @@ export class PerfilPage {
       // Handle error
     });
   }
-  ngOnInit() {
+   ionViewDidEnter(){
     this.storage.get('id').then((val) => {
       this.Iduser = val;
       this.getUsuario(this.Iduser);
     });
-  } 
+  }
   getUsuario(id:number) {
     this.userService.getUser(id)
       .then(data => {
-        debugger
       this.user=data['user'];
       this.imagenBD = data['user']['imagen'];
       this.imageFileName = this.imagenBD;
@@ -167,5 +166,8 @@ export class PerfilPage {
       duration: 2000
     });
     toast.present();
+  }
+  goToUser (){
+    this.navCtrl.navigateForward(`changeuser`);
   }
 }

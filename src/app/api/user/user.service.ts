@@ -41,6 +41,28 @@ export class UserService {
         });
     });
   }
+  updateNickname(id: number, data: any, ) {
+    return new Promise((resolve, reject) => {
+      const url = `${this.apiUrl}/users/change/${id}`;
+      this.http.put(url, data, this.httpOptions)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
+  filterNickname(data: any) {
+    return new Promise((resolve, reject) => {
+      const url = `${this.apiUrl}/users/filter`;
+      this.http.post(url, data, this.httpOptions)
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
+    });
+  }
   loginUser(data: any, ) {
     return new Promise((resolve, reject) => {
       const url = `${this.apiUrl}/users/login`;
