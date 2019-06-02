@@ -53,7 +53,7 @@
                     </ion-item>
                     <ion-item lines="none">
                         <ion-icon padding-end name="calendar" item-start></ion-icon>
-                        <ion-input required name="f_nacimiento" type="date" class="ion-color-input" color="tertiary"
+                        <ion-input align-items-end required name="f_nacimiento" type="date" display-format="DD/MM/YYYY" class="ion-color-input" color="tertiary"
                           placeholder="Fec. Nac." [(ngModel)]="user.f_nacimiento" formControlName="f_nacimiento"></ion-input>
                         <!-- <ion-datetime class="ion-fecha"  display-format="DD/MM/YYYY" min="1920" >
                         </ion-datetime> -->
@@ -138,14 +138,6 @@
                 </form>
               </div>
             </ion-col>
-            <ion-col>
-              <ion-text color="danger">
-                {{msgdata}}
-              </ion-text>
-            </ion-col>
-        
-            <!-- <ion-col size="1">                
-            </ion-col> -->
             </ion-row>
         </ion-grid>
   </ion-content>

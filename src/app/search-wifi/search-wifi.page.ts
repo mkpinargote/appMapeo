@@ -98,7 +98,6 @@ export class SearchWifiPage implements OnInit {
   //obtiene la información de la red actual conectada
   getConeccionActual() {
     this.hotspot.getConnectionInfo().then((data) => {
-      debugger
       this.dataSSID = data.SSID.substring(1, data.SSID.length - 1);
       this.dataIPAddress = data.IPAddress.substring(1);;
       this.datalinkSpeed = data.linkSpeed + "Mbps";
@@ -137,13 +136,13 @@ export class SearchWifiPage implements OnInit {
             this.hotspot.connectToWifi(SSID, data.txtpassword)
               .then((data) => {
                 toast.dismiss();
-                this.alertConex('conectado');
+                this.alertConex('Conectado');
                 this.red = { tipoRed: 'wifi', nombreRed: SSID, passwordRed: pass, estadoRed: 1, latitud: this.latituds, longitud: this.longituds, idUser: this.Iduser };
                 this.redesServices.addRed(this.red)
                   .then(data => {
-                    this.alertConex("red guardada");
+                    this.alertConex("Red guardada");
                   }, (error) => {
-                    this.alertConex("no se puedo guardar la red");
+                    this.alertConex("No se puedo guardar la red");
                   });
               }, (error) => {
                 toast.dismiss();

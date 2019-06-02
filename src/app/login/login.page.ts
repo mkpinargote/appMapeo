@@ -5,7 +5,7 @@ import { AlertOptions } from '@ionic/core';
 import { UserService } from '../../app/api/user/user.service';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
-
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -24,11 +24,10 @@ export class LoginPage  implements OnInit {
               public userService: UserService,
               private storage: Storage,
               public loadingCtrl: LoadingController,
-
+              public toastController: ToastController,
   ) {
     this.buildForm();
   }
-
   async logins() {
     const loading = await this.loadingCtrl.create({
       message: 'iniciando...',
@@ -42,7 +41,7 @@ export class LoginPage  implements OnInit {
         this.goSearchWifi();
       }, (err) => {
         loading.dismiss();
-        this.msgdata = err.error['message'];
+          this.mensajeToast(err.error['message']);
       });
   }
   goSearchWifi() {
@@ -54,12 +53,17 @@ export class LoginPage  implements OnInit {
       passsword:['',[Validators.required,Validators.minLength(6),Validators.maxLength(12)]]
       });
   }
-  
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
   }
   ngOnInit() {
   }
-  
+  async mensajeToast(mensaje: any) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
+  } 
 }
   

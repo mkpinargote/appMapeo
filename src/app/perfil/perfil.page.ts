@@ -55,7 +55,7 @@ export class PerfilPage {
           this.takephoto();
         }
       }, {
-        text: 'Elegir de galeria',
+        text: 'Elegir de galería',
         icon: 'images',
         handler: () => {
           this.getimage();
@@ -97,6 +97,7 @@ export class PerfilPage {
   getUsuario(id:number) {
     this.userService.getUser(id)
       .then(data => {
+        debugger
       this.user=data['user'];
       this.imagenBD = data['user']['imagen'];
       this.imageFileName = this.imagenBD;
@@ -151,12 +152,12 @@ export class PerfilPage {
    }
    fileTransfer.upload(this.myphoto, encodeURI('https://agile-scrubland-87518.herokuapp.com/api/v01/users/imagen/' + this.Iduser), options)
      .then((data) => {
-       this.imageFileName = this.imagenBD;
+       this.imageFileName = "https://agile-scrubland-87518.herokuapp.com/imagenes/"+ this.imagenBD;
        this.presentToast("Imagen actualizada");
        loading.dismiss();
      }, (err) => {
         console.log(err);
-          loading.dismiss();
+        loading.dismiss();
         this.presentToast(err);
       });
   }
