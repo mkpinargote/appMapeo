@@ -63,10 +63,10 @@ export class MisredesPage implements OnInit {
             this.redesServices.deleteRedes(id)
               .then(data => {
                 loading.dismiss();
-                this.alertConex("red eliminada");
+                this.alertConex("Red eliminada");
                 this.getMyredes(this.Iduser);
               }, (error) => {
-                this.alertConex("error al eliminar la red");
+                this.alertConex("Error al eliminar la red");
                 loading.dismiss();
               })
           }
@@ -84,7 +84,7 @@ export class MisredesPage implements OnInit {
         this.redesUser = data;
       }, (error) => {
           loading.dismiss();
-          this.alertConex("error al cargar tus red");
+          this.alertConex("Error al cargar tus red");
       })
   }
   async changeRedMapa(id: number, estadored: string) {

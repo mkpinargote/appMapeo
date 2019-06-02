@@ -55,7 +55,7 @@ export class PerfilPage {
           this.takephoto();
         }
       }, {
-        text: 'Elegir de galeria',
+        text: 'Elegir de galería',
         icon: 'images',
         handler: () => {
           this.getimage();

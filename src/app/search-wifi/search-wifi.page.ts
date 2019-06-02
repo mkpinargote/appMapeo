@@ -136,16 +136,16 @@ export class SearchWifiPage implements OnInit {
             this.hotspot.connectToWifi(SSID, data.txtpassword)
               .then((data) => {
                 toast.dismiss();
-                this.alertConex('conectado');
+                this.alertConex('Conectado');
                 this.red = { tipoRed: 'wifi', nombreRed: SSID, passwordRed: pass, estadoRed: 1, latitud: this.latituds, longitud: this.longituds, idUser: this.Iduser };
                 debugger
                 this.redesServices.addRed(this.red)
                   .then(data => {
                     debugger
-                    this.alertConex("red guardada");
+                    this.alertConex("Red guardada");
                   }, (error) => {
                     debugger
-                    this.alertConex("no se puedo guardar la red");
+                    this.alertConex("No se puedo guardar la red");
                   });
               }, (error) => {
                 toast.dismiss();

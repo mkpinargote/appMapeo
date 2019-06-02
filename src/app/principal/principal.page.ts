@@ -66,6 +66,7 @@ export class PrincipalPage implements OnInit {
         this.storage.set('user', data['user']);
         this.storage.set('id', data['userId']);
         this.goSearchWifi();
+        this.navCtrl.navigateForward(`buscarredes`);
         loading.dismiss();
       }, (err) => {
         loading.dismiss();

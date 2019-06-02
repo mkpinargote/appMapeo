@@ -22,7 +22,7 @@ export class AppComponent {
       icon: 'search'
     },
     {
-      title: 'Estadistica',
+      title: 'Estadística',
       url: '/estadistica',
       icon: 'stats'
     },
