@@ -46,14 +46,14 @@ export class MapaPage implements OnInit {
       if (data == true) {
         this.loadMap();
       } else {
-        this.AlertNotConexion()
+        this.AlertNotConexion('Se requiere conexión a internet');
       }
     });
   }
-  async AlertNotConexion() {
+  async AlertNotConexion(txt:any) {
     const alert1 = await this.alertController.create({
       header: 'Conexión',
-      message: 'Se requiere conexión a internet',
+      message: txt,
       buttons: [
         {
           text: 'Ok',
@@ -72,10 +72,11 @@ export class MapaPage implements OnInit {
     this.navCtrl.navigateForward(`mapa`);
   }
   async loadMap() {
-    const loading = await this.loadingCtrl.create();
+    const loading = await this.loadingCtrl.create({
+      message: 'Cargando mapa...'
+    });
     loading.present();
     const myLatLngs = await this.getLocation();
-    console.log('Latitud ' + myLatLngs.lat + ' Longitud ' + myLatLngs.lng);
     const myLatLng = new google.maps.LatLng(myLatLngs.lat, myLatLngs.lng);
     const mapEle: HTMLElement = document.getElementById('map_canvas');
     this.mapRef = new google.maps.Map(mapEle, {
@@ -110,8 +111,6 @@ export class MapaPage implements OnInit {
       });
   }
   private addMaker(posicionAcual: any, lat: any, lng: any) {
-    console.log("posicon dddd" + posicionAcual);
-    debugger
     this.redesServices.getRedes({ latitud: lat, longitud: lng })
       .then(data => {
         var location = [];
@@ -137,7 +136,6 @@ export class MapaPage implements OnInit {
               geocoder.geocode({ 'latLng': marker_lat_lng }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                   var address = results[0]['formatted_address'];
-                  console.log(address);
                 }
               });
               infowindow.setContent('<div style="font-size:11px;"><strong>Latitud:</strong> ' + location[i].latitud + '</br><strong>Longitud:</strong> ' + location[i].longitud + '</br><strong>Red:</strong> ' + location[i].nombreRed + '</br><strong>Contraseña: </strong> ' + location[i].passwordRed +'</div>');

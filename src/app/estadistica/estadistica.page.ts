@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { Chart } from 'chart.js';
 import { Hotspot, HotspotNetwork } from '@ionic-native/hotspot/ngx';
 @Component({
@@ -20,7 +20,8 @@ export class EstadisticaPage {
   IPAddressInfo: any;
   frequencyScan: any;
   constructor(public navCtrl: NavController,
-    private hotspot: Hotspot) {
+    private hotspot: Hotspot,
+    public alertController: AlertController,) {
     this.startTimer();
   }
 
@@ -151,12 +152,36 @@ export class EstadisticaPage {
       data: speedData,
     });
   }
+  goSearchWifi() {
+    this.navCtrl.navigateForward(`search-wifi`);
+  }
   ngOnInit() {
-    this.getInfoNetCurre();
-    this.scanWifi();
+    this.hotspot.isConnectedToInternetViaWifi().then((data) => {
+      if (data == true) {
+        this.getInfoNetCurre();
+        this.scanWifi();
+      } else {
+        this.AlertNotConexion();
+      }
+    });
   }
   formateaValor(valor) {
     // si no es un número devuelve el valor, o lo convierte a número con 2 decimales
     return isNaN(valor) ? valor : parseFloat(valor).toFixed(1);
+  }
+  async AlertNotConexion() {
+    const alert1 = await this.alertController.create({
+      header: 'Conexión',
+      message: 'Se requiere conexión a internet',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.goSearchWifi();
+          }
+        }
+      ]
+    });
+    await alert1.present();
   }
 }

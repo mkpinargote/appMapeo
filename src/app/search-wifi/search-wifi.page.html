@@ -30,21 +30,22 @@
   <ion-list>
     <ion-grid *ngFor="let x of data">
       <div *ngIf="x.SSID !=''">
-        <ion-row no-padding *ngIf="x.SSID == dataSSID">
-          <ion-col align-self-start size="9" (click)="showDataRed()">
+        <ion-row (click)="showDataRed()" no-padding *ngIf="x.SSID == dataSSID" style="border-bottom:1px solid #DBDBDB">
+          <ion-col align-self-start size="9">
             <ion-text color="primary" style="padding-left: 4px;">{{x.SSID}}</ion-text>
           </ion-col>
           <ion-col align-self-end size="1" no-padding>
             <ion-badge color="warning">{{x.level}}dBm</ion-badge>
           </ion-col>
           <div>
-            <span style="font-size:12px">{{x.BSSID}}</span><br>
-            <span style="font-size:12px; color:rgb(169, 184, 39)">
+            <span style="font-size:12px; margin-left: 7px;">{{x.BSSID}}</span><br>
+            <span style="font-size:12px; color:rgb(169, 184, 39); margin-left: 7px;">
               <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
             </span>
           </div>
         </ion-row>
-        <ion-row no-padding (click)="presentAlert(x.SSID)" *ngIf="x.SSID != dataSSID">
+        <ion-row no-padding (click)="presentAlert(x.SSID)" *ngIf="x.SSID != dataSSID"
+          style="border-bottom:1px solid #DBDBDB">
           <ion-col align-self-start size="12" class="letterSmall" *ngIf="x.level < -20 && x.level >= -65">
             <ion-row no-padding>
               <ion-col size="1" align-self-start>
@@ -56,9 +57,9 @@
               <ion-col size="1" align-self-end>
                 <ion-badge color="warning">{{x.level}}dBm</ion-badge>
               </ion-col>
-              <div>
+              <div style="margin-left: 7px;">
                 {{x.BSSID}}<br>
-                <span style="font-size:12px; color:rgb(169, 184, 39)">
+                <span style="font-size:12px; color:rgb(169, 184, 39)" >
                   <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
                 </span>
               </div>
@@ -75,7 +76,7 @@
               <ion-col size="1" align-self-end>
                 <ion-badge color="warning">{{x.level}}dBm</ion-badge>
               </ion-col>
-              <div>
+              <div style="margin-left: 7px;">
                 {{x.BSSID}}<br>
                 <span style="font-size:12px; color:rgb(169, 184, 39)">
                   <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
@@ -94,7 +95,7 @@
               <ion-col size="1" align-self-end>
                 <ion-badge color="warning">{{x.level}}dBm</ion-badge>
               </ion-col>
-              <div>
+              <div style="margin-left: 7px;">
                 {{x.BSSID}}<br>
                 <span style="font-size:12px; color:rgb(169, 184, 39)">
                   <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
@@ -113,7 +114,7 @@
               <ion-col size="1" align-self-end>
                 <ion-badge color="warning">{{x.level}}dBm</ion-badge>
               </ion-col>
-              <div>
+              <div style="margin-left: 7px;">
                 {{x.BSSID}}<br>
                 <span style="font-size:12px; color:rgb(169, 184, 39)">
                   <b>banda:</b> {{ formateaValor(x.frequency/1024)}} GHz
