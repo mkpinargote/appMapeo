@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UserService } from '../../app/api/user/user.service';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
-import { ToastController } from '@ionic/angular';
+import { ToastController, MenuController} from '@ionic/angular';
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
@@ -22,6 +22,7 @@ export class PrincipalPage implements OnInit {
     private storage: Storage,
     public loadingCtrl: LoadingController,
     public toastController: ToastController,
+    public menuCtrl: MenuController,
     
   ) {
     this.user = { 'imagen': 'https://agile-scrubland-87518.herokuapp.com/imagenes/usuario.png' };
@@ -44,6 +45,7 @@ export class PrincipalPage implements OnInit {
       usuario: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(10)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
       password1: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]],
+      acepto: ['', [Validators.required]],
     });
   }
   ngOnInit() {
@@ -80,6 +82,9 @@ export class PrincipalPage implements OnInit {
     });
     toast.present();
   } 
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+  }
 }
 
 

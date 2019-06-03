@@ -79,9 +79,8 @@ export class BienvenidoPage {
     }
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
-  }
-  ngOnInit() {
     this.storage.remove('id');
     this.storage.remove('user');
   }
+
 }

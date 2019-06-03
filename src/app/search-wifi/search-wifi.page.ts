@@ -48,44 +48,53 @@ export class SearchWifiPage implements OnInit {
       this.Iduser = val;
     });
   }
-
-  // async addRed(){
-  //   const alert = await this.alertController.create({
-  //     header: 'Añadir red',
-  //     inputs: [
-  //       {
-  //         name: 'Nombre de red',
-  //         type: 'text',
-  //         placeholder: 'Introducir nombre de red'
-  //       }
-  //     ],
-  //     buttons: [
-
-  //       {
-  //         text: 'Cancelar',
-  //         role: 'cancel',
-  //         cssClass: 'secondary',
-  //         handler: (blah) => {
-  //           let mensaje = 'Operación cancelada';
-  //           this.alertConexFalse(mensaje);
-  //         }
-  //       }, {
-  //         text: 'Conectar',
-  //         handler: (data) => {
-
-  //         }
-  //       }
-  //     ]
-  //   });
-
-  //   await alert.present();
-  //   this.hotspot.addWifiNetwork(this.dataSSID, mode, data.txtpassword)
-  //     .then((data) => {
-
-
-  //     })
-
-  // }
+  async addRed(){
+    const alert = await this.alertController.create({
+      header: 'Agregar red',
+      inputs: [
+        {
+          name: 'red',
+          type: 'text',
+          placeholder: 'Nombre de la red'
+        },
+        {
+          name: 'contra',
+          type: 'password',
+          placeholder: 'Ingrese la contraseña'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            let mensaje = 'Operación cancelada';
+            this.alertConex(mensaje);
+          }
+        }, {
+          text: 'Conectar',
+          handler: (datas) => {
+            this.hotspot.connectToWifi(datas.red, datas.contra)
+              .then((data) => {
+                this.alertConex('Conectado');
+                this.getConeccionActual();
+                this.red = { tipoRed: 'wifi', nombreRed: datas.red, passwordRed: datas.contra, estadoRed: 1, latitud: this.latituds, longitud: this.longituds, idUser: this.Iduser };
+                this.redesServices.addRed(this.red)
+                  .then(data => {
+                    this.alertConex("Red guardada");
+                  }, (error) => {
+                    this.alertConex("No se puedo guardar la red");
+                  });
+              }, (error) => {
+                this.alertConex('Error al conectar');
+              })
+          }
+        }
+      ]
+    });
+    await alert.present();
+   }
   //Muestra el detalle de la red como ip, frecuencia .....
   async showDataRed() {
     const alert = await this.alertController.create({
@@ -137,14 +146,12 @@ export class SearchWifiPage implements OnInit {
               .then((data) => {
                 toast.dismiss();
                 this.alertConex('Conectado');
+                this.getConeccionActual();
                 this.red = { tipoRed: 'wifi', nombreRed: SSID, passwordRed: pass, estadoRed: 1, latitud: this.latituds, longitud: this.longituds, idUser: this.Iduser };
-                debugger
                 this.redesServices.addRed(this.red)
                   .then(data => {
-                    debugger
                     this.alertConex("Red guardada");
                   }, (error) => {
-                    debugger
                     this.alertConex("No se puedo guardar la red");
                   });
               }, (error) => {
