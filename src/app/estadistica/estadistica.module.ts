@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-import {ChartsModule} from 'ng2-charts'
 import { EstadisticaPage } from './estadistica.page';
 
 const routes: Routes = [
@@ -20,7 +19,6 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ChartsModule,
     ],
   declarations: [EstadisticaPage],
   
